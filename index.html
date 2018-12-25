@@ -232,126 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/aaa/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/24/aaa/" itemprop="url">aaa</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T18:04:06+08:00">
-                2018-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="先定义一个与时间有关的对象，将与时间有关的函数封装进去"><a href="#先定义一个与时间有关的对象，将与时间有关的函数封装进去" class="headerlink" title="先定义一个与时间有关的对象，将与时间有关的函数封装进去"></a>先定义一个与时间有关的对象，将与时间有关的函数封装进去</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Time = &#123;</span><br><span class="line">  <span class="comment">// 获取当前时间戳</span></span><br><span class="line">  getUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今天0点0分0秒的时间戳</span></span><br><span class="line">  getTodayUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今年1月1日0点0分0秒的时间戳</span></span><br><span class="line">  getYearUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setMonth(<span class="number">0</span>)</span><br><span class="line">    date.setDate(<span class="number">1</span>)</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取标准年月日</span></span><br><span class="line">  getLastDate: <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span> &lt; <span class="number">10</span> ? <span class="string">'0'</span> + (date.getMonth() + <span class="number">1</span>) : date.getMonth() + <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> day = date.getDate() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + date.getDate() : date.getDate()</span><br><span class="line">    <span class="keyword">return</span> date.getFullYear() + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day</span><br><span class="line">  &#125;，</span><br><span class="line">  <span class="comment">// 转换时间</span></span><br><span class="line">  getFormatTime: <span class="function"><span class="keyword">function</span> (<span class="params">timestamp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="keyword">this</span>.getUnix() <span class="comment">// 获取当前时间戳</span></span><br><span class="line">    <span class="keyword">var</span> today = <span class="keyword">this</span>.getTodayUnix() <span class="comment">// 获取今天0点时间戳</span></span><br><span class="line">    <span class="keyword">var</span> year = <span class="keyword">this</span>.getYearUnix() <span class="comment">// 获取今年0点时间戳</span></span><br><span class="line">    vat timer = (now - timestamp) / <span class="number">1000</span> <span class="comment">// 转换为秒级</span></span><br><span class="line">    <span class="keyword">var</span> tip = <span class="string">''</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (timer &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &lt; <span class="number">3600</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) + <span class="string">'分钟前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &gt;= <span class="number">3600</span> &amp;&amp; (timeStamp - today &gt;= <span class="number">0</span>)) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">3600</span>) + <span class="string">'小时前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer/<span class="number">86400</span> &lt;= <span class="number">31</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.ceil(timer/<span class="number">86400</span>) + <span class="string">'天前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      tips = <span class="keyword">this</span>.getLastDAte(timestamp)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tip</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="自定义指令v-time"><a href="#自定义指令v-time" class="headerlink" title="自定义指令v-time"></a>自定义指令v-time</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/使用vue指令开发一个实时时间转换指令v-time/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1280,7 +1160,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
