@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="两中数字格式化的方法 数字格式化一 e.g. 23422039-&amp;gt;2342.2W    1234567891011121314151617181920/**  * 2342.2W  * @param &amp;#123;number&amp;#125; count 需要格式化的数字  */ function CounFormat (count) &amp;#123;   var countString = coun">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习日记js小锦囊-持续更新">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/学习日记js小锦囊-持续更新/index.html">
+<meta property="og:site_name" content="赵小金">
+<meta property="og:description" content="两中数字格式化的方法 数字格式化一 e.g. 23422039-&amp;gt;2342.2W    1234567891011121314151617181920/**  * 2342.2W  * @param &amp;#123;number&amp;#125; count 需要格式化的数字  */ function CounFormat (count) &amp;#123;   var countString = coun">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-18T05:36:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习日记js小锦囊-持续更新">
+<meta name="twitter:description" content="两中数字格式化的方法 数字格式化一 e.g. 23422039-&amp;gt;2342.2W    1234567891011121314151617181920/**  * 2342.2W  * @param &amp;#123;number&amp;#125; count 需要格式化的数字  */ function CounFormat (count) &amp;#123;   var countString = coun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/02/学习日记js小锦囊-持续更新/">
+
+
+
+
+
+  <title>学习日记js小锦囊-持续更新 | 赵小金</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵小金</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">嗨~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/学习日记js小锦囊-持续更新/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习日记js小锦囊-持续更新</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T22:15:32+08:00">
+                2018-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="两中数字格式化的方法"><a href="#两中数字格式化的方法" class="headerlink" title="两中数字格式化的方法"></a>两中数字格式化的方法</h4><blockquote>
+<p>数字格式化一 e.g. 23422039-&gt;2342.2W<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2342.2W</span></span><br><span class="line"><span class="comment">  * @param &#123;number&#125; count 需要格式化的数字</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">CounFormat</span> (<span class="params">count</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> countString = count.toString()</span><br><span class="line">   <span class="keyword">var</span> tmp = <span class="string">''</span></span><br><span class="line">   <span class="keyword">var</span> result = <span class="string">''</span></span><br><span class="line">   <span class="keyword">if</span> (countString.length &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">     tmp = countString.slice(<span class="number">-4</span>, <span class="number">-3</span>) === <span class="string">'0'</span> ? <span class="string">''</span> : countString.slice(<span class="number">-4</span>, <span class="number">-3</span>)</span><br><span class="line">     <span class="keyword">if</span> (tmp.slice(tmp.length + <span class="number">1</span>, <span class="number">1</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">       result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'w'</span>)</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       tmp === <span class="string">''</span> ? result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'w'</span>) : result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'.'</span> + tmp + <span class="string">'w'</span>)</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> result</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> count</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>数字格式化二 e.g. 23232222-&gt;23,232,222<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 千位符数字格式化23,232,222</span></span><br><span class="line"><span class="comment">  * @param &#123;number&#125; num 需要格式化的数字</span></span><br><span class="line"><span class="comment">  * @param &#123;int&#125; precision 保留小数位</span></span><br><span class="line"><span class="comment">  * @param &#123;String&#125; separator 分隔符</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">CounFormat2</span> (<span class="params">num, precision, separator</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> parts</span><br><span class="line">   <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(num)) &amp;&amp; <span class="built_in">isFinite</span>(num)) &#123;</span><br><span class="line">     num = <span class="built_in">Number</span>(num)</span><br><span class="line">     num = (<span class="keyword">typeof</span> precision !== <span class="string">'undefined'</span> ? num.toFixed(precision) : num).toString()</span><br><span class="line">     parts = num.split(<span class="string">'.'</span>)</span><br><span class="line">     parts[<span class="number">0</span>] = parts[<span class="number">0</span>].toString().replace(<span class="regexp">/(\d)(?=(\d&#123;3&#125;)+(?!\d))/g</span>, <span class="string">'$1'</span> + (separator || <span class="string">','</span>))</span><br><span class="line">     <span class="keyword">return</span> parts.join(<span class="string">'.'</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">NaN</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="时间格式化的方法"><a href="#时间格式化的方法" class="headerlink" title="时间格式化的方法"></a>时间格式化的方法</h4><blockquote>
+<p>时间格式化 e.g. 1245278300-&gt;2009-6-18 06:38<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 时间格式化 2018-09-09 12:02:22</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; timespan 时间戳</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatMsgTime</span> (<span class="params">timespan</span>) </span>&#123;</span><br><span class="line">  timespan = timespan * <span class="number">1000</span></span><br><span class="line">  <span class="keyword">var</span> dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>(timespan)</span><br><span class="line">  <span class="keyword">var</span> year = dateTime.getFullYear()</span><br><span class="line">  <span class="keyword">var</span> month = dateTime.getMonth() + <span class="number">1</span></span><br><span class="line">  <span class="keyword">var</span> day = dateTime.getDate()</span><br><span class="line">  <span class="keyword">var</span> hour = dateTime.getHours() ? (dateTime.getHours() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + dateTime.getHours() : dateTime.getHours()) : <span class="string">'00'</span></span><br><span class="line">  <span class="keyword">var</span> minute = dateTime.getMinutes() ? (dateTime.getMinutes() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + dateTime.getMinutes() : dateTime.getMinutes()) : <span class="string">'00'</span></span><br><span class="line">  <span class="comment">// var second = dateTime.getSeconds()</span></span><br><span class="line">  <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">  <span class="comment">// typescript转换写法</span></span><br><span class="line">  <span class="keyword">var</span> nowNew = now.getTime()</span><br><span class="line">  <span class="comment">// var nowNew = Date.parse(now.toDateString())</span></span><br><span class="line">  <span class="keyword">var</span> milliseconds = <span class="number">0</span></span><br><span class="line">  <span class="keyword">var</span> timeSpanStr</span><br><span class="line">  milliseconds = nowNew - timespan</span><br><span class="line">  <span class="keyword">if</span> (milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">1</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="string">'刚刚'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">1</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round((milliseconds / (<span class="number">1000</span> * <span class="number">60</span>))) + <span class="string">'分钟前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round(milliseconds / (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span>)) + <span class="string">'小时前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round(milliseconds / (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>)) + <span class="string">'天前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (milliseconds &gt; <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span> &amp;&amp; year === now.getFullYear()) &#123;</span><br><span class="line">    timeSpanStr = month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    timeSpanStr = year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> timeSpanStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="视频时长格式化"><a href="#视频时长格式化" class="headerlink" title="视频时长格式化"></a>视频时长格式化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 视频时长格式化</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; seconds</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">secondsToHour</span> (<span class="params">seconds</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>)</span><br><span class="line">    <span class="keyword">var</span> m = <span class="built_in">parseInt</span>((seconds % <span class="number">3600</span>) / <span class="number">60</span>)</span><br><span class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds % <span class="number">60</span>)</span><br><span class="line">    h = h ? h + <span class="string">':'</span> : <span class="string">''</span></span><br><span class="line">    m = m ? (m &lt; <span class="number">10</span> ? <span class="string">'0'</span> + m + <span class="string">':'</span> : m + <span class="string">':'</span>) : <span class="string">'00:'</span></span><br><span class="line">    s = s ? (s &lt; <span class="number">10</span> ? <span class="string">'0'</span> + s : s) : <span class="string">'00'</span></span><br><span class="line">    <span class="keyword">return</span> h + m + s</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="文案截取"><a href="#文案截取" class="headerlink" title="文案截取"></a>文案截取</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 文案截取</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; num 截取个数</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; string 拼接字符串</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; symbol 拼接字符串</span></span><br><span class="line"><span class="comment">   * stringLen("asdsfdfsdf", 80, "...")</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">stringLen</span> (<span class="params">string, num, symbol</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; string.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (len &gt;= num) &#123;</span><br><span class="line">        <span class="keyword">return</span> string.slice(<span class="number">0</span>, i) + symbol</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (string.charCodeAt(i) &gt; <span class="number">127</span> || string.charCodeAt(i) === <span class="number">94</span>) &#123;</span><br><span class="line">        len++</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        len += <span class="number">1</span> / <span class="number">2</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="对比版本号"><a href="#对比版本号" class="headerlink" title="对比版本号"></a>对比版本号</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 对比版本号，大于：true 小于：false</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; v1 2.1.1</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; v2 2.2.2</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">versions</span>(<span class="params">v1, v2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr1 = v1.replace(<span class="regexp">/[-_]/g</span>, <span class="string">'.'</span>).split(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">var</span> arr2 = v2.replace(<span class="regexp">/[-_]/g</span>, <span class="string">'.'</span>).split(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">var</span> len = <span class="built_in">Math</span>.max(arr1.length, arr2.length)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">      arr1[i] = !arr1[i] ? <span class="number">0</span> : arr1[i]</span><br><span class="line">      arr2[i] = !arr2[i] ? <span class="number">0</span> : arr2[i]</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">parseInt</span>(arr1[i]) &gt; <span class="built_in">parseInt</span>(arr2[i])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">parseInt</span>(arr1[i]) &lt; <span class="built_in">parseInt</span>(arr2[i])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="倒计时"><a href="#倒计时" class="headerlink" title="倒计时"></a>倒计时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 倒计时</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; msd 截止时间</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">MillisecondToDate</span> (<span class="params">msd</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">var</span> time = <span class="built_in">parseFloat</span>(msd - now) / <span class="number">1000</span></span><br><span class="line">    <span class="keyword">if</span> (time !== <span class="literal">null</span> &amp;&amp; time !== <span class="string">''</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> timeDay = <span class="built_in">parseInt</span>(time / <span class="number">86400.0</span>)</span><br><span class="line">      <span class="keyword">var</span> timeH = <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span> - <span class="number">24</span> * timeDay)</span><br><span class="line">      <span class="keyword">var</span> timeM = <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>)</span><br><span class="line">      <span class="keyword">var</span> timeS = <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>) - <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>)) * <span class="number">60</span>)</span><br><span class="line">      timeDay = timeDay &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeDay : timeDay</span><br><span class="line">      timeH = timeH &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeH : timeH</span><br><span class="line">      timeM = timeM &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeM : timeM</span><br><span class="line">      timeS = timeS &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeS : timeS</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'day'</span>: timeDay.toString(),</span><br><span class="line">      <span class="string">'hour'</span>: timeH.toString(),</span><br><span class="line">      <span class="string">'minute'</span>: timeM.toString(),</span><br><span class="line">      <span class="string">'second'</span>: timeS.toString()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/01/学习日记css小锦囊-持续更新/" rel="next" title="学习日记css小锦囊-持续更新">
+                <i class="fa fa-chevron-left"></i> 学习日记css小锦囊-持续更新
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/24/神器甘特图/" rel="prev" title="神器甘特图">
+                神器甘特图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">赵小金</p>
+              <p class="site-description motion-element" itemprop="description">赵小金的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#两中数字格式化的方法"><span class="nav-number">1.</span> <span class="nav-text">两中数字格式化的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间格式化的方法"><span class="nav-number">2.</span> <span class="nav-text">时间格式化的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#视频时长格式化"><span class="nav-number">3.</span> <span class="nav-text">视频时长格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文案截取"><span class="nav-number">4.</span> <span class="nav-text">文案截取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对比版本号"><span class="nav-number">5.</span> <span class="nav-text">对比版本号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒计时"><span class="nav-number">6.</span> <span class="nav-text">倒计时</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵小金</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
