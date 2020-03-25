@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javascript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3.2 把庞大的 npm script 拆到单独文件中当 npm script 不断累积、膨胀的时候，全部放在 package.json 里面可能并不是个好主意，因为这样会导致 package.json 糟乱，可读性降低。 借助 scripty 我们可以将 npm script 剥离到单独的文件中，从而把复杂性隔到单独的模块里面，让代码整体看起来更加清晰。 示例项目中的覆盖率相关的 npm scr">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3.2 把庞大的 npm script 拆到单独文件中">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 02：把庞大的 npm script 拆到单独文件中/index.html">
+<meta property="og:site_name" content="赵小金">
+<meta property="og:description" content="3.2 把庞大的 npm script 拆到单独文件中当 npm script 不断累积、膨胀的时候，全部放在 package.json 里面可能并不是个好主意，因为这样会导致 package.json 糟乱，可读性降低。 借助 scripty 我们可以将 npm script 剥离到单独的文件中，从而把复杂性隔到单独的模块里面，让代码整体看起来更加清晰。 示例项目中的覆盖率相关的 npm scr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/7/1602e70a1b4df91b?w=874&h=711&f=png&s=94680">
+<meta property="og:updated_time" content="2020-03-25T09:52:46.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3.2 把庞大的 npm script 拆到单独文件中">
+<meta name="twitter:description" content="3.2 把庞大的 npm script 拆到单独文件中当 npm script 不断累积、膨胀的时候，全部放在 package.json 里面可能并不是个好主意，因为这样会导致 package.json 糟乱，可读性降低。 借助 scripty 我们可以将 npm script 剥离到单独的文件中，从而把复杂性隔到单独的模块里面，让代码整体看起来更加清晰。 示例项目中的覆盖率相关的 npm scr">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/7/1602e70a1b4df91b?w=874&h=711&f=png&s=94680">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 02：把庞大的 npm script 拆到单独文件中/">
+
+
+
+
+
+  <title>3.2 把庞大的 npm script 拆到单独文件中 | 赵小金</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵小金</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">嗨~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 02：把庞大的 npm script 拆到单独文件中/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">3.2 把庞大的 npm script 拆到单独文件中</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:36+08:00">
+                2020-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/npm-script/" itemprop="url" rel="index">
+                    <span itemprop="name">npm script</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="3-2-把庞大的-npm-script-拆到单独文件中"><a href="#3-2-把庞大的-npm-script-拆到单独文件中" class="headerlink" title="3.2 把庞大的 npm script 拆到单独文件中"></a>3.2 把庞大的 npm script 拆到单独文件中</h1><p>当 npm script 不断累积、膨胀的时候，全部放在 package.json 里面可能并不是个好主意，因为这样会导致 package.json 糟乱，可读性降低。</p>
+<p>借助 <a href="https://github.com/testdouble/scripty" target="_blank" rel="noopener">scripty</a> 我们可以将 npm script 剥离到单独的文件中，从而把复杂性隔到单独的模块里面，让代码整体看起来更加清晰。</p>
+<p>示例项目中的覆盖率相关的 npm script 占据了很大的篇幅，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">  &quot;cover:cleanup&quot;: &quot;rimraf coverage &amp;&amp; rimraf .nyc_output&quot;,</span><br><span class="line">  &quot;cover:archive&quot;: &quot;cross-var \&quot;make-dir coverage_archive/$npm_package_version &amp;&amp; cpr coverage/* coverage_archive/$npm_package_version -o\&quot;&quot;,</span><br><span class="line">  &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">  &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">  &quot;precover&quot;: &quot;npm run cover:cleanup&quot;,</span><br><span class="line">  &quot;postcover&quot;: &quot;npm-run-all cover:archive --parallel cover:serve cover:open&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>如果要隔离复杂性，我们可以考虑从 cover 相关的 script 入手，具体操作步骤如下：</p>
+<h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i scripty -D</span><br><span class="line"># npm install scripty --save-dev</span><br><span class="line"># yarn add scripty -D</span><br></pre></td></tr></table></figure>
+<h3 id="2-准备目录和文件"><a href="#2-准备目录和文件" class="headerlink" title="2. 准备目录和文件"></a>2. 准备目录和文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p scripts/cover</span><br></pre></td></tr></table></figure>
+<p>先创建两层的目录，因为我们计划把 cover 脚本写成多个，方便单独去执行，这里命名为 scripts 是 scripty 默认的，实际上是可以自定义的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch scripts/cover.sh</span><br><span class="line">touch scripts/cover/serve.sh</span><br><span class="line">touch scripts/cover/open.sh</span><br></pre></td></tr></table></figure>
+<p>然后创建空白的脚本文件，因为有了单独的脚本，我们可以把原来的 precover、cover、postcover、cover:archive、cover:cleanup 合并到一个文件中。</p>
+<p>按照 scripty 的默认约定，npm script 命令和上面各文件的对应关系如下：</p>
+<p>命令</p>
+<p>文件</p>
+<p>备注</p>
+<p>cover</p>
+<p>scripts/cover.sh</p>
+<p>内含 precover、postcover 的逻辑</p>
+<p>cover:serve</p>
+<p>scripts/cover/serve.sh</p>
+<p>启动服务</p>
+<p>cover:open</p>
+<p>scripts/cover/open.sh</p>
+<p>打开预览</p>
+<p><strong>特别注意的是，给所有脚本增加可执行权限是必须的，否则 scripty 执行时会报错</strong>，我们可以给所有的脚本增加可执行权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R a+x scripts/**/*.sh</span><br></pre></td></tr></table></figure>
+<h3 id="3-修改-scripty-脚本"><a href="#3-修改-scripty-脚本" class="headerlink" title="3. 修改 scripty 脚本"></a>3. 修改 scripty 脚本</h3><p>准备好目录和文件之后，接下来需要给脚本填充内容，脚本内容如下（因为脚本使用的是 bash，所以直接忽略了跨平台兼容的处理，跨平台兼容脚本最好使用 Node.js 编写，下节会介绍）：</p>
+<p><code>scripts/cover.sh</code> 内容如下（cleanup –&gt; cover –&gt; archive –&gt; preview）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line"># remove old coverage reports</span><br><span class="line">rimraf coverage &amp;&amp; rimraf .nyc_output</span><br><span class="line"></span><br><span class="line"># run test and collect new coverage</span><br><span class="line">nyc --reporter=html npm run test</span><br><span class="line"></span><br><span class="line"># achive coverage report by version</span><br><span class="line">mkdir -p coverage_archive/$npm_package_version</span><br><span class="line">cp -r coverage/* coverage_archive/$npm_package_version</span><br><span class="line"></span><br><span class="line"># open coverage report for preview</span><br><span class="line">npm-run-all --parallel cover:serve cover:open</span><br></pre></td></tr></table></figure>
+<p><code>scripts/cover/serve.sh</code> 内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">http-server coverage_archive/$npm_package_version -p $npm_package_config_port</span><br></pre></td></tr></table></figure>
+<p><code>scripts/cover/open.sh</code> 内容如下（这里有个 sleep，是为了确保文件系统写入完成）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">opn http://localhost:$npm_package_config_port</span><br></pre></td></tr></table></figure>
+<p>细心的同学可能注意到了，在 shell 脚本里面是可以随意使用 npm 的内置变量和自定义变量的。</p>
+<h3 id="4-修改-package-json"><a href="#4-修改-package-json" class="headerlink" title="4. 修改 package.json"></a>4. 修改 package.json</h3><p>主要改动是清理 cover:* 命令，接入 scripty，具体的 diff 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">-    &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">-    &quot;cover:cleanup&quot;: &quot;rimraf coverage &amp;&amp; rimraf .nyc_output&quot;,</span><br><span class="line">-    &quot;cover:archive&quot;: &quot;cross-var \&quot;make-dir coverage_archive/$npm_package_version &amp;&amp; cpr coverage/* coverage_archive/$npm_package_version -o\&quot;&quot;,</span><br><span class="line">-    &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">-    &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">-    &quot;precover&quot;: &quot;npm run cover:cleanup&quot;,</span><br><span class="line">-    &quot;postcover&quot;: &quot;npm-run-all cover:archive --parallel cover:serve cover:open&quot;</span><br><span class="line">+    &quot;cover&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;cover:serve&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;cover:open&quot;: &quot;scripty&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
+<p>这里我们只保留了 cover、cover:serve、cover:open 等 3 个命令，让它们都指向 scripty，调用哪个脚本都由 scripty 来处理。</p>
+<h3 id="5-实际测试"><a href="#5-实际测试" class="headerlink" title="5. 实际测试"></a>5. 实际测试</h3><p>修改完毕之后，重新运行 npm run cover，不出意外的话，我们能得到和原来完全相同的结果，仔细观察运行的日志，会发现在代码执行前有段额外的输出，如下图中红色框中的内容，scripty 在实际执行的时候会把执行的命令内容打印出来，方便调试：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/7/1602e70a1b4df91b?w=874&amp;h=711&amp;f=png&amp;s=94680" alt="img"></p>
+<h3 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h3><p>scripty 比上面演示的要更强大，也支持通配符运行、脚本并行等特性、静默模式，如果有需求可以阅读官方的 <a href="https://github.com/testdouble/scripty#advanced-usage" target="_blank" rel="noopener">README.md</a>，毕竟咱们已经入门了，不是么？</p>
+<hr>
+<blockquote>
+<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/07-manage-complexity-using-scripty" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>07-manage-complexity-using-scripty</code>。</p>
+</blockquote>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 01：实现 npm script 跨平台兼容/" rel="next" title="3.1 实现 npm script 跨平台兼容">
+                <i class="fa fa-chevron-left"></i> 3.1 实现 npm script 跨平台兼容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 03：用 node.js 脚本替代复杂的 npm script/" rel="prev" title="3.3 用 node.js 脚本替代复杂的 npm script">
+                3.3 用 node.js 脚本替代复杂的 npm script <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">赵小金</p>
+              <p class="site-description motion-element" itemprop="description">赵小金的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-2-把庞大的-npm-script-拆到单独文件中"><span class="nav-number">1.</span> <span class="nav-text">3.2 把庞大的 npm script 拆到单独文件中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装依赖"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备目录和文件"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 准备目录和文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改-scripty-脚本"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 修改 scripty 脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-修改-package-json"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 修改 package.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-实际测试"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 实际测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级技巧"><span class="nav-number">1.0.6.</span> <span class="nav-text">高级技巧</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵小金</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
