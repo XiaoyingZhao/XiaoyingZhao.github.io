@@ -232,6 +232,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/" itemprop="url">三、将Vue项目改造成Nuxt项目-使用第三方插件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T19:52:00+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
+                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="使用第三方插件"><a href="#使用第三方插件" class="headerlink" title="使用第三方插件"></a>使用第三方插件</h3><p>举例swiper,babel-polyfill和postcss-pxtorem插件</p>
+<h4 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h4><ol>
+<li>安装插件（略过）</li>
+<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>vue-swiper.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> VueAwesomeSwiper <span class="keyword">from</span> <span class="string">'vue-awesome-swiper/dist/ssr'</span></span><br><span class="line"> </span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'~/plugins/vue-swiper.js'</span>, <span class="attr">ssr</span>: <span class="literal">false</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>不支持ssr的系统，插件只在浏览器里使用的话，需要加<code>ssr:false</code>属性</p>
+<h4 id="babel-polyfill"><a href="#babel-polyfill" class="headerlink" title="babel-polyfill"></a>babel-polyfill</h4><ol>
+<li>安装插件（略过）</li>
+<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>babel-polyfill.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'babel-polyfill'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'@/plugins/babel-polyfill'</span>, <span class="attr">ssr</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h4 id="postcss-pxtorem"><a href="#postcss-pxtorem" class="headerlink" title="postcss-pxtorem"></a>postcss-pxtorem</h4><ol>
+<li>安装插件（略过）</li>
+<li>在nuxt.config.js中配置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  extractCSS: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  ** You can extend webpack config here</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  postcss: &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">      <span class="string">'postcss-pxtorem'</span>: &#123;</span><br><span class="line">        rootValue: <span class="number">37.5</span>, <span class="comment">//默认根目录字体大小(px)</span></span><br><span class="line">        propList: [<span class="string">'*'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="string">'autoprefixer'</span>: &#123;</span><br><span class="line">        overrideBrowserslist: [<span class="string">'Android &gt;= 4.0'</span>, <span class="string">'iOS &gt;= 7'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="自己编写插件"><a href="#自己编写插件" class="headerlink" title="自己编写插件"></a>自己编写插件</h3><h4 id="dialog插件"><a href="#dialog插件" class="headerlink" title="dialog插件"></a>dialog插件</h4><p><img src="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/img1.jpg" alt="img"></p>
+<ol>
+<li><p>我们在<code>components</code>文件夹下新建一个组件<code>showDialog.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dialogWrapper"</span></span><br><span class="line">      v-<span class="keyword">if</span>=<span class="string">"show"</span></span><br><span class="line">      @touchmove.prevent&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">      &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">      &lt;p v-html='content'&gt;&lt;/</span>p&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"btns"</span></span><br><span class="line">          v-<span class="keyword">if</span>=<span class="string">"num==2"</span>&gt;</span><br><span class="line">        &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"cancel"</span></span><br><span class="line">                @click=<span class="string">"cancel();complete();"</span>&gt;&#123;&#123;cancelTxt&#125;&#125;&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="btns single"</span></span><br><span class="line"><span class="regexp">          v-if="num==1"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;  </span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'showDialog'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      show: <span class="literal">false</span>,</span><br><span class="line">      title: <span class="string">'标题'</span>,</span><br><span class="line">      content: <span class="string">''</span>,</span><br><span class="line">      num: <span class="number">1</span>,</span><br><span class="line">      cancelTxt: <span class="string">'取消'</span>,</span><br><span class="line">      sureTxt: <span class="string">'确定'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    sure () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    complete () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style lang="less" scope&gt;</span></span><br><span class="line"><span class="regexp">.dialogWrapper &#123;</span></span><br><span class="line"><span class="regexp">  position: fixed;</span></span><br><span class="line"><span class="regexp">  width: 100%;</span></span><br><span class="line"><span class="regexp">  height: 100%;</span></span><br><span class="line"><span class="regexp">  background: rgba(0, 0, 0, 0.4);</span></span><br><span class="line"><span class="regexp">  top: 0;</span></span><br><span class="line"><span class="regexp">  left: 0;</span></span><br><span class="line"><span class="regexp">  z-index: 10000;</span></span><br><span class="line"><span class="regexp">  .content &#123;</span></span><br><span class="line"><span class="regexp">    width: 299px;</span></span><br><span class="line"><span class="regexp">    border-radius: 6px;</span></span><br><span class="line"><span class="regexp">    background: #fff;</span></span><br><span class="line"><span class="regexp">    position: absolute;</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">    top: 50%;</span></span><br><span class="line"><span class="regexp">    left: 0;</span></span><br><span class="line"><span class="regexp">    right: 0;</span></span><br><span class="line"><span class="regexp">    margin: auto;</span></span><br><span class="line"><span class="regexp">    transform: translateY(-50%);</span></span><br><span class="line"><span class="regexp">    padding-top: 20px;</span></span><br><span class="line"><span class="regexp">    h3 &#123;</span></span><br><span class="line"><span class="regexp">      font-size: 18px;</span></span><br><span class="line"><span class="regexp">      font-weight: bold;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    p &#123;</span></span><br><span class="line"><span class="regexp">      padding: 14px 35px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 0.7);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  .btns &#123;</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    display: flex;</span></span><br><span class="line"><span class="regexp">    background: #fff9fafa;</span></span><br><span class="line"><span class="regexp">    padding-top: 2px;</span></span><br><span class="line"><span class="regexp">    &amp;.single &#123;</span></span><br><span class="line"><span class="regexp">      button &#123;</span></span><br><span class="line"><span class="regexp">        margin: 0;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    button &#123;</span></span><br><span class="line"><span class="regexp">      flex: 1;</span></span><br><span class="line"><span class="regexp">      height: 50px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      line-height: 18px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      justify-content: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      background: #fff;</span></span><br><span class="line"><span class="regexp">      &amp;:first-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-right: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;:last-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-left: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;.sure &#123;</span></span><br><span class="line"><span class="regexp">        font-weight: bold;</span></span><br><span class="line"><span class="regexp">        color: rgba(0, 87, 255, 1);</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文件夹<code>plugins</code>新建js文件<code>vue-plugins.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> showDialog <span class="keyword">from</span> <span class="string">'~/components/plugins/showDialog.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app &#125;, inject) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (process.client) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> DialogConstructor = Vue.extend(showDialog)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成一个该子类的实例</span></span><br><span class="line">    <span class="keyword">const</span> dialog = <span class="keyword">new</span> DialogConstructor();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并将此div加入全局挂载点内部</span></span><br><span class="line">    dialog.$mount(<span class="built_in">document</span>.createElement(<span class="string">'div'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(dialog.$el)</span><br><span class="line"></span><br><span class="line">    inject(<span class="string">'showDialog'</span>, (&#123; title, content, num, sureTxt, cancelTxt, cancel, sure &#125;) =&gt; &#123;</span><br><span class="line">      dialog.show = <span class="literal">true</span></span><br><span class="line">      title &amp;&amp; (dialog.title = title)</span><br><span class="line">      content &amp;&amp; (dialog.content = content)</span><br><span class="line">      num &amp;&amp; (dialog.num = num)</span><br><span class="line">      sureTxt &amp;&amp; (dialog.sureTxt = sureTxt)</span><br><span class="line">      cancelTxt &amp;&amp; (dialog.cancelTxt = cancelTxt)</span><br><span class="line">      cancel &amp;&amp; (dialog.cancel = cancel)</span><br><span class="line">      sure &amp;&amp; (dialog.sure = sure)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在nuxt.config.js中配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Plugins to load before mounting the App</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">plugins: [</span><br><span class="line">  <span class="string">'~/plugins/vue-plugins.js'</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">created () &#123;</span><br><span class="line">  <span class="comment">// 单按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提交成功'</span>,</span><br><span class="line">    content: <span class="string">'我们将尽快处理，如有其它问题请致电：010-56592180'</span>,</span><br><span class="line">    sureTxt: <span class="string">'我知道了'</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 双按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sureTxt: <span class="string">'好的'</span>,</span><br><span class="line">    cancelTxt: <span class="string">'我再想想'</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;,</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="comment">// 取消</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -341,6 +515,12 @@
 <p>这里注意：<code>_category.vue</code>与<code>_category/</code>同级</p>
 <h3 id="路由参数校验"><a href="#路由参数校验" class="headerlink" title="路由参数校验"></a>路由参数校验</h3><p>在动态路由中可以设置参数校验，例如文章详情页的路由是<code>http://localhost:3000/article/123456</code>，<code>123456</code>是文章id，文章id永远都是数字，不可能是汉字，所以可以在<code>pages/article/_id.vue</code>页面校验一下参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  validate (&#123; params &#125;) &#123;</span><br><span class="line">    <span class="comment">// 必须是number类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^\d+$/</span>.test(params.id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果校验方法返回的值不为 true或Promise中resolve 解析为false或抛出Error ， Nuxt.js 将自动加载显示 404 错误页面或 500 错误页面。</p>
+<p>新建<code>error.vue</code>页面在<code>layouts</code>文件夹中，在<code>error.vue</code>页面中可以捕获到：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;not-found v-<span class="keyword">if</span>=<span class="string">"error.statusCode==404"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">not-found</span>&gt;</span></span></span><br><span class="line">    &lt;error-page v-else&gt;&lt;/error-page&gt;</span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> notFound <span class="keyword">from</span> <span class="string">'~/components/404.vue'</span></span><br><span class="line"><span class="keyword">import</span> errorPage <span class="keyword">from</span> <span class="string">'~/components/500.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">'error'</span>],</span><br><span class="line">  components: &#123; notFound, errorPage &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="路由中间件"><a href="#路由中间件" class="headerlink" title="路由中间件"></a>路由中间件</h3><h5 id="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"><a href="#中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。" class="headerlink" title="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"></a>中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。</h5><p>它可以做到在打开页面或者切换路由之前，加一些判断，例如重定向之类的操作。<br>中间件放在<code>middleware</code>文件夹中，文件名就是中间件的名字(middleware/auth.js将成为 auth 中间件)<br>中间件的配置方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nuxt.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  router: &#123;</span><br><span class="line">    middleware: <span class="string">'stats'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以再中间件中加重定向：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还可以加一些其他操作，例如将userAgent赋值给context：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, app, req, store, route, params, error, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line">  context.userAgent = process.server ? context.req.headers[<span class="string">'user-agent'</span>] : navigator.userAgent</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的话，在红框，黄框周期内就可以愉快的使用userAgent了:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">validate (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>, context.userAgent)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;,</span><br><span class="line">asyncData (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>, context.userAgent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/img1.jpg" alt="img"></p>
 
           
         
@@ -485,14 +665,14 @@
             <h3 id="一、SSR概念"><a href="#一、SSR概念" class="headerlink" title="一、SSR概念"></a>一、SSR概念</h3><p><strong>SSR</strong><br>server side render 服务端渲染</p>
 <p><strong>客户端渲染</strong><br>页面初始加载的 HTML 页面中无网页展示内容，需要加载执行Js代码，通过 js 渲染生成页面。比较代表性的为React,Vue,Angular三大前端框架的SPA(Single Page Application)应用。</p>
 <p><strong>服务端渲染</strong><br>用户请求服务器，服务器上直接生成 HTML 内容并返回给浏览器。客户端所需要做的仅仅是html页面的展现和之后的DOM事件处理。代表为传统的JSP,PHP,ASP应用。</p>
-<p><strong>同构</strong><br>同构这个概念存在于 Vue，React 这些新型的前端框架中，同构实际上是客户端渲染和服务器端渲染的一个整合。两端共用一套代码，只是采用不通的构建方式；在加载首屏的时候，执行服务端代码，页面渲染和请求js同时进行。从首屏进入第二页时就不请求服务端代码了，直接执行Vue的路由跳转。<br>（这里首屏的概念不是首页，而是用户打开的第一页，例如：A打开司机招聘的首页，点击其中一条详情进入详情页，然后将详情页分享给B，B打开的是详情页。这里A的首屏是首页，B的首屏是详情页）</p>
+<p><strong>同构</strong><br>同构这个概念存在于 Vue，React 这些新型的前端框架中，同构实际上是客户端渲染和服务器端渲染的一个整合。两端共用一套代码，只是服务端采用nodeJS执行，客户端采用JS执行；在加载首屏的时候，执行服务端代码，页面渲染和请求js同时进行。从首屏进入第二页时就不请求服务端代码了，直接执行Vue的路由跳转。<br>（这里首屏的概念不是首页，而是用户打开的第一页，例如：A打开司机招聘的首页，点击其中一条详情进入详情页，然后将详情页分享给B，B打开的是详情页。这里A的首屏是首页，B的首屏是详情页）</p>
 <h3 id="二、使用SSR的利弊"><a href="#二、使用SSR的利弊" class="headerlink" title="二、使用SSR的利弊"></a>二、使用SSR的利弊</h3><h4 id="SSR的优势"><a href="#SSR的优势" class="headerlink" title="SSR的优势"></a>SSR的优势</h4><ol>
 <li>更利于SEO<br>爬虫只会爬取源码，不会执行网站的任何脚本（Google除外，Google等页面加载完之后再去爬取内容，所以Google的爬虫可以爬取单页面应用）</li>
 <li>更利于首屏渲染<br>首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。尤其是针对大型单页应用，打包后文件体积比较大，普通客户端渲染加载所有所需文件时间较长，首页就会有一个很长的白屏等待时间。</li>
 </ol>
 <h4 id="SSR的局限"><a href="#SSR的局限" class="headerlink" title="SSR的局限"></a>SSR的局限</h4><ol>
 <li>服务端压力较大<br>本来是通过客户端完成渲染，现在统一到服务端node服务去做。尤其是高并发访问的情况，会大量占用服务端CPU资源；</li>
-<li>开发条件受限<br>服务端代与客户端共用一套代码，但是执行周期不一致</li>
+<li>开发条件受限<br>服务端代与客户端共用一套代码，但是执行周期不一致，写法也有略微不同</li>
 <li>学习成本相对较高<br>还需要掌握node、Koa2等相关技术。相对于客户端渲染，项目构建、部署过程更加复杂。</li>
 </ol>
 <h3 id="三、介绍NUXT"><a href="#三、介绍NUXT" class="headerlink" title="三、介绍NUXT"></a>三、介绍NUXT</h3><p> <a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">nuxt官网</a></p>
@@ -515,6 +695,7 @@
 <li>红框、黄框内的周期都不存在Window,document,navigator对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  asyncData() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fetch() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// undefined</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// Window &#123;postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …&#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>但也不是不可以在这些周期使用客户端代码，只需要加一个判断平台的条件即可：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (process.client)&#123;</span><br><span class="line">  <span class="comment">// 这里执行服务端不支持的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="三、开始"><a href="#三、开始" class="headerlink" title="三、开始"></a>三、开始</h3><p>1、运行一个NUXT项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-nuxt-app abc</span><br></pre></td></tr></table></figure></p>
 <p>我的电脑运行这条命令慢的出奇，所以我用了另一种方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g @vue/cli-init</span><br><span class="line"><span class="comment">// 如果已安装过vue-cli可以不用执行上面这条</span></span><br><span class="line">$ vue init nuxt/starter abc</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img1.jpg" alt="image"><br>2、启动项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd abc</span><br><span class="line">$ npm install</span><br><span class="line">$ npm run dev</span><br><span class="line"><span class="comment">// 在浏览器里执行：`http://localhost:3000/`</span></span><br></pre></td></tr></table></figure></p>
@@ -571,7 +752,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 05：用 npm script 实现服务自动化运维/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/DNS解析/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -590,7 +771,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 05：用 npm script 实现服务自动化运维/" itemprop="url">4.5 使用 npm script 进行服务运维</a></h1>
+                <a class="post-title-link" href="/2020/01/06/DNS解析/" itemprop="url">DNS解析</a></h1>
         
 
         <div class="post-meta">
@@ -602,8 +783,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:42+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:45:34+08:00">
+                2020-01-06
               </time>
             
 
@@ -625,8 +806,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/网络原理/" itemprop="url" rel="index">
+                    <span itemprop="name">网络原理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
                   </a>
                 </span>
 
@@ -664,62 +856,16 @@
       
         
           
-            <h1 id="4-5-使用-npm-script-进行服务运维"><a href="#4-5-使用-npm-script-进行服务运维" class="headerlink" title="4.5 使用 npm script 进行服务运维"></a>4.5 使用 npm script 进行服务运维</h1><p>需要事先说明的是，本节部分内容涉及到非前端的话题，比如服务的部署、日志，但会从前端项目管理开始，比如依赖管理、版本管理等。即使对自己定位是纯粹前端开发的同学，也建议阅读下，因为技不压身，了解整个前端项目交付流程中需要考量的点能让我们更有大局观。</p>
-<p>通常来说，项目构建完成之后，就成为待发布的版本，因此版本管理需要考虑，甚至做成自动化的，然后，最新的代码需要部署到线上机器才能让所有用户访问到，部署环节涉及到服务的启动、重启、日志管理等需要考虑。</p>
-<p>下面我们介绍 npm script 在服务运维时的几个用途：</p>
-<h2 id="使用-npm-script-进行版本管理"><a href="#使用-npm-script-进行版本管理" class="headerlink" title="使用 npm script 进行版本管理"></a>使用 npm script 进行版本管理</h2><p>每次构建完的代码都应该有新的版本号，修改版本号直接使用 npm 内置的 version 自命令即可，如果是简单粗暴的版本管理，可以在 package.json 中添加如下 scripts：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;release:patch&quot;: &quot;npm version patch &amp;&amp; git push &amp;&amp; git push --tags&quot;,</span><br><span class="line">+    &quot;release:minor&quot;: &quot;npm version minor &amp;&amp; git push &amp;&amp; git push --tags&quot;,</span><br><span class="line">+    &quot;release:major&quot;: &quot;npm version major &amp;&amp; git push &amp;&amp; git push --tags&quot;,</span><br><span class="line">     &quot;precommit&quot;: &quot;lint-staged&quot;,</span><br></pre></td></tr></table></figure>
-<p>这 3 条命令遵循 <a href="https://semver.org" target="_blank" rel="noopener">semver</a> 的版本号规范来方便你管理版本，patch 是更新补丁版本，minor 是更新小版本，major 是更新大版本。在必要的时候，可以通过运行 npm run version:patch 来升补丁版本，运行输出如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e6e3d85b6cd?w=910&amp;h=943&amp;f=png&amp;s=144886" alt="img"></p>
-<p>如果要求所有的版本号不超过 10，即 0.0.9 的下个版本是 0.1.0 而不是 0.0.10，可以编写简单的 shell 脚本来实现（<strong>注意这样会破坏 semver 的约定</strong>），具体步骤如下：</p>
-<p>首先，在 scripts 目录下新增 bump.sh（<strong>别忘了文件的可执行权限</strong>：chmod a+x scripts/bump.sh）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line"># get major/minor/patch version to change</span><br><span class="line">version=`cat package.json| grep version | grep -v release | awk -F\&quot; &apos;&#123;print $4&#125;&apos;`</span><br><span class="line">components=($(echo $version | tr &apos;.&apos; &apos;\n&apos;))</span><br><span class="line">major=$&#123;components[0]&#125;</span><br><span class="line">minor=$&#123;components[1]&#125;</span><br><span class="line">patch=$&#123;components[2]&#125;</span><br><span class="line"></span><br><span class="line">release=&apos;patch&apos;;</span><br><span class="line"></span><br><span class="line"># decide which version to increment</span><br><span class="line">if [ $patch -ge 9 ]; then</span><br><span class="line">    if [ $minor -ge 9 ]; then</span><br><span class="line">        release=&apos;major&apos;</span><br><span class="line">    else</span><br><span class="line">        release=&apos;minor&apos;</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">    release=&apos;patch&apos;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;major=$major, minor=$minor, patch=$patch, release=$release&quot;</span><br><span class="line"></span><br><span class="line"># upgrade version</span><br><span class="line">npm run release:$release</span><br></pre></td></tr></table></figure>
-<p>然后，在 package.json 中新增 bump 子命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     &quot;release:major&quot;: &quot;npm version major &amp;&amp; git push &amp;&amp; git push --tags&quot;,</span><br><span class="line">+    &quot;bump&quot;: &quot;scripty&quot;,</span><br><span class="line">     &quot;precommit&quot;: &quot;lint-staged&quot;,</span><br></pre></td></tr></table></figure>
-<p>在必要的时候执行 npm run bump，输出示例如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e70eb4a0193?w=1001&amp;h=1143&amp;f=png&amp;s=165735" alt="img"></p>
-<h2 id="使用-npm-script-进行服务进程和日志管理"><a href="#使用-npm-script-进行服务进程和日志管理" class="headerlink" title="使用 npm script 进行服务进程和日志管理"></a>使用 npm script 进行服务进程和日志管理</h2><p>在生产环境的服务进程和日志管理领域，<a href="http://pm2.keymetrics.io" target="_blank" rel="noopener">pm2</a> 是当之无愧的首选，功能很强大，使用简单，开发环境常用的是 <a href="https://www.npmjs.com/package/nodemon" target="_blank" rel="noopener">nodemon</a>。</p>
-<p>在我们的项目中使用 npm script 进行服务进程和日志管理的基本步骤如下：</p>
-<h3 id="1-准备-http-服务"><a href="#1-准备-http-服务" class="headerlink" title="1. 准备 http 服务"></a>1. 准备 http 服务</h3><p>在使用 npm script 作为构建流水线的基础上，我们在项目中引入了 <a href="https://www.npmjs.com/package/express" target="_blank" rel="noopener">express</a> 和 <a href="https://www.npmjs.com/package/morgan" target="_blank" rel="noopener">morgan</a>，并使用如下脚本启动 http 服务器方便用户访问我们的网页（morgan 使用来记录用户的访问日志的）：</p>
-<p>先安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i express morgan -D</span><br><span class="line"># npm install express morgan --save-dev</span><br><span class="line"># yarn add express morgan -D</span><br></pre></td></tr></table></figure>
-<p>然后在根目录下创建文件 server.js，内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">const morgan = require(&apos;morgan&apos;);</span><br><span class="line"></span><br><span class="line">const app = express();</span><br><span class="line">const port = process.env.PORT || 8080;</span><br><span class="line"></span><br><span class="line">app.use(express.static(&apos;./dist&apos;));</span><br><span class="line">app.use(morgan(&apos;combined&apos;));</span><br><span class="line"></span><br><span class="line">app.listen(port, err =&gt; &#123;</span><br><span class="line">  if (err) &#123;</span><br><span class="line">    console.error(&apos;server start error&apos;, err); // eslint-disable-line</span><br><span class="line">    process.exit(1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  console.log(`server started at port $&#123;port&#125;`);  // eslint-disable-line</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="2-准备日志目录"><a href="#2-准备日志目录" class="headerlink" title="2. 准备日志目录"></a>2. 准备日志目录</h3><p>为简单起见，我们项目中创建日志存储目录 logs，有些公司可能不会把日志存在项目部署目录下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir logs</span><br><span class="line">touch logs/.gitkeep</span><br><span class="line">git add logs/.gitkeep</span><br><span class="line">git commit -m &apos;add logs folder&apos;</span><br></pre></td></tr></table></figure>
-<p>并且设置该目录为 git 忽略的，再改动 .gitignore：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> dist</span><br><span class="line">+logs</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#21</strong>：这里加 logs/.gitkeep 空文件的目的是为了能把 logs 目录提交到 git 里面，但是我们故意忽略 logs 目录里面的内容，这是在 git 中提交目录结构而忽略其中内容的常见做法。</p>
-</blockquote>
-<h3 id="3-安装和配置-pm2"><a href="#3-安装和配置-pm2" class="headerlink" title="3. 安装和配置 pm2"></a>3. 安装和配置 pm2</h3><p>安装 pm2 作为依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i pm2 -D</span><br><span class="line"># npm install pm2 --save-dev</span><br><span class="line"># yarn add pm2 -D</span><br></pre></td></tr></table></figure>
-<p>然后添加服务启动配置到项目根目录下 pm2.json，更多配置项可以参照<a href="http://pm2.keymetrics.io/docs/usage/application-declaration" target="_blank" rel="noopener">文档</a>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;apps&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;npm-script-workflow&quot;,</span><br><span class="line">      &quot;script&quot;: &quot;./server.js&quot;,</span><br><span class="line">      &quot;out_file&quot;: &quot;./logs/stdout.log&quot;,</span><br><span class="line">      &quot;error_file&quot;: &quot;./logs/stderr.log&quot;,</span><br><span class="line">      &quot;log_date_format&quot;: &quot;YYYY-MM-DD HH:mm:ss&quot;,</span><br><span class="line">      &quot;instances&quot;: 0,</span><br><span class="line">      &quot;exec_mode&quot;: &quot;cluster&quot;,</span><br><span class="line">      &quot;max_memory_restart&quot;: &quot;800M&quot;,</span><br><span class="line">      &quot;merge_logs&quot;: true,</span><br><span class="line">      &quot;env&quot;: &#123;</span><br><span class="line">        &quot;NODE_ENV&quot;: &quot;production&quot;,</span><br><span class="line">        &quot;PORT&quot;: 8080,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的配置指定了服务脚本为 server.js，日志输出文件路径，日志时间格式，进程数量 = CPU 核数，启动方式为 cluster，以及两个环境变量。</p>
-<h3 id="4-配置服务部署命令"><a href="#4-配置服务部署命令" class="headerlink" title="4. 配置服务部署命令"></a>4. 配置服务部署命令</h3><p>在没有集成 CI 服务之前，我们的部署命令应该是下面这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">     &quot;release:major&quot;: &quot;npm version major &amp;&amp; git push &amp;&amp; git push --tags&quot;,</span><br><span class="line">+    &quot;predeploy&quot;: &quot;yarn &amp;&amp; npm run build&quot;,</span><br><span class="line">+    &quot;deploy&quot;: &quot;pm2 restart pm2.json&quot;,</span><br><span class="line">     &quot;bump&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>即在部署前需要安装最新的依赖，重新构建，然后使用 pm2 重新启动服务即可，如果你有多台机器跑通1个服务，建议有个集中的 CI 服务器专门负责构建，而部署时就不需要运行 build 了。</p>
-<p>每次需要部署服务时只需要运行 npm run deploy 就行了，运行成功输出如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e77ad30626c?w=1146&amp;h=186&amp;f=png&amp;s=42916" alt="img"></p>
-<h3 id="5-配置日志查看命令"><a href="#5-配置日志查看命令" class="headerlink" title="5. 配置日志查看命令"></a>5. 配置日志查看命令</h3><p>至于日志，虽然 pm2 提供了内置的 logs 管理命令，如果某台服务器上启动了多个不同的服务进程，那么 pm2 logs 会展示所有服务的日志，个人建议使用如下命令查看当前服务的日志：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;logs&quot;: &quot;tail -f logs/*&quot;,</span><br><span class="line">     &quot;bump&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>需要查看日志时，直接运行 npm run logs，运行输入如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e7b80b6d828?w=1271&amp;h=354&amp;f=png&amp;s=80687" alt="img"></p>
-<p>当然如果你有更复杂的日志查看需求，直接用 cat、grep 之类的命令好了。</p>
-<blockquote>
-<p><strong>到这里，小册的内容基本结束了，接下来的一周，我会准备好视频版教程，在圣诞节的时候放出来给大家。如果你对内容有任何疑问，欢迎留言或者在读者群里面交流</strong></p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/13-use-npm-script-for-devops" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>13-use-npm-script-for-devops</code>。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p><strong>视频版教程已经录制完毕，下载地址：链接: <a href="https://pan.baidu.com/s/1gfeZ619" target="_blank" rel="noopener">https://pan.baidu.com/s/1gfeZ619</a> 密码: xx8j，请享用</strong></p>
-</blockquote>
-<hr>
-<p>** 对于购买了小册，没有加到读者群里面的同学，可以加我微信：feweekly，备注：掘金小册，我会拉你入群。感谢支持！**</p>
+            <p><strong>DNS</strong>（Domain Name System）域名系统</p>
+<h3 id="一、域名系统"><a href="#一、域名系统" class="headerlink" title="一、域名系统"></a>一、域名系统</h3><h4 id="1、域名系统概述"><a href="#1、域名系统概述" class="headerlink" title="1、域名系统概述"></a>1、域名系统概述</h4><p>域名系统DNS(Domain Name System)是因特网使用的命名系统，用来把便于人们使用的机器名字转换成为IP地址。域名系统其实就是名字系统。</p>
+<p>我们都知道，IP地址是由32位的二进制数字组成的。用户与因特网上某台主机通信时，显然不愿意使用很难记忆的长达32位的二进制主机地址。即使是点分十进制IP地址也并不太容易记忆。相反，大家愿意使用比较容易记忆的主机名字。但是，机器在处理IP数据报时，并不是使用域名而是使用IP地址。这是因为IP地址长度固定，而域名的长度不固定，机器处理起来比较困难。</p>
+<p>域名到IP地址的解析是由分布在因特网上的许多域名服务器程序共同完成的。域名服务器程序在专设的结点上运行，而人们也常把运行域名服务器程序的机器称为域名服务器。</p>
+<h4 id="2、因特网的域名结构"><a href="#2、因特网的域名结构" class="headerlink" title="2、因特网的域名结构"></a>2、因特网的域名结构</h4><p>由于因特网的用户数量较多，所以因特网在命名时采用的是层次树状结构的命名方法。任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)。这里，“域”(domain)是名字空间中一个可被管理的划分。</p>
+<p>如下例子所示：<br><img src="/2020/01/06/DNS解析/eg1.png" alt="image"></p>
+<p>这是中央电视台用于收发电子邮件的计算机的域名，它由三个标号组成，其中标号com是顶级域名，标号cctv是二级域名，标号mail是三级域名。</p>
+<p>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理。用这种方法可使每一个域名在整个互联网范围内是唯一的，并且也容易设计出一种查找域名的机制。</p>
+<p>域名只是逻辑概念，并不代表计算机所在的物理地点。据2006年12月统计，现在顶级域名TLD(Top Level Domain)已有265个，分为三大类：<br>(1)国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。<br>(2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。<br>(3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。</p>
+<p><img src="/2020/01/06/DNS解析/eg2.png" alt="image"></p>
 
           
         
@@ -768,7 +914,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 04：用 npm script 实现构建流水线/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -787,7 +933,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 04：用 npm script 实现构建流水线/" itemprop="url">4.4 使用 npm script 实现构建流水线</a></h1>
+                <a class="post-title-link" href="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/" itemprop="url">OSI7层参考模型和TCP/IP5层参考模型</a></h1>
         
 
         <div class="post-meta">
@@ -799,8 +945,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:41+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:23:51+08:00">
+                2020-01-06
               </time>
             
 
@@ -822,8 +968,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/网络原理/" itemprop="url" rel="index">
+                    <span itemprop="name">网络原理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
                   </a>
                 </span>
 
@@ -861,96 +1018,22 @@
       
         
           
-            <h1 id="4-4-使用-npm-script-实现构建流水线"><a href="#4-4-使用-npm-script-实现构建流水线" class="headerlink" title="4.4 使用 npm script 实现构建流水线"></a>4.4 使用 npm script 实现构建流水线</h1><p>在现代前端项目的交付工作流中，部署前最关键的环节就是构建，构建环节要完成的事情通常包括：</p>
-<ul>
-<li>源代码预编译：比如 less、sass、typescript；</li>
-<li>图片优化、雪碧图生成；</li>
-<li>JS、CSS 合并、压缩；</li>
-<li>静态资源加版本号和引用替换；</li>
-<li>静态资源传 CDN 等。</li>
-</ul>
-<p>现在大多数同学所接触的项目构建过程可能都是别人配置好的，但是对于构建过程中的某些考量可能并不是很清楚。</p>
-<p>接下来，我们将组合 npm script 和简单的命令行工具为实际项目添加构建过程，以加深对构建过程的理解，同时也会用到前面很多章节的知识点。</p>
-<h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><p>对之前的示例项目做简单改造，让目录结构包括典型的前端项目资源引用情况：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">client</span><br><span class="line">├── images</span><br><span class="line">│   └── schedule.png</span><br><span class="line">├── index.html</span><br><span class="line">├── scripts</span><br><span class="line">│   └── main.js</span><br><span class="line">└── styles</span><br><span class="line">    └── main.css</span><br></pre></td></tr></table></figure>
-<p>可能的资源依赖关系如下：</p>
-<ul>
-<li>css、html 文件中引用了图片；</li>
-<li>html 文件中引用了 css、js；</li>
-</ul>
-<p>显而易见，我们的构建过程必须遵循下面的步骤才能不出错：</p>
-<ol>
-<li>压缩图片；</li>
-<li>编译 less、压缩 css；</li>
-<li>编译、压缩 js；</li>
-<li>给图片加版本号并替换 js、css 中的引用；</li>
-<li>给 js、css 加版本号并替换 html 中的引用；</li>
-</ol>
-<h2 id="添加构建过程"><a href="#添加构建过程" class="headerlink" title="添加构建过程"></a>添加构建过程</h2><p>下面介绍如何结合 npm script 正确的给这样的项目结构加上构建过程。</p>
-<h3 id="1-准备构建目录"><a href="#1-准备构建目录" class="headerlink" title="1. 准备构建目录"></a>1. 准备构建目录</h3><p>我们约定构建产生的结果代码，放在 dist 目录下，与 client 的结构完全相同，每次构建前，清空之前的构建目录，利用 npm 的钩子机制添加 prebuild 命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-    &quot;client:static-server&quot;: &quot;http-server client/&quot;</span><br><span class="line">+    &quot;client:static-server&quot;: &quot;http-server client/&quot;,</span><br><span class="line">+    &quot;prebuild&quot;: &quot;rm -rf dist &amp;&amp; mkdir -p dist/&#123;images,styles,scripts&#125;&quot;,</span><br></pre></td></tr></table></figure>
-<h3 id="2-准备脚本目录"><a href="#2-准备脚本目录" class="headerlink" title="2. 准备脚本目录"></a>2. 准备脚本目录</h3><p>构建过程需要的命令稍长，我们可以使用 scripty 来把这些脚本剥离到单独的文件中，为此需要准备单独的目录，并且我们的构建过程分为：images、styles、scripts、hash 四个步骤，每个步骤准备单独的文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir scripts/build</span><br><span class="line">touch scripts/build.sh</span><br><span class="line">touch scripts/build/&#123;images,styles,scripts&#125;.sh</span><br><span class="line">chmod -R a+x scripts</span><br></pre></td></tr></table></figure>
-<p><strong>脚本文件的可执行权限必须添加正确，否则 scripty 会直接报错</strong>，上面命令执行完之后，scripts 目录包含如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scripts</span><br><span class="line">├── build</span><br><span class="line">│   ├── hash.sh</span><br><span class="line">│   ├── images.sh</span><br><span class="line">│   ├── scripts.sh</span><br><span class="line">│   └── styles.sh</span><br><span class="line">├── build.sh</span><br></pre></td></tr></table></figure>
-<h3 id="3-图片构建过程"><a href="#3-图片构建过程" class="headerlink" title="3. 图片构建过程"></a>3. 图片构建过程</h3><p>图片构建的经典工具是 <a href="https://github.com/imagemin/imagemin" target="_blank" rel="noopener">imagemin</a>，它也提供了命令行版本 <a href="https://github.com/imagemin/imagemin-cli" target="_blank" rel="noopener">imagemin-cli</a>，首先安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i imagemin-cli -D</span><br><span class="line"># npm install imagemin-cli --save-dev</span><br><span class="line"># yarn add imagemin-cli -D</span><br></pre></td></tr></table></figure>
-<p>然后在 scripts/build/images.sh 中添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imagemin client/images/* --out-dir=dist/images</span><br></pre></td></tr></table></figure>
-<p>然后在 package.json 中添加 build:images 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;build:images&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>尝试运行 npm run prebuild &amp;&amp; npm run build:images，然后观察 dist 目录的变化。</p>
-<h3 id="4-样式构建过程"><a href="#4-样式构建过程" class="headerlink" title="4. 样式构建过程"></a>4. 样式构建过程</h3><p>我们使用 <a href="http://lesscss.org/usage/" target="_blank" rel="noopener">less</a> 编写样式，所以需要预编译样式代码，可以使用 less 官方库自带的命令行工具 lessc，使用 sass 的同学可以直接使用 <a href="https://github.com/sass/node-sass" target="_blank" rel="noopener">node-sass</a>。此外，样式预编译完成之后，我们需要使用 <a href="https://www.npmjs.com/package/cssmin" target="_blank" rel="noopener">cssmin</a> 来完成代码预压缩。首先安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i cssmin -D</span><br><span class="line"># npm install cssmin --save-dev</span><br><span class="line"># yarn add cssmin -D</span><br></pre></td></tr></table></figure>
-<p>然后在 scripts/build/styles.sh 中添加如下内容，这里我们使用到了 shell 里面的管道操作符 <code>|</code> 和输出重定向 <code>&gt;</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for file in client/styles/*.css</span><br><span class="line">do</span><br><span class="line">  lessc $file | cssmin &gt; dist/styles/$(basename $file)</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>然后在 package.json 中添加 build:styles 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;build:styles&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>尝试运行 npm run prebuild &amp;&amp; npm run build:styles，然后观察 dist 目录的变化，应该能看到 less 编译之后再被压缩的 css 代码。</p>
-<h3 id="4-JS-构建过程"><a href="#4-JS-构建过程" class="headerlink" title="4. JS 构建过程"></a>4. JS 构建过程</h3><p>我们使用 ES6 编写 JS 代码，所以需要 <a href="https://github.com/mishoo/UglifyJS2/tree/harmony" target="_blank" rel="noopener">uglify-es</a> 来进行代码压缩，如果你不使用 ES6，可以直接使用 <a href="https://github.com/mishoo/UglifyJS2" target="_blank" rel="noopener">uglify-js</a> 来压缩代码，首先安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i uglify-es -D</span><br><span class="line"># npm install uglify-es --save-dev</span><br><span class="line"># yarn add uglify-es -D</span><br></pre></td></tr></table></figure>
-<p>然后在 scripts/build/scripts.sh 中添加如下内容，<strong>需要额外注意的是，这里我们需要手动指定 uglify-es 目录下的 bin 文件，否则识别不了 ES6 语法</strong>，因为 uglify-es 在 npm install 过程自动创建的软链是错误的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for file in client/scripts/*.js</span><br><span class="line">do</span><br><span class="line">  ./node_modules/uglify-es/bin/uglifyjs $file --mangle &gt; dist/scripts/$(basename $file)</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>然后在 package.json 中添加 build:scripts 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;build:scripts&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>尝试运行 npm run prebuild &amp;&amp; npm run build:scripts，然后观察 dist 目录的变化，应该能看到被 uglify-es 压缩后的代码。</p>
-<blockquote>
-<p><strong>TIP#19</strong>：uglify-es 支持很多其他的选项，以及 sourcemap，对 JS 代码做极致的优化，详细<a href="https://github.com/mishoo/UglifyJS2/tree/harmony#command-line-options" target="_blank" rel="noopener">参考</a></p>
-</blockquote>
-<h3 id="4-资源版本号和引用替换"><a href="#4-资源版本号和引用替换" class="headerlink" title="4. 资源版本号和引用替换"></a>4. 资源版本号和引用替换</h3><p>给静态资源加版本号的原因是线上环境的静态资源通常都放在 CDN 上，或者设置了很长时间的缓存，或者两者兼有，如果资源更新了但没有更新版本号，浏览器端是拿不到最新内容的，手动加版本号的过程很繁琐并且容易出错，为此自动化这个过程就显得非常有价值，通常的做法是利用文件内容做哈希，比如 md5，然后以这个哈希值作为版本号，版本号附着在文件名里面，线上环境的资源引用全部是带版本号的。</p>
-<p>为了实现这个过程，我们需要引入两个小工具：</p>
-<ul>
-<li><a href="https://github.com/keithamus/hashmark" target="_blank" rel="noopener">hashmark</a>，自动添加版本号；</li>
-<li><a href="https://github.com/songkick/replaceinfiles" target="_blank" rel="noopener">replaceinfiles</a>，自动完成引用替换，它需要将版本号过程的输出作为输入；</li>
-</ul>
-<p>首先安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i hashmark replaceinfiles -D</span><br><span class="line"># npm install hashmark replaceinfiles --save-dev</span><br><span class="line"># yarn add hashmark replaceinfiles -D</span><br></pre></td></tr></table></figure>
-<p>然后在 scripts/build/hash.sh 中添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 给图片资源加上版本号，并且替换引用</span><br><span class="line">hashmark -c dist -r -l 8 &apos;**/*.&#123;png,jpg&#125;&apos; &apos;&#123;dir&#125;/&#123;name&#125;.&#123;hash&#125;&#123;ext&#125;&apos; | replaceinfiles -S -s &apos;dist/**/*.css&apos; -d &apos;&#123;dir&#125;/&#123;base&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 给 js、css 资源加上版本号，并且替换引用</span><br><span class="line">hashmark -c dist -r -l 8 &apos;**/*.&#123;css,js&#125;&apos; &apos;&#123;dir&#125;/&#123;name&#125;.&#123;hash&#125;&#123;ext&#125;&apos; | replaceinfiles -S -s &apos;client/index.html&apos; -d &apos;dist/index.html&apos;</span><br></pre></td></tr></table></figure>
-<p>然后在 package.json 中添加 build:hash 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;build:hash&quot;: &quot;scripty&quot;,</span><br></pre></td></tr></table></figure>
-<p>这个步骤需要依赖前几个步骤，不能单独运行，接下来我们需要增加完整的 build 命令把上面几个步骤串起来。</p>
-<h3 id="5-完整的构建步骤"><a href="#5-完整的构建步骤" class="headerlink" title="5. 完整的构建步骤"></a>5. 完整的构建步骤</h3><p>最后我们在 package.json 中添加 build 命令把所有的步骤串起来，完整的 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-    &quot;client:static-server&quot;: &quot;http-server client/&quot;</span><br><span class="line">+    &quot;client:static-server&quot;: &quot;http-server client/&quot;,</span><br><span class="line">+    &quot;prebuild&quot;: &quot;rm -rf dist &amp;&amp; mkdir -p dist/&#123;images,styles,scripts&#125;&quot;,</span><br><span class="line">+    &quot;build&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;build:images&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;build:scripts&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;build:styles&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;build:hash&quot;: &quot;scripty&quot;</span><br></pre></td></tr></table></figure>
-<p>其中 scripts/build.sh 的内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for step in &apos;images&apos; &apos;scripts&apos; &apos;styles&apos; &apos;hash&apos;</span><br><span class="line">do</span><br><span class="line">  npm run build:$step</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>然后我们尝试运行 npm run build，完整的过程输出如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e5912427543?w=984&amp;h=1290&amp;f=png&amp;s=171783" alt="img"></p>
-<p>构建完成的 dist 目录内容如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e5b824399a7?w=698&amp;h=240&amp;f=png&amp;s=25460" alt="img"></p>
-<p>可以看到，所有的静态资源都加上了版本号。</p>
-<p>构建完成的 dist/index.html 内容如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e5e1a91e46c?w=875&amp;h=416&amp;f=png&amp;s=74207" alt="img"></p>
-<p>可以看到，静态资源的版本号被正确替换了，为了验证构建出来的页面是否正常运行，可以运行 <code>./node_modules/.bin/http-server dist</code>，然后浏览器打开：<code>http://127.0.0.1:8080</code>，不出意外的话，浏览器显示如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16066e60258d8eeb?w=865&amp;h=688&amp;f=png&amp;s=192586" alt="img"></p>
-<blockquote>
-<p><strong>好了，到这里，我们给简单但是五脏俱全的前端项目加上了构建过程，这些环节你是否都清楚？你觉得还缺失些什么环节？欢迎留言交流</strong></p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/12-use-npm-script-as-build-pipeline" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>12-use-npm-script-as-build-pipeline</code>。</p>
-</blockquote>
-<hr>
+            <h4 id="一、相关名词"><a href="#一、相关名词" class="headerlink" title="一、相关名词"></a>一、相关名词</h4><p><strong>OSI</strong>（Open System Interconnection Model开放式系统互联模型）简称为OSI模型,由国际标准化组织提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。定义于ISO/IEC 7498-1</p>
+<p><strong>OSI/RM</strong>（Open Systems Interconnection Reference Model）开放系统互联参考模型</p>
+<p><strong>ISO</strong>（International Organization for Standardization）国际标准化组织</p>
+<p><strong>ARP</strong>（Address Resolution Protocol）地址解析协议，是根据IP地址获取物理地址的一个协议</p>
+<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet Protocol，传输控制协议/网际协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP 和IP两个协议，而是指一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 只是因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议。</p>
+<h4 id="二、七层模型"><a href="#二、七层模型" class="headerlink" title="二、七层模型"></a>二、七层模型</h4><h4 id="第7层-应用层"><a href="#第7层-应用层" class="headerlink" title="第7层 应用层"></a>第7层 应用层</h4><p>应用层与提供给用户的网络服务相关，这些服务非常丰富，包括文件传送、电子邮件、P2P应用等。应用层为用户提供了一个使用网络应用的“接口”。</p>
+<h4 id="第6层-表示层"><a href="#第6层-表示层" class="headerlink" title="第6层 表示层"></a>第6层 表示层</h4><p>表现层主要用于处理应用实体间的交换数据的语法，其目的是解决格式和数据表示的差别，从而为应用层提供一个一致的数据格式，使字符、格式等有差异的设备之间相互通信。除此之外，表现层还可以实现文本压缩、数据加密/解密、字符编码的转换等功能。这一层的功能在某些实际数据通信网络中是有应用层来实现的，而且表示层不独立存在。</p>
+<h4 id="第5层-会话层"><a href="#第5层-会话层" class="headerlink" title="第5层 会话层"></a>第5层 会话层</h4><p>会话层是指用户与用户的连接，通过在两台计算机间建立、管理和终止通信来完成对话。会话层的主要功能：在建立会话时核实双方身份是否有权参加会话；确定双方支付通信费用；双方在各种选择功能方面（如全双工还是半双工通信）取得一致，在会话建立以后，需要对进程间的对话进行管理与控制，例如，对话过程中某个环节输了故障，会话层在可能条件下必须对这个对话的数据，使数据不丢失，如不能保留，那么终止这个对话，并重新开始。在实际的网络中，会话层的功能已经被应用层所覆盖，很少单独存在。</p>
+<h4 id="第4层-传输层"><a href="#第4层-传输层" class="headerlink" title="第4层 传输层"></a>第4层 传输层</h4><p>传输层是第一个端到端的层次，也是进程到进程的层次。数据的通信表面上看是在两个主机之间进行，但实质上是发生在两个主机的进程之间。OSI参考模型的前三层可组成公共网络，被很多设备共享，并且计算机——交换结点（典型的交换结点是路由器，交换机等）、交换结点——交换结点是按照“接力”方式传送的。为了防止传送途中报文的丢失，两个主机的进程之间需要实现端到端控制。因此，传输层的功能主要包括复用/分解（区分发送和接收主机上的进程）、端到端的可靠传输、连接控制、流量控制和拥塞控制机制等。</p>
+<h4 id="第3层-网络层"><a href="#第3层-网络层" class="headerlink" title="第3层 网络层"></a>第3层 网络层</h4><p>网络层解决的核心问题是如何将分组通过交换网络传送至目的主机，因此，网络层的主要功能是数据转发与路由，在交换网络中，信息从源节点出发，要经过若干个中继节点所谓存储转发后，才能到达目的结点。这样一个包括源结点、中继结点、目的结点的集合称为从源结点到目的结点的路径。一般在两个结点之间会有多条路径选择，这种路由选择是网络层要完成的主要功能之一。当网络设备，比如路由器，从一个接口收到数据分组时，需要根据已掌握的路由信息将其转发到合适的接口并向下一个结点发送，直至送达目的结点。此外网络层还要对进入交换网络的通信量加以控制，以避免通信量过大造成交换网络性能下降。</p>
+<h4 id="第2层-数据链路层"><a href="#第2层-数据链路层" class="headerlink" title="第2层 数据链路层"></a>第2层 数据链路层</h4><p>数据链路层的主要功能是实现在相邻结点之间数据可靠而有效的传输，数据在物理介质内传输过程，不能保证没有任何错误发生。为了能实现有效的差错控制，就采用了一种以“帧”为单位的数据块传输方式。要采用帧格式传输，就必须有相应的帧同步技术，这就是数据链路层的“成帧”（“帧同步”）功能，包括定义帧的格式、类型、成帧的方法等。有了“帧”的存在，就可以将差错控制技术应用在数据帧中，例如，将数据码后面附加一定位数的循环码，从而实现数据链路层的差错控制功能。数据链路层还可以实现相邻结点间通信的流量控制。</p>
+<h4 id="第1层-物理层"><a href="#第1层-物理层" class="headerlink" title="第1层 物理层"></a>第1层 物理层</h4><p>物理层的主要功能是在传输介质上实现无结构比特流传输。所谓无结构比特流是指不关心比特流实际代表的信息内容，只关心如何将0、1这些比特以合适的信号传送至目的地，因此，物理层要实现信号编码功能，物理层的另一项主要任务就是规定数据终端设备（DTE）与数据通信设备（DCE）之间接口的相关特性，主要包括机械，电气，功能和规程4个方面的特性。机械特性也叫物理特性，说明硬件连接接口的机械特点，如接口的形状、尺寸、插脚的数量和排列方式等；电气特性规定了在物理连接上，导线的电气连接及有关电路的特性，如信号电平大小、接收器和发送器电路特性的说明，信号的识别、最大传输速率的说明等；功能特性说明物理接口各条信号线的用途，如接口信号线的功能分类等；规程特性指明利用接口传输比特流的全过程及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输的方式，即在物理连接建立、维持和交换信息时，收发双方在各自电路上的动作序列。</p>
+<h4 id="三、OSI七层参考模型与TCP-IP协议"><a href="#三、OSI七层参考模型与TCP-IP协议" class="headerlink" title="三、OSI七层参考模型与TCP/IP协议"></a>三、OSI七层参考模型与TCP/IP协议</h4><html> <table><tbody><tr><td style="vertical-align:bottom;"> <p>OSI七层网络模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP四层模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP五层模型</p> </td> <td style="vertical-align:bottom;"> <p>对应网络协议</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>应用层（Application）</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">HTTP</span>、TFTP,<span style="color:#ff0000;">&nbsp;FTP</span>, NFS, WAIS、SMTP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>表示层（Presentation）</p> </td> <td style="vertical-align:bottom;"> <p>Telnet, Rlogin, SNMP, Gopher</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>会话层（Session）</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">SMTP, DNS</span></p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>传输层（Transport）</p> </td> <td> <p>传输层</p> </td> <td> <p>传输层</p> </td> <td style="vertical-align:bottom;"> <p>TCP, UDP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>网络层（Network）</p> </td> <td> <p>网络互联层</p> </td> <td> <p>网络层</p> </td> <td style="vertical-align:bottom;"> <p>IP, ICMP, ARP, RARP, AKP, UUCP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>数据链路层（Data Link）</p> </td> <td rowspan="2"> <p>网络接口层</p> </td> <td> <p>数据链路层</p> </td> <td style="vertical-align:bottom;"> <p>FDDI, Ethernet, Arpanet, PDN, SLIP, PPP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>物理层（Physical）</p> </td> <td> <p>物理层</p> </td> <td style="vertical-align:bottom;"> <p>IEEE 802.1A, IEEE 802.2到IEEE 802.11</p> </td> </tr></tbody></table> </html>
+
+
+<h4 id="四、流程图"><a href="#四、流程图" class="headerlink" title="四、流程图"></a>四、流程图</h4><p><img src="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/img.png" alt="image"></p>
 
           
         
@@ -999,7 +1082,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 03：在 git hooks 中运行 npm script/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/0.1+0.2!==0.3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1018,7 +1101,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 03：在 git hooks 中运行 npm script/" itemprop="url">4.2 在 Git Hooks 中执行 npm script</a></h1>
+                <a class="post-title-link" href="/2019/07/18/0.1+0.2!==0.3/" itemprop="url">0.1+0.2!==0.3</a></h1>
         
 
         <div class="post-meta">
@@ -1030,8 +1113,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:40+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T11:11:28+08:00">
+                2019-07-18
               </time>
             
 
@@ -1040,28 +1123,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1092,43 +1153,8 @@
       
         
           
-            <h1 id="4-2-在-Git-Hooks-中执行-npm-script"><a href="#4-2-在-Git-Hooks-中执行-npm-script" class="headerlink" title="4.2 在 Git Hooks 中执行 npm script"></a>4.2 在 Git Hooks 中执行 npm script</h1><p>严肃的研发团队都会使用 Git 之类的版本管理系统来管理代码，随着 GitHub 的广受欢迎，相信大家对 Git 并不陌生。Git 在代码版本管理之外，也提供了类似 npm script 里 <code>pre</code>、<code>post</code> 的钩子机制，叫做 <a href="https://git-scm.com/book/gr/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">Git Hooks</a>，钩子机制能让我们在代码 commit、push 之前（后）做自己想做的事情。</p>
-<p>Git Hooks 能给我们的开发工作流带来哪些可能呢？我带的团队中，大部分项目通过 npm script 为本地仓库配置了 pre-commit、pre-push 钩子检查，且正计划为远程仓库（<a href="https://git-scm.com/book/en/v1/Git-Basics-Working-with-Remotes" target="_blank" rel="noopener">Remotes</a>）配置 pre-receive 钩子检查。两种钩子的检查目的各不相同，本地检查是为了尽早给提交代码的同学反馈，哪些地方不符合规范，哪些地方需要注意；而远程检查是为了确保远程仓库收到的代码是符合团队约定的规范的，因为如果没有远程检查环节，熟悉 Git 的同学使用 <code>--no-verify</code>（简写为 <code>-n</code>） 参数跳过本地检查时，本地检查就形同虚设。</p>
-<p>可能有同学会嘀咕，在 IDE 里面配置各种检查难道还不够么？对个人开发者来说足够了，但对于团队，如果对代码里面的坏味道听之任之，久而久之整个团队的代码质量标准都会被拉低，到最后坑的还是团队的每个成员，不是么？之前没想到这层的同学建议去看看破窗理论。</p>
-<p>那么增加 Git Hooks 的必要性聊清楚了，我们应该在 Git Hooks 里面做哪些事情呢？通常来说：检查编码规范，把低级错误趁早挖出来修好；运行测试，用自动化的方法做功能回归，测试本身就包含很多话题，且按下不表。</p>
-<p>前端社区里有多种结合 npm script 和 git-hooks 的方案，比如 <a href="https://github.com/observing/pre-commit" target="_blank" rel="noopener">pre-commit</a>、<a href="https://github.com/typicode/husky" target="_blank" rel="noopener">husky</a>，相比较而言 husky 更好用，它支持更多的 Git Hooks 种类，再结合 <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">lint-staged</a> 试用就更溜。</p>
-<p>接下来我们逐步给示例项目配置本地的 Git Hooks，而在钩子中运行的是已有的 npm script，比如 lint、test：</p>
-<h3 id="1-安装项目依赖"><a href="#1-安装项目依赖" class="headerlink" title="1. 安装项目依赖"></a>1. 安装项目依赖</h3><p>使用如下命令安装 husky、lint-staged 到项目依赖中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i husky lint-staged -D</span><br><span class="line"># npm install husky lint-staged --save-dev</span><br><span class="line"># yarn add husky lint-staged -D</span><br></pre></td></tr></table></figure>
-<p>husky 的基本工作原理可以稍作解释下，翻看 husky 的 <a href="https://github.com/typicode/husky/blob/master/package.json" target="_blank" rel="noopener">package.json</a>，注意其中的 scripts 声明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;test&quot;: &quot;jest&quot;,</span><br><span class="line">  &quot;format&quot;: &quot;prettier --single-quote --no-semi --write **/*.js&quot;,</span><br><span class="line">  &quot;install&quot;: &quot;node ./bin/install.js&quot;,</span><br><span class="line">  &quot;uninstall&quot;: &quot;node ./bin/uninstall.js&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>这里面的 install 就是你在项目中安装 husky 时执行的脚本（所有的魔法都藏在在这里了，哈哈）。</p>
-<p>然后再检查我们仓库的 <code>.git/hooks</code> 目录，会发现里面的钩子都被 husky 替换掉了，注意下图中三个红色框中的内容：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/14/16052956cce1a5c3?w=905&amp;h=519&amp;f=png&amp;s=93983" alt="img"></p>
-<h3 id="2-添加-npm-script"><a href="#2-添加-npm-script" class="headerlink" title="2. 添加 npm script"></a>2. 添加 npm script</h3><p>接下来需要在 scripts 对象中增加 husky 能识别的 Git Hooks 脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">+    &quot;precommit&quot;: &quot;npm run lint&quot;,</span><br><span class="line">+    &quot;prepush&quot;: &quot;npm run test&quot;,</span><br><span class="line">     &quot;lint&quot;: &quot;npm-run-all --parallel lint:*&quot;,</span><br><span class="line">     &quot;lint:js&quot;: &quot;eslint *.js&quot;,</span><br></pre></td></tr></table></figure>
-<p>这两个命令的作用是在代码提交前运行所有的代码检查 npm run lint；在代码 push 到远程之前，运行 lint 和自动化测试（<strong>言外之意，如果测试失败，push 就不会成功</strong>），虽然运行的是 npm run test，但是 lint 也配置在了 pretest 里面。</p>
-<p>然后尝试提交代码：<code>git commit -am &#39;add husky hooks&#39;</code>，能看到 pre-commit 钩子已经生效：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/14/16052959456b87ca?w=586&amp;h=110&amp;f=png&amp;s=22843" alt="img"></p>
-<h3 id="3-用-lint-staged-改进-pre-commit"><a href="#3-用-lint-staged-改进-pre-commit" class="headerlink" title="3. 用 lint-staged 改进 pre-commit"></a>3. 用 lint-staged 改进 pre-commit</h3><p>如上的配置乍看起来没有任何问题，但是在大型项目、遗留项目中接入过 lint 工作流的同学可能深有体会，每次提交代码会检查所有的代码，可能比较慢就不说了，接入初期 lint 工具可能会报告几百上千个错误，这时候估计大多数人内心是崩溃的，尤其是当你是新规范的推进者，遇到的阻力会增大好几倍，毕竟大多数人不愿意背别人的锅，坏笑。</p>
-<p>好在，我们有 lint-staged 来环节这个问题，每个团队成员提交的时候，只检查当次改动的文件，具体改动如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">-    &quot;precommit&quot;: &quot;npm run lint&quot;,</span><br><span class="line">+    &quot;precommit&quot;: &quot;lint-staged&quot;,</span><br><span class="line">     &quot;prepush&quot;: &quot;npm run test&quot;,</span><br><span class="line">     &quot;lint&quot;: &quot;npm-run-all --parallel lint:*&quot;,</span><br><span class="line">   &#125;,</span><br><span class="line">+  &quot;lint-staged&quot;: &#123;</span><br><span class="line">+    &quot;*.js&quot;: &quot;eslint&quot;,</span><br><span class="line">+    &quot;*.less&quot;: &quot;stylelint&quot;,</span><br><span class="line">+    &quot;*.css&quot;: &quot;stylelint&quot;,</span><br><span class="line">+    &quot;*.json&quot;: &quot;jsonlint --quiet&quot;,</span><br><span class="line">+    &quot;*.md&quot;: &quot;markdownlint --config .markdownlint.json&quot;</span><br><span class="line">+  &#125;,</span><br><span class="line">   &quot;keywords&quot;: [],</span><br></pre></td></tr></table></figure>
-<p>接下来我们故意在 index.js 中引入错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-  return NaN;</span><br><span class="line">+  return NaN</span><br></pre></td></tr></table></figure>
-<p>然后尝试提交这个文件：<code>git commit -m &#39;try to add eslint error&#39; index.js</code>，结果如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/14/1605295bb21f26aa?w=733&amp;h=503&amp;f=png&amp;s=90551" alt="img"></p>
-<p>上图中带有 <code>Running Tasks</code> 字样的列表就是 lint-staged 根据当前要提交的文件和 package.json 中配置的检查命令去执行的动态输出。红色框里面提示 husky 的 pre-commit 钩子执行失败，提交也就没有成功。</p>
-<p>关于 lint-staged 还有些高级的用法，比如对单个文件执行多条命令，对单个文件动态自动修复，自动格式化等等，留待大家自己去探索好了。</p>
-<p>撤销掉有错误的修改，提交之后，我们往远程 push 新分支，结果如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/14/16052e6c6cba85ff?w=867&amp;h=460&amp;f=png&amp;s=160857" alt="img"></p>
-<blockquote>
-<p>读过我其他文章的同学可能已经想到，本小节的内容部分和我早期的文章<a href="https://juejin.im/post/592615580ce463006bf19aa0" target="_blank" rel="noopener">《用 husky 和 lint-staged 构建超溜的代码检查工作流》</a>有部分内容是重叠的。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/11-run-npm-script-in-git-hooks" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改（<strong>记得安装 npm 依赖之后再运行脚本</strong>），注意切换到正确的分支 <code>11-run-npm-script-in-git-hooks</code>。</p>
-</blockquote>
-<hr>
+            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span> == <span class="number">0.3</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>) <span class="comment">// 0.30000000000000004</span></span><br></pre></td></tr></table></figure>
+<p>浮点数值的最高精度是17位小数，但是在进行算数计算式其精度远远不如整数。浮点数值计算会产生舍入误差，有一点需要明确，这是基于IEEE754数值的浮点计算的通病。<br>所以实际上，这里错的不是结论，而是比较的方法，正确的比较方法是使用Javascript提供的最小精度值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.abs(<span class="number">0.1</span> + <span class="number">0.2</span> <span class="number">-0.3</span>) &lt; <span class="built_in">Number</span>.EPSILON) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1177,7 +1203,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 02：结合 live-reload 实现自动刷新/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/leetCode两数之和/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1196,7 +1222,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 02：结合 live-reload 实现自动刷新/" itemprop="url">4.2 使用 livereload 实现自动刷新</a></h1>
+                <a class="post-title-link" href="/2019/04/09/leetCode两数之和/" itemprop="url">leetCode两数之和</a></h1>
         
 
         <div class="post-meta">
@@ -1208,8 +1234,128 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:39+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T17:33:44+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tmp = target - nums[i];</span><br><span class="line">        <span class="keyword">if</span> (nums.indexOf(tmp) != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> tmp2 = nums.indexOf(tmp)</span><br><span class="line">            <span class="keyword">if</span> (tmp2 === i) <span class="keyword">continue</span> </span><br><span class="line">            result.push(i,tmp2)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">6</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">var</span> j = i+<span class="number">1</span>; j &lt; nums.length; j++)&#123;</span><br><span class="line">             <span class="keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                 result.push(i)</span><br><span class="line">                 result.push(j)</span><br><span class="line">                 <span class="keyword">return</span> result</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">26</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/曼彻斯特编码与差分曼彻斯特编码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/18/曼彻斯特编码与差分曼彻斯特编码/" itemprop="url">曼彻斯特编码与差分曼彻斯特编码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T11:16:42+08:00">
+                2019-01-18
               </time>
             
 
@@ -1231,8 +1377,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/网络原理/" itemprop="url" rel="index">
+                    <span itemprop="name">网络原理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
                   </a>
                 </span>
 
@@ -1270,35 +1427,15 @@
       
         
           
-            <h1 id="4-2-使用-livereload-实现自动刷新"><a href="#4-2-使用-livereload-实现自动刷新" class="headerlink" title="4.2 使用 livereload 实现自动刷新"></a>4.2 使用 livereload 实现自动刷新</h1><p>前端工程师日常开发最频繁（实际上最浪费时间）的操作是什么？可能你已经想到了，就是刷新页面，要让变更生效，需要重新加载，刷新页面的操作就变成了重复低效的操作。</p>
-<p>于是社区里出现了 <a href="https://www.npmjs.com/package/livereload" target="_blank" rel="noopener">LiveReload</a> 来把这个过程自动化，react 种子项目生成工具 <a href="https://github.com/facebookincubator/create-react-app" target="_blank" rel="noopener">create-react-app</a> 中就使用了这种技术。</p>
-<p>但随着技术的演化，在单页应用中刷新页面意味着客户端状态的全部丢失，特别是复杂的单页应用刷新意味着更大量的重复工作才能回到刷新前的状态，于是社区又捣鼓出了 <a href="https://webpack.js.org/concepts/hot-module-replacement/" target="_blank" rel="noopener">Hot Module Replacement，简称为 HMR</a>，比如使用 <a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">vue-cli</a> 创建的 <a href="https://github.com/vuejs-templates/webpack" target="_blank" rel="noopener">webpack</a> 种子项目中就包含这种特性，<a href="https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html" target="_blank" rel="noopener">react-native</a> 也内置了这种特性，来帮助开发者提高效率。</p>
-<p>读到这里，你可能会嘀咕，看起来 LiveReload 并不是最新的技术，还讨论它干啥，实际上它是自动刷新技术的鼻祖，后续的 HMR、HR 等都是它的改良版，动手配置下自动刷新，也能让你对这些技术的基本原理略知一二。</p>
-<p>下面介绍如何在经典的前端项目中（引用了 css、js 的 html 页面）接入 LiveReload 的详细步骤：</p>
-<h3 id="1-安装项目依赖"><a href="#1-安装项目依赖" class="headerlink" title="1. 安装项目依赖"></a>1. 安装项目依赖</h3><p>使用如下命令安装 <a href="https://www.npmjs.com/package/livereload" target="_blank" rel="noopener">livereload</a> 和 <a href="https://www.npmjs.com/package/http-server" target="_blank" rel="noopener">http-server</a> 到项目依赖中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i livereload http-server -D</span><br><span class="line"># npm install livereload http-server --save-dev</span><br><span class="line"># yarn add livereload http-server -D</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-npm-script"><a href="#2-添加-npm-script" class="headerlink" title="2. 添加 npm script"></a>2. 添加 npm script</h3><p>按如下提示添加命令，方便我们启动 LiveReload 服务器和通过 HTTP 的方式访问页面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-    &quot;cover:open&quot;: &quot;scripty&quot;</span><br><span class="line">+    &quot;cover:open&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;client&quot;: &quot;npm-run-all --parallel client:*&quot;,</span><br><span class="line">+    &quot;client:reload-server&quot;: &quot;livereload client/&quot;,</span><br><span class="line">+    &quot;client:static-server&quot;: &quot;http-server client/&quot;</span><br></pre></td></tr></table></figure>
-<p>其中 client 命令能同时启动 livereload 服务、静态文件服务。</p>
-<blockquote>
-<p><strong>TIP#16</strong>：可能有同学会问，为什么需要启动两个服务，其中 http-server 启动的是静态文件服务器，该服务启动后可以通过 http 的方式访问文件系统上的文件，而 livereload 是启动了自动刷新服务，该服务负责监听文件系统变化，并在文件系统变化时通知所有连接的客户端，在 <code>client/index.html</code> 中嵌入的那段 js 实际上是和 livereload-server 连接的一个 livereload-client。</p>
+            <p>昨天在看西安交大陈妍老师的视频中，老师说曼彻斯特编码中电平从高电平跳变到低电平是表示“1”，从低电平条跳变到高电平表示“0”，怎么跟我印象中好像不太一样，难道我记错了？<br>本着学知识不可以不求甚解的态度，我又查找了一下资料，咳咳，还真是我记错了，不过，在在网络工程师考试以及与其相关的资料中确实是这样规定的：位中间电平从低到高（向上）跳变表示“1”；位中间电平从高到低（向下）跳变表示“0”。而在清华大学出版的《计算机通信与网络教程》《计算机网络（第4版）》[1]却与之相反，在此我们将清华版称为标准曼彻斯编码。</p>
+<h4 id="曼彻斯特编码："><a href="#曼彻斯特编码：" class="headerlink" title="曼彻斯特编码："></a>曼彻斯特编码：</h4><blockquote>
+<p>位中间电平从高到低跳变表示”1”<br>位中间电平从低到高跳变表示”0”。</p>
 </blockquote>
-<h3 id="3-在页面中嵌入-livereload-脚本"><a href="#3-在页面中嵌入-livereload-脚本" class="headerlink" title="3. 在页面中嵌入 livereload 脚本"></a>3. 在页面中嵌入 livereload 脚本</h3><p>修改 client/index.html 嵌入 livereload 脚本（能够连接我们的 livereload 服务），diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> &lt;body&gt;</span><br><span class="line">   &lt;h2&gt;LiveReload Demo&lt;/h2&gt;</span><br><span class="line">+  &lt;script&gt;</span><br><span class="line">+    document.write(&apos;&lt;script src=&quot;http://&apos; + (location.host || &apos;localhost&apos;).split(&apos;:&apos;)[0] +</span><br><span class="line">+      &apos;:35729/livereload.js?snipver=1&quot;&gt;&lt;/&apos; + &apos;script&gt;&apos;)</span><br><span class="line">+  &lt;/script&gt;</span><br><span class="line"> &lt;/body&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#17</strong>：livereload 是支持在启动时自定义端口的，如果你使用了自定义端口，在页面中嵌入的这段 js 里面的 <code>35729</code> 也需要替换成对应的端口。</p>
+<h4 id="差分曼彻斯特编码："><a href="#差分曼彻斯特编码：" class="headerlink" title="差分曼彻斯特编码："></a>差分曼彻斯特编码：</h4><blockquote>
+<p>前半周期没有跳变表示”1”<br>前半周期有跳变表示”0”。</p>
 </blockquote>
-<h3 id="4-启动服务并测试"><a href="#4-启动服务并测试" class="headerlink" title="4. 启动服务并测试"></a>4. 启动服务并测试</h3><p>最后，运行 npm run client 之后，截图如下，注意两个红框里面的输出表示服务启动成功：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/14/1605294cbbf843bc?w=1066&amp;h=503&amp;f=png&amp;s=111997" alt="img"></p>
-<p>然后，打开浏览器访问：<a href="http://localhost:8080，接着修改" target="_blank" rel="noopener">http://localhost:8080，接着修改</a> client/main.css 并保存（<strong>别忘了保存</strong>），你会发现浏览器自动刷新了。如果没有刷新，欢迎留言交流。</p>
-<blockquote>
-<p><strong>TIP#18</strong>：有代码洁癖的同学可能会问，在页面中嵌入的那段 js 在线上环境咋办？实际上在嵌入这段脚本的时候可以通过简单的手段（比如判断 location.hostname）去检查当前页面运行环境，如果是线上环境就不嵌入了，或者使用打包工具处理 html 文件，上线前直接去掉即可。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/10-livereload-with-npm-script" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>10-livereload-with-npm-script</code>。</p>
-</blockquote>
-<hr>
+<p>　差分曼彻斯特编码比曼彻斯特编码的变化要少，因此更适合与传输高速的信息，被广泛用于宽带高速网中。然而，由于每个时钟位都必须有一次变化，所以这两种编码的效率仅可达到50%左右。</p>
+<p>a:数字信号  b:曼彻斯特编码   c:差分曼彻斯特编码<br><img src="/2019/01/18/曼彻斯特编码与差分曼彻斯特编码/img.jpg" alt="img"></p>
 
           
         
@@ -1347,7 +1484,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 01：监听文件变化并自动运行 npm script/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/使用vue指令开发一个实时时间转换指令v-time/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1366,7 +1503,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 01：监听文件变化并自动运行 npm script/" itemprop="url">4.1 文件变化时自动运行 npm script</a></h1>
+                <a class="post-title-link" href="/2018/12/24/使用vue指令开发一个实时时间转换指令v-time/" itemprop="url">使用vue指令开发一个实时时间转换指令v-time</a></h1>
         
 
         <div class="post-meta">
@@ -1378,8 +1515,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:38+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T18:04:06+08:00">
+                2018-12-24
               </time>
             
 
@@ -1401,8 +1538,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
                   </a>
                 </span>
 
@@ -1440,38 +1588,11 @@
       
         
           
-            <h1 id="4-1-文件变化时自动运行-npm-script"><a href="#4-1-文件变化时自动运行-npm-script" class="headerlink" title="4.1 文件变化时自动运行 npm script"></a>4.1 文件变化时自动运行 npm script</h1><p>软件工程师做的事情基本都是在实现自动化，比如各种业务系统是为了业务运转的自动化，部署系统是为了运维的自动化，对于开发者本身，自动化也是提升效率的关键环节，在实际开发过程中也有不少事情是可以自动化的。</p>
-<p>拥抱现代前端工作流的同学都会有代码风格检查、单元测试等环节，这样就很需要在代码变更之后立即得到反馈，如代码改动导致了那个 Case 失败，哪块不符合团队的编码规范等。</p>
-<p>使用 gulp、grunt 的同学，可能对这种功能非常熟悉，不就是 watch 么？确实是，使用 npm script 我们也可以实现类似的功能。下面详细介绍如何改造我们的项目实现单测、代码检查的自动化。</p>
-<h2 id="单元测试自动化"><a href="#单元测试自动化" class="headerlink" title="单元测试自动化"></a>单元测试自动化</h2><p>幸运的是，mocha 本身支持 <code>--watch</code> 参数，即在代码变化时自动重跑所有的测试，我们只需要在 scripts 对象中新增一条命令即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">+    &quot;watch:test&quot;: &quot;npm t -- --watch&quot;,</span><br><span class="line">     &quot;cover&quot;: &quot;node scripts/cover.js&quot;,</span><br></pre></td></tr></table></figure>
-<p>尝试运行 npm run watch:test，我们会发现进程并没有退出，接下来尝试去修改测试代码，测试是不是自动重跑了呢？自己试试看。</p>
-<h2 id="代码检查自动化"><a href="#代码检查自动化" class="headerlink" title="代码检查自动化"></a>代码检查自动化</h2><p>我们使用的代码检查工具 <a href="https://stylelint.io" target="_blank" rel="noopener">stylelint</a>、<a href="https://eslint.org" target="_blank" rel="noopener">eslint</a>、<a href="https://github.com/zaach/jsonlint" target="_blank" rel="noopener">jsonlint</a> 不全支持 watch 模式，这里我们需要借助 <a href="https://github.com/Qard/onchange" target="_blank" rel="noopener">onchange</a> 工具包来实现，onchange 可以方便的让我们在文件被修改、添加、删除时运行需要的命令。</p>
-<h3 id="1-安装项目依赖"><a href="#1-安装项目依赖" class="headerlink" title="1. 安装项目依赖"></a>1. 安装项目依赖</h3><p>使用如下命令安装 onchange 到项目依赖中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i onchange -D</span><br><span class="line"># npm install onchange --save-dev</span><br><span class="line"># yarn add onchange -D</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-npm-script"><a href="#2-添加-npm-script" class="headerlink" title="2. 添加 npm script"></a>2. 添加 npm script</h3><p>按照如下提示添加 watch:lint 和 watch 两个子命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+    &quot;watch&quot;: &quot;npm-run-all --parallel watch:*&quot;,</span><br><span class="line">+    &quot;watch:lint&quot;: &quot;onchange -i \&quot;**/*.js\&quot; \&quot;**/*.less\&quot; -- npm run lint&quot;,</span><br><span class="line">     &quot;watch:test&quot;: &quot;npm t -- --watch&quot;,</span><br></pre></td></tr></table></figure>
-<p>关于改动的几点说明：</p>
-<ul>
-<li><code>watch:lint</code> 里面的文件匹配模式可以使用通配符，但是模式两边使用了转义的双引号，这样是跨平台兼容的；</li>
-<li><code>watch:lint</code> 里面的 <code>-i</code> 参数是让 onchange 在启动时就运行一次 <code>--</code> 之后的命令，即代码没变化的时候，变化前后的对比大多数时候还是有价值的；</li>
-<li>watch 命令实际上是使用了 npm-run-all 来运行所有的 watch 子命令；</li>
-</ul>
-<blockquote>
-<p><strong>TIP#15</strong>：有没有好奇过 onchange 是怎么实现文件系统监听的？所有的魔法都藏在它的源代码里面，实际上它使用了跨平台的文件系统监听包 <a href="https://github.com/paulmillr/chokidar" target="_blank" rel="noopener">chokidar</a>，基于它，你能做点什么有意思的事情呢？</p>
-</blockquote>
-<p>onchange 有个不太醒目的特性是，文件系统发生变化之后，他在运行指定命令之前输出哪个文件发生了哪些变化，如下图红框中的内容：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/12/160481d04f4e2aa5?w=951&amp;h=533&amp;f=png&amp;s=77037" alt="img"></p>
-<p>读到这里，有没有觉得 onchange 可以和 gulp、grunt 的 watch 一样强大。</p>
-<blockquote>
-<p>除了上面的单测重跑和代码检查之外，你还有什么需求需要放在 onchange 里面？欢迎留言讨论。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/09-run-npm-script-with-onchange" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>09-run-npm-script-with-onchange</code>。</p>
-</blockquote>
-<hr>
-
+            <h4 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h4><p> 先定义一个与时间有关的对象，将与时间有关的函数封装进去</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Time = &#123;</span><br><span class="line">  <span class="comment">// 获取当前时间戳</span></span><br><span class="line">  getUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今天0点0分0秒的时间戳</span></span><br><span class="line">  getTodayUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今年1月1日0点0分0秒的时间戳</span></span><br><span class="line">  getYearUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setMonth(<span class="number">0</span>)</span><br><span class="line">    date.setDate(<span class="number">1</span>)</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取标准年月日</span></span><br><span class="line">  getLastDate: <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(time)</span><br><span class="line">    <span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span> &lt; <span class="number">10</span> ? <span class="string">'0'</span> + (date.getMonth() + <span class="number">1</span>) : date.getMonth() + <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> day = date.getDate() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + date.getDate() : date.getDate()</span><br><span class="line">    <span class="keyword">return</span> date.getFullYear() + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 转换时间</span></span><br><span class="line">  getFormatTime: <span class="function"><span class="keyword">function</span> (<span class="params">timestamp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="keyword">this</span>.getUnix() <span class="comment">// 获取当前时间戳</span></span><br><span class="line">    <span class="keyword">var</span> today = <span class="keyword">this</span>.getTodayUnix() <span class="comment">// 获取今天0点时间戳</span></span><br><span class="line">    <span class="keyword">var</span> year = <span class="keyword">this</span>.getYearUnix() <span class="comment">// 获取今年0点时间戳</span></span><br><span class="line">    <span class="keyword">var</span> timer = (now - timestamp) / <span class="number">1000</span> <span class="comment">// 转换为秒级</span></span><br><span class="line">    <span class="keyword">var</span> tip = <span class="string">''</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (timer &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &lt; <span class="number">3600</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) + <span class="string">'分钟前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &gt;= <span class="number">3600</span> &amp;&amp; (timestamp - today &gt;= <span class="number">0</span>)) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">3600</span>) + <span class="string">'小时前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer/<span class="number">86400</span> &lt;= <span class="number">31</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.ceil(timer/<span class="number">86400</span>) + <span class="string">'天前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      tip = <span class="keyword">this</span>.getLastDate(timestamp)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tip</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="自定义指令v-time"><a href="#自定义指令v-time" class="headerlink" title="自定义指令v-time"></a>自定义指令v-time</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'time'</span>, &#123;</span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">    el.innerHTML = Time.getFormatTime(binding.value)</span><br><span class="line">    el.__timeout__ = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      el.innerHTML = Time.getFormatTime(binding.value)</span><br><span class="line">    &#125;, <span class="number">60000</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  unbind: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearInterval(el.__timeout__)</span><br><span class="line">    <span class="keyword">delete</span> el.__timeout__  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>定时器el.__timeout__每分钟触发一次，在unbind钩子中清除</p>
+<h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a>html代码</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"time"</span> <span class="attr">v-time</span>=<span class="string">"1545719797346"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -1519,7 +1640,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 03：用 node.js 脚本替代复杂的 npm script/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/JS如何实现在IOS中video全屏播放/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1538,7 +1659,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 03：用 node.js 脚本替代复杂的 npm script/" itemprop="url">3.3 用 node.js 脚本替代复杂的 npm script</a></h1>
+                <a class="post-title-link" href="/2018/12/21/JS如何实现在IOS中video全屏播放/" itemprop="url">JS如何实现在IOS中video全屏播放</a></h1>
         
 
         <div class="post-meta">
@@ -1550,8 +1671,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:37+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T13:08:37+08:00">
+                2018-12-21
               </time>
             
 
@@ -1573,8 +1694,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -1612,412 +1733,14 @@
       
         
           
-            <h1 id="3-3-用-node-js-脚本替代复杂的-npm-script"><a href="#3-3-用-node-js-脚本替代复杂的-npm-script" class="headerlink" title="3.3 用 node.js 脚本替代复杂的 npm script"></a>3.3 用 node.js 脚本替代复杂的 npm script</h1><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a> 丰富的生态能赋予我们更强的能力，对于前端工程师来说，使用 Node.js 来编写复杂的 npm script 具有明显的 2 个优势：首先，编写简单的工具脚本对前端工程师来说额外的学习成本很低甚至可以忽略不计，其次，因为 Node.js 本身是跨平台的，用它编写的脚本出现跨平台兼容问题的概率很小。</p>
-<p>下面我们就一起探索下，如何把上节中使用 shell 编写的 cover 脚本改写成 Node.js 脚本，在 Node.js 脚本中我们也能体味到 <a href="https://www.npmjs.com/package/shelljs" target="_blank" rel="noopener">shelljs</a> 这个工具包的强大。</p>
-<h3 id="1-安装-shelljs-依赖"><a href="#1-安装-shelljs-依赖" class="headerlink" title="1. 安装 shelljs 依赖"></a>1. 安装 shelljs 依赖</h3><p>使用如下命令安装 shelljs 到项目依赖中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i shelljs -D</span><br><span class="line"># npm install shelljs --save-dev</span><br><span class="line"># yarn add shelljs -D</span><br></pre></td></tr></table></figure>
-<p>此外，我们计划使用 <a href="https://www.npmjs.com/package/chalk" target="_blank" rel="noopener">chalk</a> 来给输出加点颜色，让脚本变的更有趣，同样安装到 devDependencies 里面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i chalk -D</span><br><span class="line"># npm install chalk --save-dev</span><br><span class="line"># yarn add chalk -D</span><br></pre></td></tr></table></figure>
-<h3 id="2-创建-Node-js-脚本"><a href="#2-创建-Node-js-脚本" class="headerlink" title="2. 创建 Node.js 脚本"></a>2. 创建 Node.js 脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch scripts/cover.js</span><br></pre></td></tr></table></figure>
-<h3 id="3-用-Node-js-实现同等功能"><a href="#3-用-Node-js-实现同等功能" class="headerlink" title="3. 用 Node.js 实现同等功能"></a>3. 用 Node.js 实现同等功能</h3><p>shelljs 为我们提供了各种常见命令的跨平台支持，比如 cp、mkdir、rm、cd 等命令，此外，理论上你可以在 Node.js 脚本中使用任何 <a href="https://www.npmjs.com" target="_blank" rel="noopener">npmjs.com</a> 上能找到的包。清理归档目录、运行测试、归档并预览覆盖率报告的完整 Node.js 代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const &#123; rm, cp, mkdir, exec, echo &#125; = require(&apos;shelljs&apos;);</span><br><span class="line">const chalk = require(&apos;chalk&apos;);</span><br><span class="line"></span><br><span class="line">console.log(chalk.green(&apos;1. remove old coverage reports...&apos;));</span><br><span class="line">rm(&apos;-rf&apos;, &apos;coverage&apos;);</span><br><span class="line">rm(&apos;-rf&apos;, &apos;.nyc_output&apos;);</span><br><span class="line"></span><br><span class="line">console.log(chalk.green(&apos;2. run test and collect new coverage...&apos;));</span><br><span class="line">exec(&apos;nyc --reporter=html npm run test&apos;);</span><br><span class="line"></span><br><span class="line">console.log(chalk.green(&apos;3. archive coverage report by version...&apos;));</span><br><span class="line">mkdir(&apos;-p&apos;, &apos;coverage_archive/$npm_package_version&apos;);</span><br><span class="line">cp(&apos;-r&apos;, &apos;coverage/*&apos;, &apos;coverage_archive/$npm_package_version&apos;);</span><br><span class="line"></span><br><span class="line">console.log(chalk.green(&apos;4. open coverage report for preview...&apos;));</span><br><span class="line">exec(&apos;npm-run-all --parallel cover:serve cover:open&apos;);</span><br></pre></td></tr></table></figure>
-<p>关于改动的几点说明：</p>
-<ul>
-<li>简单的文件系统操作，建议直接使用 shelljs 提供的 cp、rm 等替换；</li>
-<li>部分稍复杂的命令，比如 nyc 可以使用 exec 来执行，也可以使用 istanbul 包来完成；</li>
-<li>在 exec 中也可以大胆的使用 npm script 运行时的环境变量，比如 <code>$npm_package_version</code>；</li>
-</ul>
-<h3 id="4-让-package-json-指向新脚本"><a href="#4-让-package-json-指向新脚本" class="headerlink" title="4. 让 package.json 指向新脚本"></a>4. 让 package.json 指向新脚本</h3><p>准备好 Node.js 脚本之后，我们需要修改 package.json 里面的命令，使其运行该脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">-    &quot;cover&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;cover&quot;: &quot;node scripts/cover.js&quot;,</span><br><span class="line">     &quot;cover:open&quot;: &quot;scripty&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<h3 id="5-测试-cover-命名"><a href="#5-测试-cover-命名" class="headerlink" title="5. 测试 cover 命名"></a>5. 测试 cover 命名</h3><p>重新运行 npm run cover 命令，不出意外的话，基本功能是正常的，除了我们新加的绿色输出，如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/10/1603de95af9b2c41?w=1060&amp;h=587&amp;f=png&amp;s=87226" alt="img"></p>
-<p>以上，本小节完，这里只是简单展示了如何组织 Node.js 脚本并且让其与 npm script 关联起来，至于具体在脚本中做什么事情，请你自由发挥吧。</p>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/08-using-nodejs-script-as-replacement" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>08-using-nodejs-script-as-replacement</code>。</p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 02：把庞大的 npm script 拆到单独文件中/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 02：把庞大的 npm script 拆到单独文件中/" itemprop="url">3.2 把庞大的 npm script 拆到单独文件中</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:36+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="3-2-把庞大的-npm-script-拆到单独文件中"><a href="#3-2-把庞大的-npm-script-拆到单独文件中" class="headerlink" title="3.2 把庞大的 npm script 拆到单独文件中"></a>3.2 把庞大的 npm script 拆到单独文件中</h1><p>当 npm script 不断累积、膨胀的时候，全部放在 package.json 里面可能并不是个好主意，因为这样会导致 package.json 糟乱，可读性降低。</p>
-<p>借助 <a href="https://github.com/testdouble/scripty" target="_blank" rel="noopener">scripty</a> 我们可以将 npm script 剥离到单独的文件中，从而把复杂性隔到单独的模块里面，让代码整体看起来更加清晰。</p>
-<p>示例项目中的覆盖率相关的 npm script 占据了很大的篇幅，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">  &quot;cover:cleanup&quot;: &quot;rimraf coverage &amp;&amp; rimraf .nyc_output&quot;,</span><br><span class="line">  &quot;cover:archive&quot;: &quot;cross-var \&quot;make-dir coverage_archive/$npm_package_version &amp;&amp; cpr coverage/* coverage_archive/$npm_package_version -o\&quot;&quot;,</span><br><span class="line">  &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">  &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">  &quot;precover&quot;: &quot;npm run cover:cleanup&quot;,</span><br><span class="line">  &quot;postcover&quot;: &quot;npm-run-all cover:archive --parallel cover:serve cover:open&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>如果要隔离复杂性，我们可以考虑从 cover 相关的 script 入手，具体操作步骤如下：</p>
-<h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i scripty -D</span><br><span class="line"># npm install scripty --save-dev</span><br><span class="line"># yarn add scripty -D</span><br></pre></td></tr></table></figure>
-<h3 id="2-准备目录和文件"><a href="#2-准备目录和文件" class="headerlink" title="2. 准备目录和文件"></a>2. 准备目录和文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p scripts/cover</span><br></pre></td></tr></table></figure>
-<p>先创建两层的目录，因为我们计划把 cover 脚本写成多个，方便单独去执行，这里命名为 scripts 是 scripty 默认的，实际上是可以自定义的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch scripts/cover.sh</span><br><span class="line">touch scripts/cover/serve.sh</span><br><span class="line">touch scripts/cover/open.sh</span><br></pre></td></tr></table></figure>
-<p>然后创建空白的脚本文件，因为有了单独的脚本，我们可以把原来的 precover、cover、postcover、cover:archive、cover:cleanup 合并到一个文件中。</p>
-<p>按照 scripty 的默认约定，npm script 命令和上面各文件的对应关系如下：</p>
-<p>命令</p>
-<p>文件</p>
-<p>备注</p>
-<p>cover</p>
-<p>scripts/cover.sh</p>
-<p>内含 precover、postcover 的逻辑</p>
-<p>cover:serve</p>
-<p>scripts/cover/serve.sh</p>
-<p>启动服务</p>
-<p>cover:open</p>
-<p>scripts/cover/open.sh</p>
-<p>打开预览</p>
-<p><strong>特别注意的是，给所有脚本增加可执行权限是必须的，否则 scripty 执行时会报错</strong>，我们可以给所有的脚本增加可执行权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R a+x scripts/**/*.sh</span><br></pre></td></tr></table></figure>
-<h3 id="3-修改-scripty-脚本"><a href="#3-修改-scripty-脚本" class="headerlink" title="3. 修改 scripty 脚本"></a>3. 修改 scripty 脚本</h3><p>准备好目录和文件之后，接下来需要给脚本填充内容，脚本内容如下（因为脚本使用的是 bash，所以直接忽略了跨平台兼容的处理，跨平台兼容脚本最好使用 Node.js 编写，下节会介绍）：</p>
-<p><code>scripts/cover.sh</code> 内容如下（cleanup –&gt; cover –&gt; archive –&gt; preview）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line"># remove old coverage reports</span><br><span class="line">rimraf coverage &amp;&amp; rimraf .nyc_output</span><br><span class="line"></span><br><span class="line"># run test and collect new coverage</span><br><span class="line">nyc --reporter=html npm run test</span><br><span class="line"></span><br><span class="line"># achive coverage report by version</span><br><span class="line">mkdir -p coverage_archive/$npm_package_version</span><br><span class="line">cp -r coverage/* coverage_archive/$npm_package_version</span><br><span class="line"></span><br><span class="line"># open coverage report for preview</span><br><span class="line">npm-run-all --parallel cover:serve cover:open</span><br></pre></td></tr></table></figure>
-<p><code>scripts/cover/serve.sh</code> 内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">http-server coverage_archive/$npm_package_version -p $npm_package_config_port</span><br></pre></td></tr></table></figure>
-<p><code>scripts/cover/open.sh</code> 内容如下（这里有个 sleep，是为了确保文件系统写入完成）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">opn http://localhost:$npm_package_config_port</span><br></pre></td></tr></table></figure>
-<p>细心的同学可能注意到了，在 shell 脚本里面是可以随意使用 npm 的内置变量和自定义变量的。</p>
-<h3 id="4-修改-package-json"><a href="#4-修改-package-json" class="headerlink" title="4. 修改 package.json"></a>4. 修改 package.json</h3><p>主要改动是清理 cover:* 命令，接入 scripty，具体的 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">-    &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">-    &quot;cover:cleanup&quot;: &quot;rimraf coverage &amp;&amp; rimraf .nyc_output&quot;,</span><br><span class="line">-    &quot;cover:archive&quot;: &quot;cross-var \&quot;make-dir coverage_archive/$npm_package_version &amp;&amp; cpr coverage/* coverage_archive/$npm_package_version -o\&quot;&quot;,</span><br><span class="line">-    &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">-    &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">-    &quot;precover&quot;: &quot;npm run cover:cleanup&quot;,</span><br><span class="line">-    &quot;postcover&quot;: &quot;npm-run-all cover:archive --parallel cover:serve cover:open&quot;</span><br><span class="line">+    &quot;cover&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;cover:serve&quot;: &quot;scripty&quot;,</span><br><span class="line">+    &quot;cover:open&quot;: &quot;scripty&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>这里我们只保留了 cover、cover:serve、cover:open 等 3 个命令，让它们都指向 scripty，调用哪个脚本都由 scripty 来处理。</p>
-<h3 id="5-实际测试"><a href="#5-实际测试" class="headerlink" title="5. 实际测试"></a>5. 实际测试</h3><p>修改完毕之后，重新运行 npm run cover，不出意外的话，我们能得到和原来完全相同的结果，仔细观察运行的日志，会发现在代码执行前有段额外的输出，如下图中红色框中的内容，scripty 在实际执行的时候会把执行的命令内容打印出来，方便调试：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/7/1602e70a1b4df91b?w=874&amp;h=711&amp;f=png&amp;s=94680" alt="img"></p>
-<h3 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h3><p>scripty 比上面演示的要更强大，也支持通配符运行、脚本并行等特性、静默模式，如果有需求可以阅读官方的 <a href="https://github.com/testdouble/scripty#advanced-usage" target="_blank" rel="noopener">README.md</a>，毕竟咱们已经入门了，不是么？</p>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/07-manage-complexity-using-scripty" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>07-manage-complexity-using-scripty</code>。</p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 01：实现 npm script 跨平台兼容/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/高阶篇 01：实现 npm script 跨平台兼容/" itemprop="url">3.1 实现 npm script 跨平台兼容</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:35+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="3-1-实现-npm-script-跨平台兼容"><a href="#3-1-实现-npm-script-跨平台兼容" class="headerlink" title="3.1 实现 npm script 跨平台兼容"></a>3.1 实现 npm script 跨平台兼容</h1><p>到目前为止，如果你在 Linux、Mac 平台做开发，所有的 npm script 都会顺利运行，但是 Windows 下面的同学可能就比较痛苦了，因为不是所有的 shell 命令都是跨平台兼容的，甚至各种常见的文件系统操作也是不兼容的。</p>
-<p>可能有部分同学处理过 npm script 跨平台兼容的问题，比如粗暴的为两种平台各写一份 npm script，像下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hello-npm-script&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;bash-script&quot;: &quot;echo Hello $npm_package_name&quot;,</span><br><span class="line">    &quot;win-script&quot;: &quot;echo Hello %npm_package_name%&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有技术追求的工程师肯定不会满足上面的解决方案，实际上社区中已经有非常多的小工具可以帮我们优雅的实现跨平台的 npm script，下面我们探索下如何实现跨平台的文件系统操作、变量引用、环境变量设置。</p>
-<p><strong>特别说明，windows 环境的同学建议使用 git bash 来运行 npm script，使用 windows 自带的 cmd 可能会遇到比较多的问题</strong></p>
-<h2 id="文件系统操作的跨平台兼容"><a href="#文件系统操作的跨平台兼容" class="headerlink" title="文件系统操作的跨平台兼容"></a>文件系统操作的跨平台兼容</h2><p>npm script 中涉及到的文件系统操作包括文件和目录的创建、删除、移动、复制等操作，而社区为这些基本操作也提供了跨平台兼容的包，列举如下：</p>
-<ul>
-<li><a href="https://github.com/isaacs/rimraf" target="_blank" rel="noopener">rimraf</a> 或 <a href="https://www.npmjs.com/package/del-cli" target="_blank" rel="noopener">del-cli</a>，用来删除文件和目录，实现类似于 <code>rm -rf</code> 的功能；</li>
-<li><a href="https://www.npmjs.com/package/cpr" target="_blank" rel="noopener">cpr</a>，用于拷贝、复制文件和目录，实现类似于 <code>cp -r</code> 的功能；</li>
-<li><a href="https://www.npmjs.com/package/make-dir-cli" target="_blank" rel="noopener">make-dir-cli</a>，用于创建目录，实现类似于 <code>mkdir -p</code> 的功能；</li>
-</ul>
-<p>使用上面这几个小工具改造 npm script 的具体步骤如下：</p>
-<p>第 1 步，添加开发依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i rimraf cpr make-dir-cli -D</span><br><span class="line"># npm install rimraf cpr make-dir-cli --save-dev</span><br><span class="line"># yarn add rimraf cpr make-dir-cli -D</span><br></pre></td></tr></table></figure>
-<p>第 2 步，改造涉及文件系统操作的 npm script：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">-    &quot;cover:cleanup&quot;: &quot;rm -rf coverage &amp;&amp; rm -rf .nyc_output&quot;,</span><br><span class="line">-    &quot;cover:archive&quot;: &quot;cross-var \&quot;mkdir -p coverage_archive/$npm_package_version &amp;&amp; cp -r coverage/* coverage_archive/$npm_package_version\&quot;&quot;,</span><br><span class="line">+    &quot;cover:cleanup&quot;: &quot;rimraf coverage &amp;&amp; rimraf .nyc_output&quot;,</span><br><span class="line">+    &quot;cover:archive&quot;: &quot;cross-var \&quot;make-dir coverage_archive/$npm_package_version &amp;&amp; cpr coverage/* coverage_archive/$npm_package_version -o\&quot;&quot;,</span><br><span class="line">     &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">     &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">-    &quot;postcover&quot;: &quot;npm-run-all cover:archive cover:cleanup --parallel cover:serve cover:open&quot;</span><br><span class="line">+    &quot;precover&quot;: &quot;npm run cover:cleanup&quot;,</span><br><span class="line">+    &quot;postcover&quot;: &quot;npm-run-all cover:archive --parallel cover:serve cover:open&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-<p>对改动的几点说明：</p>
-<ul>
-<li><code>rm -rf</code> 直接替换成 <code>rimraf</code>；</li>
-<li><code>mkdir -p</code> 直接替换成 <code>make-dir</code>；</li>
-<li><code>cp -r</code> 的替换需特别说明下，<code>cpr</code> 默认是不覆盖的，需要显示传入 <code>-o</code> 配置项，并且参数必须严格是 <code>cpr &lt;source&gt; &lt;destination&gt; [options]</code> 的格式，即配置项放在最后面；</li>
-<li>把 <code>cover:cleanup</code> 从 <code>postcover</code> 挪到 <code>precover</code> 里面去执行，规避 <code>cpr</code> 没归档完毕覆盖率报告就被清空的问题；</li>
-</ul>
-<blockquote>
-<p><strong>TIP#13</strong>：任何改动之后记得重新运行 npm run cover，确保所有的 npm script 还是按预期工作的</p>
-</blockquote>
-<h2 id="用-cross-var-引用变量"><a href="#用-cross-var-引用变量" class="headerlink" title="用 cross-var 引用变量"></a>用 cross-var 引用变量</h2><p><a href="https://juejin.im/book/5a1212bc51882531ea64df07/section/5a12146951882531bb6c68fe" target="_blank" rel="noopener">2.2 在 npm script 中使用变量</a> 介绍了如何使用内置和预定义变量减少代码重复的技巧，如本节开头的例子，Linux 和 Windows 下引用变量的方式是不同的，Linux 下直接可以用 <code>$npm_package_name</code>，而 Windows 下必须使用 <code>%npm_package_name%</code>，我们可以使用 <a href="https://www.npmjs.com/package/cross-var" target="_blank" rel="noopener">cross-var</a> 实现跨平台的变量引用，具体步骤如下：</p>
-<p>第 1 步，安装 cross-var 为开发依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i cross-var -D</span><br><span class="line"># npm install cross-var --save-dev</span><br><span class="line"># yarn add cross-var -D</span><br></pre></td></tr></table></figure>
-<p>第 2 步，改写引用变量 npm script，具体 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;cover:cleanup&quot;: &quot;rm -rf coverage &amp;&amp; rm -rf .nyc_output&quot;,</span><br><span class="line">-    &quot;cover:archive&quot;: &quot;mkdir -p coverage_archive/$npm_package_version &amp;&amp; cp -r coverage/* coverage_archive/$npm_package_version&quot;,</span><br><span class="line">-    &quot;cover:serve&quot;: &quot;http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">-    &quot;cover:open&quot;: &quot;opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">+    &quot;cover:archive&quot;: &quot;cross-var \&quot;mkdir -p coverage_archive/$npm_package_version &amp;&amp; cp -r coverage/* coverage_archive/$npm_package_version\&quot;&quot;,</span><br><span class="line">+    &quot;cover:serve&quot;: &quot;cross-var http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">+    &quot;cover:open&quot;: &quot;cross-var opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">     &quot;postcover&quot;: &quot;npm-run-all cover:archive cover:cleanup --parallel cover:serve cover:open&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>因为 cover:serve 和 cover:open 命令都比较简单，直接在原始命令前增加 cross-var 命令即可，而 cover:archive 内含了两条子命令，我们需要用引号把整个命令包起来（注意这里是用的双引号，且必须转义），然后在前面加上 cross-var。</p>
-<p>此外，细心的同学可能发现引入 cross-var 之后，它竟然给我们安装了 babel，如果想保持依赖更轻量的话，可以考虑使用 <a href="https://www.npmjs.com/package/cross-var-no-babel" target="_blank" rel="noopener">cross-var-no-babel</a>。</p>
-<h2 id="用-cross-env-设置环境变量"><a href="#用-cross-env-设置环境变量" class="headerlink" title="用 cross-env 设置环境变量"></a>用 cross-env 设置环境变量</h2><p>在 node.js 脚本和 npm script 使用环境变量也是比较常见的，比如我们在运行测试时，需要加上 <code>NODE_ENV=test</code>，或者在启动静态资源服务器时自定义端口号。因为不同平台的环境变量语法不同，我们可以使用 <a href="https://www.npmjs.com/package/cross-env" target="_blank" rel="noopener">cross-env</a> 来实现 npm script 的跨平台兼容，具体步骤如下：</p>
-<p>第 1 步，添加 cross-env 到开发依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i cross-env -D</span><br><span class="line"># npm install cross-env --save-dev</span><br><span class="line"># yarn add cross-env -D</span><br></pre></td></tr></table></figure>
-<p>第 2 步，改写使用了环境变量的 npm script：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">-    &quot;test&quot;: &quot;NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">+    &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha tests/&quot;,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-<p>上面的改动更简单，直接在设置了环境变量的命令前面加上 cross-env 即可。</p>
-<h2 id="再多说几句"><a href="#再多说几句" class="headerlink" title="再多说几句"></a>再多说几句</h2><p>关于 npm script 的跨平台兼容，还有几点需要大家注意：</p>
-<ul>
-<li>所有使用引号的地方，建议使用双引号，并且加上转义；</li>
-<li>没做特殊处理的命令比如 eslint、stylelint、mocha、opn 等工具本身都是跨平台兼容的；</li>
-<li>还是强烈建议有能力的同学能使用 Linux 做开发，只要你入门并且熟练了，效率提升会惊人；</li>
-<li>短时间内继续拥抱 Windows 的同学，可以考虑看看 Windows 10 里面引入的 <a href="https://msdn.microsoft.com/en-us/commandline/wsl/about" target="_blank" rel="noopener">Subsystem</a>，让你不用虚拟机即可在 Windows 下使用大多数 Linux 命令。</li>
-</ul>
-<blockquote>
-<p><strong>TIP#14</strong>：如果你在编写 npm script 过程中有更多的跨平台兼容需求，基本思路是去 <a href="https://www.npmjs.com/search?q=cross%20platform" target="_blank" rel="noopener">npmjs.com</a> 上找对应的包，关键词自然少不了 <code>cross platform</code>，你遇到的问题，肯定很多其他人遇到过，相信我，你并不孤独！</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/06-add-cross-platform-support" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>06-add-cross-platform-support</code>。</p>
-</blockquote>
-<hr>
-
+            <p>现在开发人员不容易呀，产品、运营天天各种需求，哎这个顶导要在页面往上滑的时候缓缓的隐藏，下拉的时候在缓缓的显示~ 哎这个图片要自适应的呀，就是那种不够的话补黑边的呀~ 哎视频的进度条要自定义的呀，原生的那个多丑呀~ 哎。。。</p>
+<p>唉，怎么办呢，没有办法呀，使劲磕呗，那今天的话题我们就来说说IOS中video全屏的问题，有需要的朋友可以参考下</p>
+<h3 id="video的几个重要的属性"><a href="#video的几个重要的属性" class="headerlink" title="video的几个重要的属性"></a>video的几个重要的属性</h3><p><code>controls</code>： 显示播放控件；controls属性规定浏览器应该为视频提供播放控件,换句话说，只有写了这个属性才会有播放控件，不写的话默认是没有的，所有如果要自定义播放控件就不需要写controls属性<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>autoplay</code>：自动播放；指定后，视频会马上自动开始播放，不会停下来等着数据载入结束<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>playsinline</code>：取消全屏；只需在video上添加该属性，便可使视频播放时局域播放，不脱离文档流，但是这个属性需要APP支持，在APP开发中设置UIwebview 的allowsInlineMediaPlayback = YES   webview.allowsInlineMediaPlayback = YES才能生效<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">webkit-playsinline</span>=<span class="string">"true"</span> <span class="attr">playsinline</span>=<span class="string">"playsinline"</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="js自定义video全屏"><a href="#js自定义video全屏" class="headerlink" title="js自定义video全屏"></a>js自定义video全屏</h3><p>众所周知，IOS是不支持全屏API的，于是requesrFullScreen事件对于video全屏是不起作用的，但是IOS9+对于video标签有一个很重要的属性，那就是<code>playsinline</code>,这个属性去掉之后视频就可以全屏，但不是直接生效，而是下次播放的时候才可以，于是我们需要先把视频短暂的暂停一下，在播放就可以了，具体实现方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">video.pause()</span><br><span class="line">video.removeAttribute(<span class="string">'playsinline'</span>)</span><br><span class="line">video.removeAttribute(<span class="string">'webkit-playsinline'</span>)</span><br><span class="line">video.play()</span><br></pre></td></tr></table></figure></p>
+<p>这个仅对IOS中的全屏有用，如果兼容Android需要使用<code>requestFullScreen</code>方法，具体实现方法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"fullscreenFn()"</span>&gt;</span>全屏<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">autoplay</span>=<span class="string">""</span> <span class="attr">webkit-playsinline</span>=<span class="string">"true"</span> <span class="attr">playsinline</span>=<span class="string">"playsinline"</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span> <span class="attr">id</span>=<span class="string">"video"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浏览器前缀判断</span></span><br><span class="line">    <span class="keyword">var</span> videoEle = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">browserPrefix</span> (<span class="params">method</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> browserPrefixreturn</span><br><span class="line">      <span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="comment">// W3C</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[method])):</span><br><span class="line">          browserPrefixreturn = method</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// FireFox</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'moz'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'moz'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// Chrome等</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'webkit'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'webkit'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// IE11</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'ms'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'ms'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> browserPrefixreturn</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fullscreenFn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      video.pause()</span><br><span class="line">      video.removeAttribute(<span class="string">'playsinline'</span>)</span><br><span class="line">      video.removeAttribute(<span class="string">'webkit-playsinline'</span>)</span><br><span class="line">      video.play()</span><br><span class="line">      video[browserPrefix(<span class="string">'requestFullScreen'</span>)]()</span><br><span class="line">      event.stopImmediatePropagation()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2056,7 +1779,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2102,7 +1825,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2113,7 +1836,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>

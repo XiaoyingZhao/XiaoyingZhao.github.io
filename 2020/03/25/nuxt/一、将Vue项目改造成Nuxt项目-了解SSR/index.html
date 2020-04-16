@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="vue,javascript,nuxt,">
+  <meta name="keywords" content="javascript,vue,nuxt,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="一、SSR概念SSRserver side render 服务端渲染 客户端渲染页面初始加载的 HTML 页面中无网页展示内容，需要加载执行Js代码，通过 js 渲染生成页面。比较代表性的为React,Vue,Angular三大前端框架的SPA(Single Page Application)应用。 服务端渲染用户请求服务器，服务器上直接生成 HTML 内容并返回给浏览器。客户端所需要做的仅仅是h">
-<meta name="keywords" content="vue,javascript,nuxt">
+<meta name="keywords" content="javascript,vue,nuxt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一、将Vue项目改造成Nuxt项目-了解SSR">
 <meta property="og:url" content="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/index.html">
@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img3.jpg">
-<meta property="og:updated_time" content="2020-03-25T11:54:54.237Z">
+<meta property="og:updated_time" content="2020-03-27T04:35:20.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一、将Vue项目改造成Nuxt项目-了解SSR">
 <meta name="twitter:description" content="一、SSR概念SSRserver side render 服务端渲染 客户端渲染页面初始加载的 HTML 页面中无网页展示内容，需要加载执行Js代码，通过 js 渲染生成页面。比较代表性的为React,Vue,Angular三大前端框架的SPA(Single Page Application)应用。 服务端渲染用户请求服务器，服务器上直接生成 HTML 内容并返回给浏览器。客户端所需要做的仅仅是h">
@@ -330,14 +330,14 @@
         <h3 id="一、SSR概念"><a href="#一、SSR概念" class="headerlink" title="一、SSR概念"></a>一、SSR概念</h3><p><strong>SSR</strong><br>server side render 服务端渲染</p>
 <p><strong>客户端渲染</strong><br>页面初始加载的 HTML 页面中无网页展示内容，需要加载执行Js代码，通过 js 渲染生成页面。比较代表性的为React,Vue,Angular三大前端框架的SPA(Single Page Application)应用。</p>
 <p><strong>服务端渲染</strong><br>用户请求服务器，服务器上直接生成 HTML 内容并返回给浏览器。客户端所需要做的仅仅是html页面的展现和之后的DOM事件处理。代表为传统的JSP,PHP,ASP应用。</p>
-<p><strong>同构</strong><br>同构这个概念存在于 Vue，React 这些新型的前端框架中，同构实际上是客户端渲染和服务器端渲染的一个整合。两端共用一套代码，只是采用不通的构建方式；在加载首屏的时候，执行服务端代码，页面渲染和请求js同时进行。从首屏进入第二页时就不请求服务端代码了，直接执行Vue的路由跳转。<br>（这里首屏的概念不是首页，而是用户打开的第一页，例如：A打开司机招聘的首页，点击其中一条详情进入详情页，然后将详情页分享给B，B打开的是详情页。这里A的首屏是首页，B的首屏是详情页）</p>
+<p><strong>同构</strong><br>同构这个概念存在于 Vue，React 这些新型的前端框架中，同构实际上是客户端渲染和服务器端渲染的一个整合。两端共用一套代码，只是服务端采用nodeJS执行，客户端采用JS执行；在加载首屏的时候，执行服务端代码，页面渲染和请求js同时进行。从首屏进入第二页时就不请求服务端代码了，直接执行Vue的路由跳转。<br>（这里首屏的概念不是首页，而是用户打开的第一页，例如：A打开司机招聘的首页，点击其中一条详情进入详情页，然后将详情页分享给B，B打开的是详情页。这里A的首屏是首页，B的首屏是详情页）</p>
 <h3 id="二、使用SSR的利弊"><a href="#二、使用SSR的利弊" class="headerlink" title="二、使用SSR的利弊"></a>二、使用SSR的利弊</h3><h4 id="SSR的优势"><a href="#SSR的优势" class="headerlink" title="SSR的优势"></a>SSR的优势</h4><ol>
 <li>更利于SEO<br>爬虫只会爬取源码，不会执行网站的任何脚本（Google除外，Google等页面加载完之后再去爬取内容，所以Google的爬虫可以爬取单页面应用）</li>
 <li>更利于首屏渲染<br>首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。尤其是针对大型单页应用，打包后文件体积比较大，普通客户端渲染加载所有所需文件时间较长，首页就会有一个很长的白屏等待时间。</li>
 </ol>
 <h4 id="SSR的局限"><a href="#SSR的局限" class="headerlink" title="SSR的局限"></a>SSR的局限</h4><ol>
 <li>服务端压力较大<br>本来是通过客户端完成渲染，现在统一到服务端node服务去做。尤其是高并发访问的情况，会大量占用服务端CPU资源；</li>
-<li>开发条件受限<br>服务端代与客户端共用一套代码，但是执行周期不一致</li>
+<li>开发条件受限<br>服务端代与客户端共用一套代码，但是执行周期不一致，写法也有略微不同</li>
 <li>学习成本相对较高<br>还需要掌握node、Koa2等相关技术。相对于客户端渲染，项目构建、部署过程更加复杂。</li>
 </ol>
 <h3 id="三、介绍NUXT"><a href="#三、介绍NUXT" class="headerlink" title="三、介绍NUXT"></a>三、介绍NUXT</h3><p> <a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">nuxt官网</a></p>
@@ -360,6 +360,7 @@
 <li>红框、黄框内的周期都不存在Window,document,navigator对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  asyncData() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fetch() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// undefined</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// Window &#123;postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …&#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>但也不是不可以在这些周期使用客户端代码，只需要加一个判断平台的条件即可：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (process.client)&#123;</span><br><span class="line">  <span class="comment">// 这里执行服务端不支持的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="三、开始"><a href="#三、开始" class="headerlink" title="三、开始"></a>三、开始</h3><p>1、运行一个NUXT项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-nuxt-app abc</span><br></pre></td></tr></table></figure></p>
 <p>我的电脑运行这条命令慢的出奇，所以我用了另一种方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g @vue/cli-init</span><br><span class="line"><span class="comment">// 如果已安装过vue-cli可以不用执行上面这条</span></span><br><span class="line">$ vue init nuxt/starter abc</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img1.jpg" alt="image"><br>2、启动项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd abc</span><br><span class="line">$ npm install</span><br><span class="line">$ npm run dev</span><br><span class="line"><span class="comment">// 在浏览器里执行：`http://localhost:3000/`</span></span><br></pre></td></tr></table></figure></p>
@@ -385,9 +386,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
             <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
             <a href="/tags/nuxt/" rel="tag"># nuxt</a>
           
@@ -402,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/17/用 npm script 打造超溜的前端工作流/实战篇 05：用 npm script 实现服务自动化运维/" rel="next" title="4.5 使用 npm script 进行服务运维">
-                <i class="fa fa-chevron-left"></i> 4.5 使用 npm script 进行服务运维
+              <a href="/2020/01/06/DNS解析/" rel="next" title="DNS解析">
+                <i class="fa fa-chevron-left"></i> DNS解析
               </a>
             
           </div>
@@ -491,7 +492,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -502,7 +503,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>

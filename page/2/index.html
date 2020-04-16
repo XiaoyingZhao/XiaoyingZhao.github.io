@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 03：实现 npm script 命令自动补全/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/神器甘特图/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 03：实现 npm script 命令自动补全/" itemprop="url">2.3 实现命令行自动补全</a></h1>
+                <a class="post-title-link" href="/2018/06/24/神器甘特图/" itemprop="url">神器甘特图</a></h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:34+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T19:41:50+08:00">
+                2018-06-24
               </time>
             
 
@@ -286,8 +286,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -325,43 +325,9 @@
       
         
           
-            <h1 id="2-3-实现命令行自动补全"><a href="#2-3-实现命令行自动补全" class="headerlink" title="2.3 实现命令行自动补全"></a>2.3 实现命令行自动补全</h1><p>当 npm script 里面积累的命令越来越多时，重度命令行用户肯定会好奇，能不能实现类似 bash、zsh 里面的命令自动补全？答案是肯定的，下面来逐一介绍。</p>
-<h2 id="使用-npm-run-直接列出"><a href="#使用-npm-run-直接列出" class="headerlink" title="使用 npm run 直接列出"></a>使用 npm run 直接列出</h2><p>前面章节有过介绍，不带任何参数运行 npm run 能列出 scripts 对象中定义的所有命令，再结合管道操作符、less 命令（这里的 less 不是 css 领域的 less，而是 linux 里面的工具），即使 scripts 子命令很多我们也能移动自如。</p>
-<p>比如，我们在项目中执行：<code>npm run | less</code>，得到如下结果，注意截图左下方的红框，按空格能翻页：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bcdae64f00ea?w=1094&amp;h=715&amp;f=png&amp;s=101307" alt="img"></p>
-<p>在这个结果里面，我们可以进行类似于 Vim 中的搜索，先按 <code>/</code> 进入搜索模式，然后输入 <code>markdown</code>，搜索结果如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bcdd6b736441?w=1100&amp;h=399&amp;f=png&amp;s=59941" alt="img"></p>
-<h2 id="把-npm-completion-集成到-shell-中"><a href="#把-npm-completion-集成到-shell-中" class="headerlink" title="把 npm completion 集成到 shell 中"></a>把 npm completion 集成到 shell 中</h2><p>npm 自身提供了自动完成工具 <a href="https://docs.npmjs.com/cli/completion" target="_blank" rel="noopener">completion</a>，将其集成到 <a href="https://www.gnu.org/software/bash" target="_blank" rel="noopener">bash</a> 或者 <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">zsh</a> 里也非常容易（顺便说一句，早期我是 bash 的忠实用户，两年前切换到 zsh，就再也没回头）。</p>
-<p>官方文档里面的集成方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm completion &gt;&gt; ~/.bashrc</span><br><span class="line">npm completion &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#10</strong>：如果你好奇上面的命令究竟做了什么，尝试直接运行 <code>npm completion</code>，就能看到它其实在你的配置文件中追加了一大坨 shell。上面命令中的 <code>&gt;&gt;</code> 意思是把前面命令的输出追加到后面的文件中。</p>
-</blockquote>
-<p>如果你也有代码洁癖，为了保持 .zshrc 或者 .bashrc 文件的整洁，可以用下面的方法：</p>
-<p>第 1 步，把 npm completion 产生的那坨命令放在单独的文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm completion &gt;&gt; ~/.npm-completion.bash</span><br></pre></td></tr></table></figure>
-<p>第 2 步，在 .bashrc 或者 .zshrc 中引入这个文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;[ -f ~/.npm-completion.bash ] &amp;&amp; source ~/.npm-completion.bash;&quot; &gt;&gt; ~/.bashrc</span><br><span class="line">echo &quot;[ -f ~/.npm-completion.bash ] &amp;&amp; source ~/.npm-completion.bash;&quot; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#11</strong>：执行完上面的命令一定要记得 <code>source ~/.zshrc</code> 或者 <code>source ~/.bashrc</code>，来让自动完成生效。</p>
-</blockquote>
-<p>接下来我们就可以尽情享受自动完成带来的便利了，尝试在命令行中输入 npm run，<strong>然后键入空格（空格很重要）</strong>，然后键入 tab 键，发现命令行有什么反应了么？在列出备选项之后，继续按 tab，就能在不同的选项之间切换，找到自己想要的，直接回车就能完成命令补全。多练习几次，你的手指和大脑就能熟练掌握这个过程。</p>
-<p>在我们的项目目录里面键入 <code>npm run cov</code> 再键入 tab 键，命令行又有什么反应？</p>
-<p>需要单独说明的是，npm completion 能实现的自动完成不仅仅是 scripts 里面的子自命令，npm 的子命令也是可以的，可以依次输入 <code>npm</code>、空格、tab，看看命令行的反应。</p>
-<h2 id="更高级的自动完成"><a href="#更高级的自动完成" class="headerlink" title="更高级的自动完成"></a>更高级的自动完成</h2><p>人类对于效率的追求是永无止境的，工程师更是如此，npm 命令补全到目前为止显然还不够高效，能不能补全 package.json 里面的依赖名称？能不能在补全 npm script 的时候列出这个命令是干啥的？</p>
-<p>有人已经帮我们解决了这个痛点，还写成了 zsh 插件（bash 的同学无福消受了）：<a href="https://github.com/lukechilds/zsh-better-npm-completion" target="_blank" rel="noopener">zsh-better-npm-completion</a>，它有以下几个让人无法拒绝的便利：</p>
-<h3 id="1-在-npm-install-时自动根据历史安装过的包给出补全建议"><a href="#1-在-npm-install-时自动根据历史安装过的包给出补全建议" class="headerlink" title="1. 在 npm install 时自动根据历史安装过的包给出补全建议"></a>1. 在 npm install 时自动根据历史安装过的包给出补全建议</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bce81ef5dac6?w=1267&amp;h=249&amp;f=png&amp;s=65352" alt="img"></p>
-<h3 id="2-在-npm-uninstall-时候根据-package-json-里面的声明给出补全建议"><a href="#2-在-npm-uninstall-时候根据-package-json-里面的声明给出补全建议" class="headerlink" title="2. 在 npm uninstall 时候根据 package.json 里面的声明给出补全建议"></a>2. 在 npm uninstall 时候根据 package.json 里面的声明给出补全建议</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bcec1c11549f?w=1263&amp;h=114&amp;f=png&amp;s=26712" alt="img"></p>
-<h3 id="3-在-npm-run-时补全建议中列出命令细节"><a href="#3-在-npm-run-时补全建议中列出命令细节" class="headerlink" title="3. 在 npm run 时补全建议中列出命令细节"></a>3. 在 npm run 时补全建议中列出命令细节</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bcf08dc06346?w=1256&amp;h=331&amp;f=png&amp;s=78999" alt="img"></p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/3/1601bcf1e3a37f16?w=1263&amp;h=222&amp;f=png&amp;s=49982" alt="img"></p>
-<p>看到这里，是不是心痒痒？具体的安装方法参照官方 <a href="https://github.com/lukechilds/zsh-better-npm-completion" target="_blank" rel="noopener">README.md</a> 文件就好，我就不在这里啰嗦了。</p>
-<blockquote>
-<p><strong>TIP#12</strong>：如果你要使用 zsh-better-npm-completion 插件，需要把 .bashrc、.zshrc 文件里面 npm completion 部分的配置删掉，避免冲突。</p>
-</blockquote>
-<hr>
-<p><strong>好了，本小节没有代码，读到这里，你动手做了几个？</strong></p>
-<hr>
-<h2 id="20171206-增补：如何实现-yarn-的命令自动补全？"><a href="#20171206-增补：如何实现-yarn-的命令自动补全？" class="headerlink" title="20171206 增补：如何实现 yarn 的命令自动补全？"></a>20171206 增补：如何实现 yarn 的命令自动补全？</h2><p>已经有人帮我们做好了 <a href="https://github.com/mklabs/yarn-completions" target="_blank" rel="noopener">yarn-completions</a>，能实现类似于 zsh-better-npm-completion 的命令补全，参照官方 README.md 安装即可。</p>
+            <p>什么东西在我们的生活和工作当中可有可无，但是有了它立马会提升一个档次呀~ ———— 那就是甘特图Gantt chart，就是下面这个东西啦啦啦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">dateFormat  YYYY-MM-DD</span><br><span class="line">title 上报事件时间线</span><br><span class="line"></span><br><span class="line">section load事件</span><br><span class="line">load(加载开始)：load_start_timestamp          :    p1, 2018-01-01, 1d</span><br><span class="line">load(加载结束)：load_end_timestamp            :    p2, after p4, 1d</span><br><span class="line"></span><br><span class="line">section show事件</span><br><span class="line">show(页面曝光)                            :           p3, after p1, 1d</span><br><span class="line"></span><br><span class="line">section stay事件</span><br><span class="line">stay(duration第一次)：1000           :            p4, after p3, 1d</span><br><span class="line">stay(duration持续)：5000           :           p5, after p2, 5d</span><br><span class="line"></span><br><span class="line">section model_show事件</span><br><span class="line">model_show(默认曝光)          :            p6, after p5, 10d</span><br><span class="line">model_show(滚动曝光)          :            p7, after p6, 10d</span><br><span class="line"></span><br><span class="line">section model_click事件</span><br><span class="line"> model_click(点击上报)          :            p8, after p7, 10d</span><br></pre></td></tr></table></figure>
+<p>当当当当~<br><img src="/2018/06/24/神器甘特图/timer.jpg" alt="img"></p>
 
           
         
@@ -410,7 +376,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 02：在 npm script 中使用环境变量/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/学习日记js小锦囊-持续更新/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -429,7 +395,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 02：在 npm script 中使用环境变量/" itemprop="url">2.2 在 npm script 中使用变量</a></h1>
+                <a class="post-title-link" href="/2018/05/02/学习日记js小锦囊-持续更新/" itemprop="url">学习日记js小锦囊-持续更新</a></h1>
         
 
         <div class="post-meta">
@@ -441,8 +407,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:33+08:00">
-                2020-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T22:15:32+08:00">
+                2018-05-02
               </time>
             
 
@@ -464,1121 +430,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="2-2-在-npm-script-中使用变量"><a href="#2-2-在-npm-script-中使用变量" class="headerlink" title="2.2 在 npm script 中使用变量"></a>2.2 在 npm script 中使用变量</h1><p>npm 为加高效的执行 npm script 做了大量的优化，<a href="https://juejin.im/book/5a1212bc51882531ea64df07/section/5a1213d4f265da4335625b4a" target="_blank" rel="noopener">创建并运行 npm script 命令</a> 里面讲到的环境变量特性能让我们在 npm script 中直接调用依赖包里的可执行文件，更强大的是，npm 还提供了 <code>$PATH</code> 之外的更多的变量，比如当前正在执行的命令、包的名称和版本号、日志输出的级别等。</p>
-<p>DRY（Don’t Repeat Yourself）是基本的编程原则，在 npm script 中使用预定义变量和自定义变量让我们更容易遵从 DRY 原则，因为使用这些变量之后，npm script 就具备了自适应的能力，我们可以直接把积累起来的 npm script 使用到其他项目里面，而不用做任何修改。</p>
-<h2 id="使用预定义变量"><a href="#使用预定义变量" class="headerlink" title="使用预定义变量"></a>使用预定义变量</h2><p>首先我们来看预定义变量，通过运行 <code>npm run env</code> 就能拿到完整的变量列表，这个列表非常长，这里我使用 <code>npm run env | grep npm_package | sort</code> 拿到部分排序后的预定义环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 作者信息...</span><br><span class="line">npm_package_author_email=wangshijun2010@gmail.com</span><br><span class="line">npm_package_author_name=wangshijun</span><br><span class="line">npm_package_author_url=http://github.com/wangshijun</span><br><span class="line">// 依赖信息...</span><br><span class="line">npm_package_devDependencies_markdownlint_cli=^0.5.0</span><br><span class="line">npm_package_devDependencies_mocha=^4.0.1</span><br><span class="line">npm_package_devDependencies_npm_run_all=^4.1.2</span><br><span class="line">// 各种 npm script</span><br><span class="line">npm_package_scripts_lint=npm-run-all --parallel lint:*</span><br><span class="line">npm_package_scripts_lint_css=stylelint *.less</span><br><span class="line">npm_package_scripts_lint_js=eslint *.js</span><br><span class="line">npm_package_scripts_lint_js_fix=npm run lint:js -- --fix</span><br><span class="line">npm_package_scripts_lint_json=jsonlint --quiet *.json</span><br><span class="line">// 基本信息</span><br><span class="line">npm_package_version=0.1.0</span><br><span class="line">npm_package_gitHead=3796e548cfe406ec33ab837ac00bcbd6ee8a38a0</span><br><span class="line">npm_package_license=MIT</span><br><span class="line">npm_package_main=index.js</span><br><span class="line">npm_package_name=hello-npm-script</span><br><span class="line">npm_package_readmeFilename=README.md</span><br><span class="line">// 依赖的配置</span><br><span class="line">npm_package_nyc_exclude_0=**/*.spec.js</span><br><span class="line">npm_package_nyc_exclude_1=.*.js</span><br></pre></td></tr></table></figure>
-<p>变量的使用方法遵循 shell 里面的语法，直接在 npm script 给想要引用的变量前面加上 <code>$</code> 符号即可。比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;dummy&quot;: &quot;echo $npm_package_name&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回到我们的项目，测试覆盖率归档是比较常见的需求，因为它方便我们追踪覆盖率的变化趋势，最彻底的做法是归档到 CI 系统里面，对于简单项目，则可以直接归档到文件系统中，即把收集到的覆盖率报告按版本号去存放。</p>
-<p>比如，我们在根目录下新建 coverage_archive 目录存储覆盖率归档，并利用变量机制把归档和版本号关联起来。具体的 npm script 修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index d297f2e..d86f65c 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -12,9 +12,10 @@</span><br><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">-    &quot;precover&quot;: &quot;rm -rf coverage&quot;,</span><br><span class="line">     &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">-    &quot;postcover&quot;: &quot;rm -rf .nyc_output &amp;&amp; opn coverage/index.html&quot;</span><br><span class="line">+    &quot;cover:cleanup&quot;: &quot;rm -rf coverage &amp;&amp; rm -rf .nyc_output&quot;,</span><br><span class="line">+    &quot;cover:archive&quot;: &quot;mkdir -p coverage_archive/$npm_package_version &amp;&amp; cp -r coverage/* coverage_archive/$npm_package_version&quot;,</span><br><span class="line">+    &quot;postcover&quot;: &quot;npm run cover:archive &amp;&amp; npm run cover:cleanup &amp;&amp; opn coverage_archive/$npm_package_version/index.html&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>主要改动是：增加 cover:cleanup 和 cover:archive 命令，并且修改 postcover 命令。下面对使用了环境变量的 npm script 稍作解释：</p>
-<p>cover:archive 做了 2 件事情：</p>
-<ol>
-<li><code>mkdir -p coverage_archive/$npm_package_version</code> 准备当前版本号的归档目录；</li>
-<li><code>cp -r coverage/* coverage_archive/$npm_package_version</code>，直接复制文件来归档；</li>
-</ol>
-<p>而 postcover 做了 3 件事情：</p>
-<ol>
-<li><code>npm run cover:archive</code>，归档本次覆盖率报告；</li>
-<li><code>npm run cover:cleanup</code>，清理本次覆盖率报告；</li>
-<li><code>opn coverage_archive/$npm_package_version/index.html</code>，直接预览覆盖率报告；</li>
-</ol>
-<p>配置好之后，我们直接运行 <code>npm run cover</code>，最后的目录结构如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/1/1600f6b21ec7b5f9?w=1820&amp;h=878&amp;f=png&amp;s=253518" alt="img"></p>
-<h2 id="使用自定义变量"><a href="#使用自定义变量" class="headerlink" title="使用自定义变量"></a>使用自定义变量</h2><p>除了预定义变量外，我们还可以在 package.json 中添加自定义变量，并且在 npm script 中使用这些变量。</p>
-<p>为把测试覆盖率报告分享给其他同事浏览，我们就不能使用 opn-cli 打开文件了，需要启动简单的 http 服务，把网址发给别人浏览，比如我们约定网址 <code>http://IP:3000</code>，这里的 IP 需要替换成自己的实际 IP。</p>
-<p><a href="https://www.npmjs.com/package/http-server" target="_blank" rel="noopener">http-server</a> 提供了非常轻量的 http 服务，我们先把它加到 devDependencies 中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i http-server -D    # 等价命令 npm install http-server --save-dev</span><br></pre></td></tr></table></figure>
-<p>接下来，在 package.json 增加自定义端口配置和相应的 npm script 命令，完整的 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index d86f65c..abc9d01 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -3,6 +3,9 @@</span><br><span class="line">   &quot;version&quot;: &quot;0.1.0&quot;,</span><br><span class="line">+  &quot;config&quot;: &#123;</span><br><span class="line">+    &quot;port&quot;: 3000</span><br><span class="line">+  &#125;,</span><br><span class="line">   &quot;scripts&quot;: &#123;</span><br><span class="line">@@ -15,7 +18,9 @@</span><br><span class="line">     &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">-    &quot;postcover&quot;: &quot;npm run cover:archive &amp;&amp; npm run cover:cleanup &amp;&amp; opn coverage_archive/$npm_package_version/index.html&quot;</span><br><span class="line">+    &quot;cover:serve&quot;: &quot;http-server coverage_archive/$npm_package_version -p $npm_package_config_port&quot;,</span><br><span class="line">+    &quot;cover:open&quot;: &quot;opn http://localhost:$npm_package_config_port&quot;,</span><br><span class="line">+    &quot;postcover&quot;: &quot;npm-run-all cover:archive cover:cleanup --parallel cover:serve cover:open&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">@@ -23,6 +28,7 @@</span><br><span class="line">   &quot;devDependencies&quot;: &#123;</span><br><span class="line">     &quot;chai&quot;: &quot;^4.1.2&quot;,</span><br><span class="line">+    &quot;http-server&quot;: &quot;^0.10.0&quot;,</span><br><span class="line">     &quot;mocha&quot;: &quot;^4.0.1&quot;,</span><br></pre></td></tr></table></figure>
-<p>关于改动做以下几点解释：</p>
-<ul>
-<li>新增的命令 <code>cover:serve</code> 中同时使用了预定义变量 <code>$npm_package_version</code> 和自定义变量 <code>$npm_package_config_port</code>；</li>
-<li>预览覆盖率报告的方式从直接打开文件修改为打开网址： <code>http://localhost:$npm_package_config_port</code>；</li>
-<li>postcover 命令要做的事情比较多，我们直接使用 npm-run-all 来编排子命令。</li>
-</ul>
-<blockquote>
-<p><strong>TIP#8</strong>：注意这里给 cover:serve 和 cover:open 增加了并行参数 <code>--parallel</code>，因为 cover:serve 不会自动退出。</p>
-<p><strong>TIP#9</strong>：可能有同学会好奇，是否可以在自定义变量的声明中使用预定义变量，笔者也有这种好奇，并且做过尝试，结果是不支持。</p>
-</blockquote>
-<p>修改完之后，我们再次运行 npm run cover，终端会在 cover:serve 之后进入等待状态：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/1/1600f6b886e6e423?w=1280&amp;h=968&amp;f=png&amp;s=228450" alt="img"></p>
-<p>同时浏览器会打开覆盖率报告，如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/1/1600f6bb0e572ee4?w=976&amp;h=554&amp;f=png&amp;s=70116" alt="img"></p>
-<hr>
-<p><strong>好，关于 npm script 里面的变量使用就介绍到这里，留给你的问题是，在你的项目里面怎么用起来呢？如果想到了，什么时候落地？</strong></p>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/05-use-config-variables" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>05-use-config-variables</code>。</p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 01：使用 npm script 的钩子/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/进阶篇 01：使用 npm script 的钩子/" itemprop="url">2.1 使用 npm script 的钩子</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:32+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="2-1-使用-npm-script-的钩子"><a href="#2-1-使用-npm-script-的钩子" class="headerlink" title="2.1 使用 npm script 的钩子"></a>2.1 使用 npm script 的钩子</h1><p>为了方便开发者自定义，npm script 的设计者为命令的执行增加了类似生命周期的机制，具体来说就是 <code>pre</code> 和 <code>post</code> 钩子脚本。这种特性在某些操作前需要做检查、某些操作后需要做清理的情况下非常有用。</p>
-<p>举例来说，运行 npm run test 的时候，分 3 个阶段：</p>
-<ol>
-<li>检查 scripts 对象中是否存在 pretest 命令，如果有，先执行该命令；</li>
-<li>检查是否有 test 命令，有的话运行 test 命令，没有的话报错；</li>
-<li>检查是否存在 posttest 命令，如果有，执行 posttest 命令；</li>
-</ol>
-<p>到目前为止我们所覆盖的前端工作流包含了代码检查和测试自动化运行环节，<strong>衡量测试效果的重要指标是测试覆盖率</strong>，而收集覆盖率也非常的简单，<strong>下面逐步讲解如何把代码检查、测试运行、覆盖率收集这些步骤串起来</strong>。</p>
-<h2 id="改造-test-命令"><a href="#改造-test-命令" class="headerlink" title="改造 test 命令"></a>改造 test 命令</h2><p>首先，我们基于钩子机制对现有的 scripts 做以下 3 点重构，把代码检查和测试运行串起来：</p>
-<ul>
-<li>增加简单的 lint 命令，并行运行所有的 lint 子命令；</li>
-<li>增加 pretest 钩子，在其中运行 lint 命令；</li>
-<li>把 test 替换为更简单的 <code>mocha tests/</code>；</li>
-</ul>
-<p>代码 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index 8f67810..d297f2e 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -4,13 +4,17 @@</span><br><span class="line">+    &quot;lint&quot;: &quot;npm-run-all --parallel lint:*&quot;,</span><br><span class="line">     &quot;lint:js&quot;: &quot;eslint *.js&quot;,</span><br><span class="line">     &quot;lint:js:fix&quot;: &quot;npm run lint:js -- --fix&quot;,</span><br><span class="line">     &quot;lint:css&quot;: &quot;stylelint *.less&quot;,</span><br><span class="line">     &quot;lint:json&quot;: &quot;jsonlint --quiet *.json&quot;,</span><br><span class="line">     &quot;lint:markdown&quot;: &quot;markdownlint --config .markdownlint.json *.md&quot;,</span><br><span class="line">-    &quot;mocha&quot;: &quot;mocha tests/&quot;,</span><br><span class="line">-    &quot;test&quot;: &quot;# 运行所有代码检查和单元测试 \n    npm-run-all --parallel lint:* mocha&quot;</span><br><span class="line">+    &quot;pretest&quot;: &quot;npm run lint&quot;,</span><br><span class="line">+    &quot;test&quot;: &quot;mocha tests/&quot;,</span><br></pre></td></tr></table></figure>
-<p>当我们运行 npm test 的时候，会先自动执行 pretest 里面的 lint，实际输出如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/29/160052621691a0b7?w=846&amp;h=848&amp;f=png&amp;s=103472" alt="img"></p>
-<h2 id="增加覆盖率收集"><a href="#增加覆盖率收集" class="headerlink" title="增加覆盖率收集"></a>增加覆盖率收集</h2><p>接下来，我们把运行测试和覆盖率收集串起来，具体做法是：增加覆盖率收集的命令，并且覆盖率收集完毕之后自动打开 html 版本的覆盖率报告。要实现目标，我们需要引入两个新工具：</p>
-<ol>
-<li>覆盖率收集工具 <a href="https://github.com/istanbuljs/nyc" target="_blank" rel="noopener">nyc</a>，是覆盖率收集工具 <a href="https://istanbul.js.org" target="_blank" rel="noopener">istanbul</a> 的命令行版本，istanbul 支持生成各种格式的覆盖率报告，我已经使用多年；</li>
-<li>打开 html 文件的工具 <a href="https://github.com/sindresorhus/opn-cli" target="_blank" rel="noopener">opn-cli</a>，是能够打开任意程序的工具 <a href="https://github.com/sindresorhus/opn" target="_blank" rel="noopener">opn</a> 的命令行版本，作者是前端社区非常高产的 <a href="https://github.com/sindresorhus" target="_blank" rel="noopener">Sindre Sorhus</a>，它在 npm 上发布了超过 1000 个包，并且质量都很不错。</li>
-</ol>
-<p>使用如下命令安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i nyc opn-cli -D</span><br></pre></td></tr></table></figure>
-<p>然后在 package.json 增加 nyc 的配置，告诉 nyc 该忽略哪些文件。最后是在 scripts 中新增 3 条命令：</p>
-<ol>
-<li>precover，收集覆盖率之前把之前的覆盖率报告目录清理掉；</li>
-<li>cover，直接调用 nyc，让其生成 html 格式的覆盖率报告；</li>
-<li>postcover，清理掉临时文件，并且在浏览器中预览覆盖率报告；</li>
-</ol>
-<p>具体 diff 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index 8f67810..d297f2e 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -4,13 +4,17 @@</span><br><span class="line">   scripts: &#123;</span><br><span class="line">+    &quot;precover&quot;: &quot;rm -rf coverage&quot;,</span><br><span class="line">+    &quot;cover&quot;: &quot;nyc --reporter=html npm test&quot;,</span><br><span class="line">+    &quot;postcover&quot;: &quot;rm -rf .nyc_output &amp;&amp; opn coverage/index.html&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">@@ -22,7 +26,15 @@</span><br><span class="line">   &quot;devDependencies&quot;: &#123;</span><br><span class="line">     &quot;npm-run-all&quot;: &quot;^4.1.2&quot;,</span><br><span class="line">+    &quot;nyc&quot;: &quot;^11.3.0&quot;,</span><br><span class="line">+    &quot;opn-cli&quot;: &quot;^3.1.0&quot;,</span><br><span class="line">     &quot;stylelint&quot;: &quot;^8.2.0&quot;,</span><br><span class="line">     &quot;stylelint-config-standard&quot;: &quot;^17.0.0&quot;</span><br><span class="line">+  &#125;,</span><br><span class="line">+  &quot;nyc&quot;: &#123;</span><br><span class="line">+    &quot;exclude&quot;: [</span><br><span class="line">+      &quot;**/*.spec.js&quot;,</span><br><span class="line">+      &quot;.*.js&quot;</span><br><span class="line">+    ]</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>改完之后，我们可以直接运行 npm run cover，运行的详细截图如下：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/29/16005264d5d3aef6?w=921&amp;h=1112&amp;f=png&amp;s=147056" alt="img"></p>
-<blockquote>
-<p><strong>TIP#7</strong>：到目前为止，我们的工作流中已经包含代码检查、测试运行、覆盖率收集、覆盖率查看等功能，你是不是可以用来改进下自己的工作流呢？</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/04-pre-and-post-hooks" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>04-pre-and-post-hooks</code>。</p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 03：给 npm script 传递参数和添加注释/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 03：给 npm script 传递参数和添加注释/" itemprop="url">1.3 给 npm script 传递参数和添加注释</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:31+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-3-给-npm-script-传递参数和添加注释"><a href="#1-3-给-npm-script-传递参数和添加注释" class="headerlink" title="1.3 给 npm script 传递参数和添加注释"></a>1.3 给 npm script 传递参数和添加注释</h1><p>本小节会介绍 3 个知识点：给 npm script 传递参数以减少重复的 npm script；增加注释提高 npm script 脚本的可读性；控制运行时日志输出能让你专注在重要信息上。</p>
-<h2 id="给-npm-script-传递参数"><a href="#给-npm-script-传递参数" class="headerlink" title="给 npm script 传递参数"></a>给 npm script 传递参数</h2><p>eslint 内置了代码风格自动修复模式，只需给它传入 <code>--fix</code> 参数即可，在 scripts 中声明检查代码命令的同时你可能也需要声明修复代码的命令，面对这种需求，大多数同学可能会忍不住复制粘贴，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index c32da1c..b6fb03e 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -5,6 +5,7 @@</span><br><span class="line">     &quot;lint:js&quot;: &quot;eslint *.js&quot;,</span><br><span class="line">+    &quot;lint:js:fix&quot;: &quot;eslint *.js --fix&quot;,</span><br></pre></td></tr></table></figure>
-<p>在 <code>lint:js</code> 命令比较短的时候复制粘贴的方法简单粗暴有效，但是当 <code>lint:js</code> 命令变的很长之后，难免后续会有人改了 <code>lint:js</code> 而忘记修改 <code>lint:js:fix</code>（<strong>别问我为啥，我就是踩着坑过来的</strong>），更健壮的做法是，在运行 npm script 时给定额外的参数，代码修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -5,6 +5,7 @@</span><br><span class="line">     &quot;lint:js&quot;: &quot;eslint *.js&quot;,</span><br><span class="line">+    &quot;lint:js:fix&quot;: &quot;npm run lint:js -- --fix&quot;,</span><br></pre></td></tr></table></figure>
-<p>要格外注意 <code>--fix</code> 参数前面的 <code>--</code> 分隔符，意指要给 <code>npm run lint:js</code> 实际指向的命令传递额外的参数。</p>
-<p>运行效果如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/27/15ffa71dbf43d9ff?w=1702&amp;h=376&amp;f=jpeg&amp;s=77949" alt="img"></p>
-<p>上图第2个红色框里面是实际执行的命令，可以看到 <code>--fix</code> 参数附加在了后面。</p>
-<blockquote>
-<p><strong>TIP#6</strong>：如果你不想单独声明 <code>lint:js:fix</code> 命令，在需要的时候直接运行： <code>npm run lint:js -- --fix</code> 来实现同样的效果。</p>
-</blockquote>
-<p>问题来了，如果我想为 mocha 命令增加 <code>--watch</code> 模式方便在开发时立即看到测试结果，该怎么做呢？相信读到这里你心中已经有了答案。</p>
-<p>:stuck_out_tongue:</p>
-<h2 id="给-npm-script-添加注释"><a href="#给-npm-script-添加注释" class="headerlink" title="给 npm script 添加注释"></a>给 npm script 添加注释</h2><p>如果 package.json 中的 scripts 越来越多，或者出现复杂的编排命令，你可能需要给它们添加注释以保障代码可读性，但 json 天然是不支持添加注释的，下面是 2 种比较 trick 的方式。</p>
-<p>第一种方式是，package.json 中可以增加 <code>//</code> 为键的值，注释就可以写在对应的值里面，npm 会忽略这种键，比如，我们想要给 test 命令添加注释，按如下方式添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -10,6 +10,7 @@</span><br><span class="line">+    &quot;//&quot;: &quot;运行所有代码检查和单元测试&quot;,</span><br><span class="line">     &quot;test&quot;: &quot;npm-run-all --parallel lint:* mocha&quot;</span><br></pre></td></tr></table></figure>
-<p>这种方式的明显不足是，npm run 列出来的命令列表不能把注释和实际命令对应上，如果你声明了多个，npm run 只会列出最后那个，如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/27/15ffa7295bd69b87?w=844&amp;h=441&amp;f=png&amp;s=56037" alt="img"></p>
-<p>另外一种方式是直接在 script 声明中做手脚，因为命令的本质是 shell 命令（适用于 linux 平台），我们可以在命令前面加上注释，具体做法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -10,8 +10,7 @@</span><br><span class="line">-    &quot;//&quot;: &quot;运行所有代码检查和单元测试&quot;,</span><br><span class="line">-    &quot;test&quot;: &quot;npm-run-all --parallel lint:* mocha&quot;</span><br><span class="line">+    &quot;test&quot;: &quot;# 运行所有代码检查和单元测试 \n    npm-run-all --parallel lint:* mocha&quot;</span><br></pre></td></tr></table></figure>
-<p>注意注释后面的换行符 <code>\n</code> 和多余的空格，换行符是用于将注释和命令分隔开，这样命令就相当于微型的 shell 脚本，多余的空格是为了控制缩进，也可以用制表符 <code>\t</code> 替代。这种做法能让 npm run 列出来的命令更美观，但是 scripts 声明阅读起来不那么整齐美观。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/27/15ffa72c247900f5?w=846&amp;h=412&amp;f=png&amp;s=54745" alt="img"></p>
-<p>上面两种方式都有明显的缺陷，个人建议的更优方案还是把复杂的命令剥离到单独的文件中管理，在单独的文件中可以自由给它添加注释，详见后续章节。</p>
-<h2 id="调整-npm-script-运行时日志输出"><a href="#调整-npm-script-运行时日志输出" class="headerlink" title="调整 npm script 运行时日志输出"></a>调整 npm script 运行时日志输出</h2><p>在运行 npm script 出现问题时你需要有能力去调试它，某些情况下你需要让 npm script 以静默的方式运行，这类需求可通过控制运行时日志输出级别来实现。</p>
-<p>日志级别控制参数有好几个，简单举例如下：</p>
-<h3 id="默认日志输出级别"><a href="#默认日志输出级别" class="headerlink" title="默认日志输出级别"></a>默认日志输出级别</h3><p>即不加任何日志控制参数得到的输出，可能是你最常用的，能看到执行的命令、命令执行的结果。</p>
-<h3 id="显示尽可能少的有用信息"><a href="#显示尽可能少的有用信息" class="headerlink" title="显示尽可能少的有用信息"></a>显示尽可能少的有用信息</h3><p>结合其他工具调用 npm script 的时候比较有用，需要使用 <code>--loglevel silent</code>，或者 <code>--silent</code>，或者更简单的 <code>-s</code> 来控制，这个日志级别的输出实例如下（只有命令本身的输出，读起来非常的简洁）：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/27/15ffa73279c8a9e8?w=782&amp;h=232&amp;f=png&amp;s=20452" alt="img"></p>
-<p>如果执行各种 lint script 的时候启用了 <code>-s</code> 配置，代码都符合规范的话，你不会看到任何输出，这就是<strong>没有消息是最好的消息</strong>的由来，哈哈！</p>
-<h3 id="显示尽可能多的运行时状态"><a href="#显示尽可能多的运行时状态" class="headerlink" title="显示尽可能多的运行时状态"></a>显示尽可能多的运行时状态</h3><p>排查脚本问题的时候比较有用，需要使用 <code>--loglevel verbose</code>，或者 <code>--verbose</code>，或者更简单的 <code>-d</code> 来控制，这个日志级别的输出实例如下（详细打印出了每个步骤的参数、返回值，下面的截图只是部分）：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/27/15ffa734d9168dff?w=826&amp;h=691&amp;f=png&amp;s=157260" alt="img"></p>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/03-arguments-comments-logs" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>03-arguments-comments-logs</code>。</p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 02：运行多个 npm script 的各种姿势/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 02：运行多个 npm script 的各种姿势/" itemprop="url">1.2 运行多个 npm script 的各种姿势</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:30+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-2-运行多个-npm-script-的各种姿势"><a href="#1-2-运行多个-npm-script-的各种姿势" class="headerlink" title="1.2 运行多个 npm script 的各种姿势"></a>1.2 运行多个 npm script 的各种姿势</h1><p>前端项目通常会包括多个 npm script，对多个命令进行编排是很自然的需求，有时候需要将多个命令串行，即脚本遵循严格的执行顺序；有时候则需要让它们并行来提高速度，比如不相互阻塞的 npm script。社区中也有比 npm 内置的多命令运行机制更好用的解决方案：npm-run-all。</p>
-<h2 id="哪来那么多命令？"><a href="#哪来那么多命令？" class="headerlink" title="哪来那么多命令？"></a>哪来那么多命令？</h2><p>通常来说，前端项目会包含 js、css、less、scss、json、markdown 等格式的文件，为保障代码质量，给不同的代码添加检查是很有必要的，代码检查不仅保障代码没有低级的语法错误，还可确保代码都遵守社区的最佳实践和一致的编码风格，在团队协作中尤其有用，即使是个人项目，加上代码检查，也会提高你的效率和质量。</p>
-<p>我通常会给前端项目加上下面 4 种代码检查：</p>
-<ul>
-<li><a href="https://eslint.org" target="_blank" rel="noopener">eslint</a>，可定制的 js 代码检查，1.1 中有详细的配置步骤；</li>
-<li><a href="https://stylelint.io" target="_blank" rel="noopener">stylelint</a>，可定制的样式文件检查，支持 css、less、scss；</li>
-<li><a href="https://github.com/zaach/jsonlint" target="_blank" rel="noopener">jsonlint</a>，json 文件语法检查，踩过坑的同学会清楚，json 文件语法错误会知道导致各种失败；</li>
-<li><a href="https://github.com/igorshubovych/markdownlint-cli" target="_blank" rel="noopener">markdownlint-cli</a>，Markdown 文件最佳实践检查，个人偏好；</li>
-</ul>
-<p>需要注意的是，html 代码也应该检查，但是工具支持薄弱，就略过不表。此外，为代码添加必要的单元测试也是质量保障的重要手段，常用的单测技术栈是：</p>
-<ul>
-<li><a href="https://mochajs.org" target="_blank" rel="noopener">mocha</a>，测试用例组织，测试用例运行和结果收集的框架；</li>
-<li><a href="http://chaijs.com" target="_blank" rel="noopener">chai</a>，测试断言库，必要的时候可以结合 <a href="http://sinonjs.org" target="_blank" rel="noopener">sinon</a> 使用；</li>
-</ul>
-<blockquote>
-<p><strong>TIP#4</strong>：测试工具如 <a href="http://www.node-tap.org" target="_blank" rel="noopener">tap</a>、<a href="https://github.com/avajs/ava" target="_blank" rel="noopener">ava</a> 也都提供了命令行接口，能很好的集成到 npm script 中，原理是相通的。</p>
-</blockquote>
-<p>包含了基本的代码检查、单元测试命令的 package.json 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hello-npm-script&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.1.0&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;lint:js&quot;: &quot;eslint *.js&quot;,</span><br><span class="line">    &quot;lint:css&quot;: &quot;stylelint *.less&quot;,</span><br><span class="line">    &quot;lint:json&quot;: &quot;jsonlint --quiet *.json&quot;,</span><br><span class="line">    &quot;lint:markdown&quot;: &quot;markdownlint --config .markdownlint.json *.md&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;mocha tests/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;chai&quot;: &quot;^4.1.2&quot;,</span><br><span class="line">    &quot;eslint&quot;: &quot;^4.11.0&quot;,</span><br><span class="line">    &quot;jsonlint&quot;: &quot;^1.6.2&quot;,</span><br><span class="line">    &quot;markdownlint-cli&quot;: &quot;^0.5.0&quot;,</span><br><span class="line">    &quot;mocha&quot;: &quot;^4.0.1&quot;,</span><br><span class="line">    &quot;stylelint&quot;: &quot;^8.2.0&quot;,</span><br><span class="line">    &quot;stylelint-config-standard&quot;: &quot;^17.0.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="让多个-npm-script-串行？"><a href="#让多个-npm-script-串行？" class="headerlink" title="让多个 npm script 串行？"></a>让多个 npm script 串行？</h2><p>在我们运行测试之前确保我们的代码都通过代码检查会是比较不错的实践，这也是让多个 npm script 串行的典型用例，实现方式也比较简单，只需要用 <code>&amp;&amp;</code> 符号把多条 npm script 按先后顺序串起来即可，具体到我们的项目，修改如下图所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index c904250..023d71e 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -8,7 +8,7 @@</span><br><span class="line">-    &quot;test&quot;: &quot;mocha tests/&quot;</span><br><span class="line">+    &quot;test&quot;: &quot;npm run lint:js &amp;&amp; npm run lint:css &amp;&amp; npm run lint:json &amp;&amp; npm run lint:markdown &amp;&amp; mocha tests/&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>然后直接执行 <code>npm test</code> 或 <code>npm t</code>，从输出可以看到子命令的执行顺序是严格按照我们在 scripts 中声明的先后顺序来的：</p>
-<p><code>eslint ==&gt; stylelint ==&gt; jsonlint ==&gt; markdownlint ==&gt; mocha</code></p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 02：运行多个 npm script 的各种姿势/img1.png" alt="img"></p>
-<p>需要注意的是，串行执行的时候如果前序命令失败（通常进程退出码非0），后续全部命令都会终止，我们可以尝试在 index.js 中引入错误（删掉行末的分号）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/index.js b/index.js</span><br><span class="line">index ab8bd0e..b817ea4 100644</span><br><span class="line">--- a/index.js</span><br><span class="line">+++ b/index.js</span><br><span class="line">@@ -4,7 +4,7 @@ const add = (a, b) =&gt; &#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   return NaN;</span><br><span class="line">-&#125;;</span><br><span class="line">+&#125;</span><br><span class="line"></span><br><span class="line"> module.exports = &#123; add  &#125;;</span><br></pre></td></tr></table></figure>
-<p>然后重新运行 npm t，结果如下，npm run lint:js 失败之后，后续命令都没有执行：</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 02：运行多个 npm script 的各种姿势/img2.png" alt="img"></p>
-<h2 id="让多个-npm-script-并行？"><a href="#让多个-npm-script-并行？" class="headerlink" title="让多个 npm script 并行？"></a>让多个 npm script 并行？</h2><p>在严格串行的情况下，我们必须要确保代码中没有编码规范问题才能运行测试，在某些时候可能并不是我们想要的，因为我们真正需要的是，代码变更时同时给出测试结果和测试运行结果。这就需要把子命令的运行从串行改成并行，实现方式更简单，把连接多条命令的 <code>&amp;&amp;</code> 符号替换成 <code>&amp;</code> 即可。</p>
-<p>代码变更如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index 023d71e..2d9bd6f 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -8,7 +8,7 @@</span><br><span class="line">-    &quot;test&quot;: &quot;npm run lint:js &amp;&amp; npm run lint:css &amp;&amp; npm run lint:json &amp;&amp; npm run lint:markdown &amp;&amp; mocha tests/&quot;</span><br><span class="line">+    &quot;test&quot;: &quot;npm run lint:js &amp; npm run lint:css &amp; npm run lint:json &amp; npm run lint:markdown &amp; mocha tests/&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>重新运行 npm t，我们得到如下结果：</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 02：运行多个 npm script 的各种姿势/img3.png" alt="img"></p>
-<p>细心的同学可能已经发现上图中哪里不对，npm run lint:js 的结果在进程退出之后才输出，如果你自己运行，不一定能稳定复现这个问题，但 npm 内置支持的多条命令并行跟 js 里面同时发起多个异步请求非常类似，它只负责触发多条命令，而不管结果的收集，如果并行的命令执行时间差异非常大，上面的问题就会稳定复现。怎么解决这个问题呢？</p>
-<p>答案也很简单，在命令的增加 <code>&amp; wait</code> 即可，这样我们的 test 命令长这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run lint:js &amp; npm run lint:css &amp; npm run lint:json &amp; npm run lint:markdown &amp; mocha tests/ &amp; wait</span><br></pre></td></tr></table></figure>
-<p>加上 wait 的额外好处是，如果我们在任何子命令中启动了长时间运行的进程，比如启用了 mocha 的 <code>--watch</code> 配置，可以使用 <code>ctrl + c</code> 来结束进程，如果没加的话，你就没办法直接结束启动到后台的进程。</p>
-<h2 id="有没有更好的管理方式？"><a href="#有没有更好的管理方式？" class="headerlink" title="有没有更好的管理方式？"></a>有没有更好的管理方式？</h2><p>有强迫症的同学可能会觉得像上面这样用原生方式来运行多条命令很臃肿，幸运的是，我们可以使用 <code>npm-run-all</code> 实现更轻量和简洁的多命令运行。</p>
-<p>用如下命令将 <code>npm-run-all</code> 添加到项目依赖中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i npm-run-all -D</span><br></pre></td></tr></table></figure>
-<p>然后修改 package.json 实现多命令的串行执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index b3b1272..83974d6 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -8,7 +8,8 @@</span><br><span class="line">-    &quot;test&quot;: &quot;npm run lint:js &amp; npm run lint:css &amp; npm run lint:json &amp; npm run lint:markdown &amp; mocha tests/ &amp; wait&quot;</span><br><span class="line">+    &quot;mocha&quot;: &quot;mocha tests/&quot;,</span><br><span class="line">+    &quot;test&quot;: &quot;npm-run-all lint:js lint:css lint:json lint:markdown mocha&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>npm-run-all 还支持通配符匹配分组的 npm script，上面的脚本可以进一步简化成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index 83974d6..7b327cd 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -9,7 +9,7 @@</span><br><span class="line">-    &quot;test&quot;: &quot;npm-run-all lint:js lint:css lint:json lint:markdown mocha&quot;</span><br><span class="line">+    &quot;test&quot;: &quot;npm-run-all lint:* mocha&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>如何让多个 npm script 并行执行？也很简单：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/package.json b/package.json</span><br><span class="line">index 7b327cd..c32da1c 100644</span><br><span class="line">--- a/package.json</span><br><span class="line">+++ b/package.json</span><br><span class="line">@@ -9,7 +9,7 @@</span><br><span class="line">-    &quot;test&quot;: &quot;npm-run-all lint:* mocha&quot;</span><br><span class="line">+    &quot;test&quot;: &quot;npm-run-all --parallel lint:* mocha&quot;</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-<p>并行执行的时候，我们并不需要在后面增加 <code>&amp; wait</code>，因为 npm-run-all 已经帮我们做了。</p>
-<blockquote>
-<p><strong>TIP#5</strong>：npm-run-all 还提供了很多配置项支持更复杂的命令编排，比如多个命令并行之后接串行的命令，感兴趣的同学请阅读<a href="https://github.com/mysticatea/npm-run-all/blob/HEAD/docs/npm-run-all.md" target="_blank" rel="noopener">文档</a>，自己玩儿。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本节用到的代码见 <a href="https://github.com/wangshijun/automated-workflow-with-npm-script/tree/02-run-multiple-npm-scripts" target="_blank" rel="noopener">GitHub</a>，想边看边动手练习的同学可以拉下来自己改，注意切换到正确的分支 <code>02-run-multiple-npm-scripts</code>。<strong>运行命令前别忘了安装 node_modules，😆</strong></p>
-</blockquote>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 01：创建并运行 npm script 命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 01：创建并运行 npm script 命令/" itemprop="url">1.1 初识 npm script</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:29+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-1-初识-npm-script"><a href="#1-1-初识-npm-script" class="headerlink" title="1.1 初识 npm script"></a>1.1 初识 npm script</h1><p>首先介绍创建 package.json 文件的科学方法，目标是掌握 npm init 命令。然后，通过在终端中运行自动生成的 test 命令，详细讲解 npm 脚本基本执行流程。 然后，动手给项目增加 eslint 命令，熟悉创建自定义命令的基本流程。</p>
-<h2 id="用-npm-init-快速创建项目"><a href="#用-npm-init-快速创建项目" class="headerlink" title="用 npm init 快速创建项目"></a>用 npm init 快速创建项目</h2><p>开始探索 npm script 之前，我们先聊聊这些 scripts 所依赖的文件 package.json，以它为基础的 npm 则是 node.js 社区蓬勃发展的顶梁柱。</p>
-<p>npm 为我们提供了快速创建 package.json 文件的命令 npm init，执行该命令会问几个基本问题，如包名称、版本号、作者信息、入口文件、仓库地址、许可协议等，多数问题已经提供了默认值，你可以在问题后敲回车接受默认值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package name: (hello-npm-script)</span><br><span class="line">version: (0.1.0)</span><br><span class="line">description: hello npm script</span><br><span class="line">entry point: (index.js)</span><br><span class="line">test command:</span><br><span class="line">git repository:</span><br><span class="line">keywords: npm, script</span><br><span class="line">license: (MIT)</span><br></pre></td></tr></table></figure>
-<p>上面的例子指定了描述（description）和关键字（keywords）两个字段，基本问题问完之后 npm 会把 package.json 文件内容打出来供你确认：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hello-npm-script&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.1.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;hello npm script&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;npm&quot;,</span><br><span class="line">    &quot;script&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;wangshijun &lt;wangshijun2010@gmail.com&gt; (https://github.com/wangshijun)&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;MIT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>按回车确认就能把package.json 的内容写到文件系统，如果要修改 package.json，可以直接用编辑器编辑，或者再次运行 npm init，npm 默认不会覆盖修改里面已经存在的信息。</p>
-<blockquote>
-<p><strong>TIP#1</strong>: 嫌上面的初始化方式太啰嗦？你可以使用 npm init -f（意指 –force，或者使用 –yes）告诉 npm 直接跳过参数问答环节，快速生成 package.json。</p>
-</blockquote>
-<p>初始化 package.json 时的字段默认值是可以自己配置的，细心的同学可能已经发现，我上面的默认版本号是 0.1.0，而 npm 默认的版本号是 0.0.1，可以用下面的命令去修改默认配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm config set init.author.email &quot;wangshijun2010@gmail.com&quot;</span><br><span class="line">npm config set init.author.name &quot;wangshijun&quot;</span><br><span class="line">npm config set init.author.url &quot;http://github.com/wangshijun&quot;</span><br><span class="line">npm config set init.license &quot;MIT&quot;</span><br><span class="line">npm config set init.version &quot;0.1.0&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#2</strong>: 将默认配置和 -f 参数结合使用，能让你用最短的时间创建 package.json，快去自己试试吧。</p>
-</blockquote>
-<p>严肃的工程师都会使用 Git 对源代码进行版本管理，在 npm init 的基础上，你可以使用 git init 来初始化 git 仓库，不再展开。</p>
-<p>纸上得来终觉浅，想掌握 npm script，请打开终端，执行下列命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir hello-npm-script &amp;&amp; cd $_</span><br><span class="line">npm init</span><br><span class="line">npm init -f</span><br></pre></td></tr></table></figure>
-<p><strong>执行上面第 3、4 行命令时结果是否符合预期？如果不符合预期，请在下面留言，或者在读者群里反馈。</strong></p>
-<h2 id="用-npm-run-执行任意命令"><a href="#用-npm-run-执行任意命令" class="headerlink" title="用 npm run 执行任意命令"></a>用 npm run 执行任意命令</h2><p>使用 npm init 创建的 package.json 文件中包含了 scripts 字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>在终端中运行 npm run test，能看到 Error: no test specified 的输出。npm run test 可以简写为 npm test，或更简单的 npm t，得到的结果是几乎相同的。npm test 顾名思义，就是运行项目测试，实际用法在实战环节会有介绍。</p>
-<p>和 test 类似，start 也是 npm 内置支持的命令，但是需要先在 scripts 字段中声明该脚本的实际内容，如果没声明就执行 npm start，会直接报错。如下图所示：</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 01：创建并运行 npm script 命令/img1.png" alt="img"></p>
-<p>那么，npm 是如何管理和执行各种 scripts 的呢？作为 npm 内置的核心功能之一，npm run 实际上是 npm run-script 命令的简写。当我们运行 npm run xxx 时，基本步骤如下：</p>
-<ol>
-<li>从 package.json 文件中读取 scripts 对象里面的全部配置；</li>
-<li>以传给 npm run 的第一个参数作为键，本例中为 xxx，在 scripts 对象里面获取对应的值作为接下来要执行的命令，如果没找到直接报错；</li>
-<li>在系统默认的 shell 中执行上述命令，系统默认 shell 通常是 bash，windows 环境下可能略有不同，稍后再讲。</li>
-</ol>
-<p>注意，上面这是简化的流程，更复杂的钩子机制后面章节单独介绍。</p>
-<p>举例来说，如果 package.json 文件内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hello-npm-script&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;eslint&quot;: &quot;latest&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;eslint&quot;: &quot;eslint **.js&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果不带任何参数执行 npm run，它会列出可执行的所有命令，比如下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Available scripts in the myproject package:</span><br><span class="line">  eslint</span><br><span class="line">    eslint **.js</span><br></pre></td></tr></table></figure>
-<p>如果运行 npm run eslint，npm 会在 shell 中运行 eslint **.js。</p>
-<p>有没有好奇过上面的 eslint 命令是从哪里来的？其实，npm 在执行指定 script 之前会把 node_modules/.bin 加到环境变量 $PATH 的前面，这意味着任何内含可执行文件的 npm 依赖都可以在 npm script 中直接调用，换句话说，你不需要在 npm script 中加上可执行文件的完整路径，比如 <code>./node_modules/.bin/eslint **.js</code>。</p>
-<h2 id="创建自定义-npm-script"><a href="#创建自定义-npm-script" class="headerlink" title="创建自定义 npm script"></a>创建自定义 npm script</h2><p>知道如何运行 npm script 之后，接下来我们在 hello-npm-script 项目中添加有实际用途的 eslint 脚本，<a href="https://eslint.org" target="_blank" rel="noopener">eslint</a> 是社区中接受度比较高的 javascript 风格检查工具，有大把现成的规则集可供你选择，比如 <a href="https://github.com/google/eslint-config-google" target="_blank" rel="noopener">google</a>、 <a href="https://www.npmjs.com/package/eslint-config-airbnb" target="_blank" rel="noopener">airbnb</a>。</p>
-<p>在新项目或者任何现有项目中添加 eslint 自定义脚本的步骤如下：</p>
-<h3 id="1-准备被检查的代码"><a href="#1-准备被检查的代码" class="headerlink" title="1. 准备被检查的代码"></a>1. 准备被检查的代码</h3><p>要做代码检查，我们必须有代码，创建 index.js 文件，输入如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const str = &apos;some value&apos;;</span><br><span class="line"></span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log(&apos;some log&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-eslint-依赖"><a href="#2-添加-eslint-依赖" class="headerlink" title="2. 添加 eslint 依赖"></a>2. 添加 eslint 依赖</h3><p>执行如下命令将 eslint 添加为 devDependencies：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install eslint -D</span><br></pre></td></tr></table></figure>
-<h3 id="3-初始化-eslint-配置"><a href="#3-初始化-eslint-配置" class="headerlink" title="3. 初始化 eslint 配置"></a>3. 初始化 eslint 配置</h3><p>用 eslint 做检查需要配置规则集，存放规则集的文件就是配置文件，使用如下文件生成配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/eslint --init</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>TIP#3</strong>: 把 eslint 安装为项目依赖而非全局命令，项目可移植性更高。</p>
-</blockquote>
-<p>在命令行提示中选择 Answer questions about your style，如下图回答几个问题，答案可以根据自己的偏好：</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 01：创建并运行 npm script 命令/img2.png" alt="img"></p>
-<p>回车后根目录下就有了 .eslintrc.js 配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  env: &#123;</span><br><span class="line">    es6: true,</span><br><span class="line">    node: true,</span><br><span class="line">  &#125;,</span><br><span class="line">  extends: &apos;eslint:recommended&apos;,</span><br><span class="line">  rules: &#123;</span><br><span class="line">    indent: [&apos;error&apos;, 4],</span><br><span class="line">    &apos;linebreak-style&apos;: [&apos;error&apos;, &apos;unix&apos;],</span><br><span class="line">    quotes: [&apos;error&apos;, &apos;single&apos;],</span><br><span class="line">    semi: [&apos;error&apos;, &apos;always&apos;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="4-添加-eslint-命令"><a href="#4-添加-eslint-命令" class="headerlink" title="4. 添加 eslint 命令"></a>4. 添加 eslint 命令</h3><p>在 package.json 的 scripts 字段中新增命令 eslint：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;eslint&quot;: &quot;eslint *.js&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>手动修改 package.json 时一定要注意语法正确。</strong></p>
-<h3 id="5-运行-eslint-命令"><a href="#5-运行-eslint-命令" class="headerlink" title="5. 运行 eslint 命令"></a>5. 运行 eslint 命令</h3><p>执行 npm run eslint，可以看到，按照官方推荐规则代码里有 3 处不符合规范的地方：</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/入门篇 01：创建并运行 npm script 命令/img3.png" alt="img"></p>
-<hr>
-<p>如果读到这里，相信你已经完成 npm script 上手，接下来我们去探索更高级的话题。</p>
-<hr>
-<h2 id="20171205-增补：eslint-完成-react、vue-js-代码的检查"><a href="#20171205-增补：eslint-完成-react、vue-js-代码的检查" class="headerlink" title="20171205 增补：eslint 完成 react、vue.js 代码的检查"></a>20171205 增补：eslint 完成 react、vue.js 代码的检查</h2><p>如果需要结合 eslint 检查主流前端框架 react、vue.js，下面提供两条线索，因为官方仓库的 README 就可以作为入门文档，仔细读读相信绝大多数同学都能配置好。</p>
-<p>使用 <a href="https://github.com/yannickcr/eslint-plugin-react" target="_blank" rel="noopener">eslint-plugin-react</a> 检查 react 代码，使用 <a href="https://github.com/Intellicode/eslint-plugin-react-native" target="_blank" rel="noopener">react-plugin-react-native</a> 检查 react-native 代码，如果你比较懒，可以直接使用 <a href="https://www.npmjs.com/package/eslint-config-airbnb" target="_blank" rel="noopener">eslint-config-airbnb</a>，里面内置了 eslint-plugin-react，新人常遇到 peerDependencies 安装失败问题可参照 npmjs 主页上的如下方法解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(</span><br><span class="line">  export PKG=eslint-config-airbnb;</span><br><span class="line">  npm info &quot;$PKG@latest&quot; peerDependencies --json | command sed &apos;s/[\&#123;\&#125;,]//g ; s/: /@/g&apos; | xargs npm install --save-dev &quot;$PKG@latest&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>推荐使用 vue.js 官方的 eslint 插件：<a href="https://github.com/vuejs/eslint-plugin-vue" target="_blank" rel="noopener">eslint-plugin-vue</a> 来检查 vue.js 代码，具体的配置方法官方 README 写的清晰明了，这里就不赘述了。</p>
-<p>上面的几种 eslint 规则集的官方仓库都列出了各自支持的规则，如果你需要关闭某些规则，可以直接在自己的 .eslintrc* 里面的 rules 中配置，比如我们仓库里面的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  env: &#123;</span><br><span class="line">    es6: true,</span><br><span class="line">    node: true,</span><br><span class="line">  &#125;,</span><br><span class="line">  extends: &apos;eslint:recommended&apos;,</span><br><span class="line">  rules: &#123;</span><br><span class="line">    indent: [&apos;error&apos;, 2],</span><br><span class="line">    &apos;linebreak-style&apos;: [&apos;error&apos;, &apos;unix&apos;],</span><br><span class="line">    quotes: [&apos;error&apos;, &apos;single&apos;],</span><br><span class="line">    semi: [&apos;error&apos;, &apos;always&apos;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>如果你配置过程中遇到什么问题，欢迎留言或者在读者群里面交流。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/用 npm script 打造超溜的前端工作流/为什么选择 npm script/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/17/用 npm script 打造超溜的前端工作流/为什么选择 npm script/" itemprop="url">为什么选择 npm script？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T11:11:28+08:00">
-                2020-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm-script/" itemprop="url" rel="index">
-                    <span itemprop="name">npm script</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="为什么选择-npm-script？"><a href="#为什么选择-npm-script？" class="headerlink" title="为什么选择 npm script？"></a>为什么选择 npm script？</h1><p>可能在你翻开这个页面的同时，心里在嘀咕，为什么要选择 npm script？我用着 grunt、gulp 不是挺好的么？</p>
-<p>如果你在心里这么问自己，我会很欣慰，因为理性的选择都应该从为什么开始。在小册介绍中我提到的重量级构建工具所带来的问题，已有前人总结的非常不错，吐血推荐大家阅读原文：<a href="https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8" target="_blank" rel="noopener">Why I left gulp and grunt for npm scripts</a>，中译版也有，可以自己去搜。</p>
-<p>说说我自己的亲身经历，在前东家接手维护过使用了 39 个 gulp 插件的项目，因为项目起步较早，部分插件所依赖的基础工具版本都比较老，当这些插件所依赖的基础工具升级之后，gulp 插件本身并没有更新的那么快，我不得不 fork 原仓库去维护内部的版本，而当 gulp 发布了新版本之后，升级插件更是一场艰苦的持久战。</p>
-<p>冷静思考下来，上面这种复杂性其实并没有必要，在软件工程里面有个重要的原则，就是简单性，越是简单的东西越是可靠，从概率论的角度，任何系统环节越多稳定性越差。</p>
-<p>npm script 相比 grunt、gulp 之类的构建工具简单很多，因为它消除了这些构建工具所带来的抽象层，并带给我们更大的自由度。随着社区的发展，各种基础工具你都可以信手拈来，只要你会使用 <a href="https://www.npmjs.com" target="_blank" rel="noopener">npmjs.com</a> 去搜索，或者去 <a href="https://libraries.io" target="_blank" rel="noopener">libraries.io</a> 上搜索。</p>
-<p>废话不多说，我再补充 3 组数据，相信看完这 3 组数据，你就知道该做出什么选择了。</p>
-<h2 id="Google-Trends"><a href="#Google-Trends" class="headerlink" title="Google Trends"></a>Google Trends</h2><p>第 1 组数据来自 <a href="https://trends.google.com/trends/explore?date=all&amp;q=npm,gulp,webpack,grunt" target="_blank" rel="noopener">Google Trends</a>，如果你想了解任何事物的长期发展趋势，Google Trends 是个非常不错的工具。</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/为什么选择 npm script/img1.png" alt="img"></p>
-<p>图中是 Google 上的 grunt、gulp、webpack、npm 等 4 种工具的搜索量呈现的趋势，npm 无疑是非常值得前端工程师关注的，而真正让他<code>强大到无所不能（夸张说法）</code>的 npm script 是不是应该熟练掌握？</p>
-<h2 id="Stack-Overflow-Trends"><a href="#Stack-Overflow-Trends" class="headerlink" title="Stack Overflow Trends"></a>Stack Overflow Trends</h2><p>第 2 组数据来自 <a href="https://insights.stackoverflow.com/trends?tags=npm%2Cgulp%2Cgruntjs%2Cwebpack" target="_blank" rel="noopener">Stack Overflow Trends</a>，就是那个遇到任何技术问题都可以去找答案的问答社区。</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/为什么选择 npm script/img2.png" alt="img"></p>
-<p>图中是 4 种工具逐月问题数在全部问题总数中的占比，虽然整体比例比较小，但是从趋势来看，webpack、npm 依然是值得的关注的技术。</p>
-<h2 id="The-State-of-JS-Survey-2016"><a href="#The-State-of-JS-Survey-2016" class="headerlink" title="The State of JS Survey 2016"></a>The State of JS Survey 2016</h2><p>第 3 组数据来自 <a href="https://stateofjs.com/2016/buildtools" target="_blank" rel="noopener">The State of JS Survey 2016</a> 年度调查的结果，虽然 npm script 在 javascript 开发者中接受度没有排到前四名（webpack、grunt、gulp、browserify），但是在其他项中名列前茅，个人也比较好奇今年的实际表现（统计结果还没出来）。</p>
-<p><img src="/2020/03/17/用 npm script 打造超溜的前端工作流/为什么选择 npm script/img3.png" alt="img"></p>
-<p>好，关于为什么该拥抱 npm script 就说到这里，期待接下来你能跟我一起去探索 npm script 的方方面面，把它学会用好，添加到自己的武器库里。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/DNS解析/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/DNS解析/" itemprop="url">DNS解析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:45:34+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/" itemprop="url" rel="index">
-                    <span itemprop="name">网络原理</span>
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -1588,7 +441,7 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
+                  <a href="/categories/js/学习日记/" itemprop="url" rel="index">
                     <span itemprop="name">学习日记</span>
                   </a>
                 </span>
@@ -1627,17 +480,17 @@
       
         
           
-            <p><strong>DNS</strong>（Domain Name System）域名系统</p>
-<h3 id="一、域名系统"><a href="#一、域名系统" class="headerlink" title="一、域名系统"></a>一、域名系统</h3><h4 id="1、域名系统概述"><a href="#1、域名系统概述" class="headerlink" title="1、域名系统概述"></a>1、域名系统概述</h4><p>域名系统DNS(Domain Name System)是因特网使用的命名系统，用来把便于人们使用的机器名字转换成为IP地址。域名系统其实就是名字系统。</p>
-<p>我们都知道，IP地址是由32位的二进制数字组成的。用户与因特网上某台主机通信时，显然不愿意使用很难记忆的长达32位的二进制主机地址。即使是点分十进制IP地址也并不太容易记忆。相反，大家愿意使用比较容易记忆的主机名字。但是，机器在处理IP数据报时，并不是使用域名而是使用IP地址。这是因为IP地址长度固定，而域名的长度不固定，机器处理起来比较困难。</p>
-<p>域名到IP地址的解析是由分布在因特网上的许多域名服务器程序共同完成的。域名服务器程序在专设的结点上运行，而人们也常把运行域名服务器程序的机器称为域名服务器。</p>
-<h4 id="2、因特网的域名结构"><a href="#2、因特网的域名结构" class="headerlink" title="2、因特网的域名结构"></a>2、因特网的域名结构</h4><p>由于因特网的用户数量较多，所以因特网在命名时采用的是层次树状结构的命名方法。任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)。这里，“域”(domain)是名字空间中一个可被管理的划分。</p>
-<p>如下例子所示：<br><img src="/2020/01/06/DNS解析/eg1.png" alt="image"></p>
-<p>这是中央电视台用于收发电子邮件的计算机的域名，它由三个标号组成，其中标号com是顶级域名，标号cctv是二级域名，标号mail是三级域名。</p>
-<p>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理。用这种方法可使每一个域名在整个互联网范围内是唯一的，并且也容易设计出一种查找域名的机制。</p>
-<p>域名只是逻辑概念，并不代表计算机所在的物理地点。据2006年12月统计，现在顶级域名TLD(Top Level Domain)已有265个，分为三大类：<br>(1)国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。<br>(2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。<br>(3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。</p>
-<p><img src="/2020/01/06/DNS解析/eg2.png" alt="image"></p>
-
+            <h4 id="两中数字格式化的方法"><a href="#两中数字格式化的方法" class="headerlink" title="两中数字格式化的方法"></a>两中数字格式化的方法</h4><blockquote>
+<p>数字格式化一 e.g. 23422039-&gt;2342.2W<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2342.2W</span></span><br><span class="line"><span class="comment">  * @param &#123;number&#125; count 需要格式化的数字</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">CounFormat</span> (<span class="params">count</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> countString = count.toString()</span><br><span class="line">   <span class="keyword">var</span> tmp = <span class="string">''</span></span><br><span class="line">   <span class="keyword">var</span> result = <span class="string">''</span></span><br><span class="line">   <span class="keyword">if</span> (countString.length &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">     tmp = countString.slice(<span class="number">-4</span>, <span class="number">-3</span>) === <span class="string">'0'</span> ? <span class="string">''</span> : countString.slice(<span class="number">-4</span>, <span class="number">-3</span>)</span><br><span class="line">     <span class="keyword">if</span> (tmp.slice(tmp.length + <span class="number">1</span>, <span class="number">1</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">       result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'w'</span>)</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       tmp === <span class="string">''</span> ? result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'w'</span>) : result = countString.slice(<span class="number">0</span>, <span class="number">-4</span>).concat(<span class="string">'.'</span> + tmp + <span class="string">'w'</span>)</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> result</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> count</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>数字格式化二 e.g. 23232222-&gt;23,232,222<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 千位符数字格式化23,232,222</span></span><br><span class="line"><span class="comment">  * @param &#123;number&#125; num 需要格式化的数字</span></span><br><span class="line"><span class="comment">  * @param &#123;int&#125; precision 保留小数位</span></span><br><span class="line"><span class="comment">  * @param &#123;String&#125; separator 分隔符</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">CounFormat2</span> (<span class="params">num, precision, separator</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> parts</span><br><span class="line">   <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(num)) &amp;&amp; <span class="built_in">isFinite</span>(num)) &#123;</span><br><span class="line">     num = <span class="built_in">Number</span>(num)</span><br><span class="line">     num = (<span class="keyword">typeof</span> precision !== <span class="string">'undefined'</span> ? num.toFixed(precision) : num).toString()</span><br><span class="line">     parts = num.split(<span class="string">'.'</span>)</span><br><span class="line">     parts[<span class="number">0</span>] = parts[<span class="number">0</span>].toString().replace(<span class="regexp">/(\d)(?=(\d&#123;3&#125;)+(?!\d))/g</span>, <span class="string">'$1'</span> + (separator || <span class="string">','</span>))</span><br><span class="line">     <span class="keyword">return</span> parts.join(<span class="string">'.'</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">NaN</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="时间格式化的方法"><a href="#时间格式化的方法" class="headerlink" title="时间格式化的方法"></a>时间格式化的方法</h4><blockquote>
+<p>时间格式化 e.g. 1245278300-&gt;2009-6-18 06:38<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 时间格式化 2018-09-09 12:02:22</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; timespan 时间戳</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatMsgTime</span> (<span class="params">timespan</span>) </span>&#123;</span><br><span class="line">  timespan = timespan * <span class="number">1000</span></span><br><span class="line">  <span class="keyword">var</span> dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>(timespan)</span><br><span class="line">  <span class="keyword">var</span> year = dateTime.getFullYear()</span><br><span class="line">  <span class="keyword">var</span> month = dateTime.getMonth() + <span class="number">1</span></span><br><span class="line">  <span class="keyword">var</span> day = dateTime.getDate()</span><br><span class="line">  <span class="keyword">var</span> hour = dateTime.getHours() ? (dateTime.getHours() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + dateTime.getHours() : dateTime.getHours()) : <span class="string">'00'</span></span><br><span class="line">  <span class="keyword">var</span> minute = dateTime.getMinutes() ? (dateTime.getMinutes() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + dateTime.getMinutes() : dateTime.getMinutes()) : <span class="string">'00'</span></span><br><span class="line">  <span class="comment">// var second = dateTime.getSeconds()</span></span><br><span class="line">  <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">  <span class="comment">// typescript转换写法</span></span><br><span class="line">  <span class="keyword">var</span> nowNew = now.getTime()</span><br><span class="line">  <span class="comment">// var nowNew = Date.parse(now.toDateString())</span></span><br><span class="line">  <span class="keyword">var</span> milliseconds = <span class="number">0</span></span><br><span class="line">  <span class="keyword">var</span> timeSpanStr</span><br><span class="line">  milliseconds = nowNew - timespan</span><br><span class="line">  <span class="keyword">if</span> (milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">1</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="string">'刚刚'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">1</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round((milliseconds / (<span class="number">1000</span> * <span class="number">60</span>))) + <span class="string">'分钟前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round(milliseconds / (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span>)) + <span class="string">'小时前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> &lt; milliseconds &amp;&amp; milliseconds &lt;= <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span>) &#123;</span><br><span class="line">    timeSpanStr = <span class="built_in">Math</span>.round(milliseconds / (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>)) + <span class="string">'天前'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (milliseconds &gt; <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span> &amp;&amp; year === now.getFullYear()) &#123;</span><br><span class="line">    timeSpanStr = month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    timeSpanStr = year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> timeSpanStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="视频时长格式化"><a href="#视频时长格式化" class="headerlink" title="视频时长格式化"></a>视频时长格式化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 视频时长格式化</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; seconds</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">secondsToHour</span> (<span class="params">seconds</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>)</span><br><span class="line">    <span class="keyword">var</span> m = <span class="built_in">parseInt</span>((seconds % <span class="number">3600</span>) / <span class="number">60</span>)</span><br><span class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds % <span class="number">60</span>)</span><br><span class="line">    h = h ? h + <span class="string">':'</span> : <span class="string">''</span></span><br><span class="line">    m = m ? (m &lt; <span class="number">10</span> ? <span class="string">'0'</span> + m + <span class="string">':'</span> : m + <span class="string">':'</span>) : <span class="string">'00:'</span></span><br><span class="line">    s = s ? (s &lt; <span class="number">10</span> ? <span class="string">'0'</span> + s : s) : <span class="string">'00'</span></span><br><span class="line">    <span class="keyword">return</span> h + m + s</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="文案截取"><a href="#文案截取" class="headerlink" title="文案截取"></a>文案截取</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 文案截取</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; num 截取个数</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; string 拼接字符串</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; symbol 拼接字符串</span></span><br><span class="line"><span class="comment">   * stringLen("asdsfdfsdf", 80, "...")</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">stringLen</span> (<span class="params">string, num, symbol</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; string.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (len &gt;= num) &#123;</span><br><span class="line">        <span class="keyword">return</span> string.slice(<span class="number">0</span>, i) + symbol</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (string.charCodeAt(i) &gt; <span class="number">127</span> || string.charCodeAt(i) === <span class="number">94</span>) &#123;</span><br><span class="line">        len++</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        len += <span class="number">1</span> / <span class="number">2</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="对比版本号"><a href="#对比版本号" class="headerlink" title="对比版本号"></a>对比版本号</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 对比版本号，大于：true 小于：false</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; v1 2.1.1</span></span><br><span class="line"><span class="comment">   * @param &#123;String&#125; v2 2.2.2</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">versions</span>(<span class="params">v1, v2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr1 = v1.replace(<span class="regexp">/[-_]/g</span>, <span class="string">'.'</span>).split(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">var</span> arr2 = v2.replace(<span class="regexp">/[-_]/g</span>, <span class="string">'.'</span>).split(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">var</span> len = <span class="built_in">Math</span>.max(arr1.length, arr2.length)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">      arr1[i] = !arr1[i] ? <span class="number">0</span> : arr1[i]</span><br><span class="line">      arr2[i] = !arr2[i] ? <span class="number">0</span> : arr2[i]</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">parseInt</span>(arr1[i]) &gt; <span class="built_in">parseInt</span>(arr2[i])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">parseInt</span>(arr1[i]) &lt; <span class="built_in">parseInt</span>(arr2[i])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="倒计时"><a href="#倒计时" class="headerlink" title="倒计时"></a>倒计时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 倒计时</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; msd 截止时间</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">MillisecondToDate</span> (<span class="params">msd</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">var</span> time = <span class="built_in">parseFloat</span>(msd - now) / <span class="number">1000</span></span><br><span class="line">    <span class="keyword">if</span> (time !== <span class="literal">null</span> &amp;&amp; time !== <span class="string">''</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> timeDay = <span class="built_in">parseInt</span>(time / <span class="number">86400.0</span>)</span><br><span class="line">      <span class="keyword">var</span> timeH = <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span> - <span class="number">24</span> * timeDay)</span><br><span class="line">      <span class="keyword">var</span> timeM = <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>)</span><br><span class="line">      <span class="keyword">var</span> timeS = <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>) - <span class="built_in">parseInt</span>((<span class="built_in">parseFloat</span>(time / <span class="number">3600.0</span>) - <span class="built_in">parseInt</span>(time / <span class="number">3600.0</span>)) * <span class="number">60</span>)) * <span class="number">60</span>)</span><br><span class="line">      timeDay = timeDay &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeDay : timeDay</span><br><span class="line">      timeH = timeH &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeH : timeH</span><br><span class="line">      timeM = timeM &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeM : timeM</span><br><span class="line">      timeS = timeS &lt; <span class="number">10</span> ? <span class="string">'0'</span> + timeS : timeS</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'day'</span>: timeDay.toString(),</span><br><span class="line">      <span class="string">'hour'</span>: timeH.toString(),</span><br><span class="line">      <span class="string">'minute'</span>: timeM.toString(),</span><br><span class="line">      <span class="string">'second'</span>: timeS.toString()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1685,7 +538,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/学习日记css小锦囊-持续更新/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1704,7 +557,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/" itemprop="url">OSI7层参考模型和TCP/IP5层参考模型</a></h1>
+                <a class="post-title-link" href="/2018/04/01/学习日记css小锦囊-持续更新/" itemprop="url">学习日记css小锦囊-持续更新</a></h1>
         
 
         <div class="post-meta">
@@ -1716,8 +569,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:23:51+08:00">
-                2020-01-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T19:45:09+08:00">
+                2018-04-01
               </time>
             
 
@@ -1739,8 +592,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/" itemprop="url" rel="index">
-                    <span itemprop="name">网络原理</span>
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
                   </a>
                 </span>
 
@@ -1750,7 +603,18 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
+                  <a href="/categories/css/css3/" itemprop="url" rel="index">
+                    <span itemprop="name">css3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/css3/学习日记/" itemprop="url" rel="index">
                     <span itemprop="name">学习日记</span>
                   </a>
                 </span>
@@ -1789,22 +653,282 @@
       
         
           
-            <h4 id="一、相关名词"><a href="#一、相关名词" class="headerlink" title="一、相关名词"></a>一、相关名词</h4><p><strong>OSI</strong>（Open System Interconnection Model开放式系统互联模型）简称为OSI模型,由国际标准化组织提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。定义于ISO/IEC 7498-1</p>
-<p><strong>OSI/RM</strong>（Open Systems Interconnection Reference Model）开放系统互联参考模型</p>
-<p><strong>ISO</strong>（International Organization for Standardization）国际标准化组织</p>
-<p><strong>ARP</strong>（Address Resolution Protocol）地址解析协议，是根据IP地址获取物理地址的一个协议</p>
-<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet Protocol，传输控制协议/网际协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP 和IP两个协议，而是指一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 只是因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议。</p>
-<h4 id="二、七层模型"><a href="#二、七层模型" class="headerlink" title="二、七层模型"></a>二、七层模型</h4><h4 id="第7层-应用层"><a href="#第7层-应用层" class="headerlink" title="第7层 应用层"></a>第7层 应用层</h4><p>应用层与提供给用户的网络服务相关，这些服务非常丰富，包括文件传送、电子邮件、P2P应用等。应用层为用户提供了一个使用网络应用的“接口”。</p>
-<h4 id="第6层-表示层"><a href="#第6层-表示层" class="headerlink" title="第6层 表示层"></a>第6层 表示层</h4><p>表现层主要用于处理应用实体间的交换数据的语法，其目的是解决格式和数据表示的差别，从而为应用层提供一个一致的数据格式，使字符、格式等有差异的设备之间相互通信。除此之外，表现层还可以实现文本压缩、数据加密/解密、字符编码的转换等功能。这一层的功能在某些实际数据通信网络中是有应用层来实现的，而且表示层不独立存在。</p>
-<h4 id="第5层-会话层"><a href="#第5层-会话层" class="headerlink" title="第5层 会话层"></a>第5层 会话层</h4><p>会话层是指用户与用户的连接，通过在两台计算机间建立、管理和终止通信来完成对话。会话层的主要功能：在建立会话时核实双方身份是否有权参加会话；确定双方支付通信费用；双方在各种选择功能方面（如全双工还是半双工通信）取得一致，在会话建立以后，需要对进程间的对话进行管理与控制，例如，对话过程中某个环节输了故障，会话层在可能条件下必须对这个对话的数据，使数据不丢失，如不能保留，那么终止这个对话，并重新开始。在实际的网络中，会话层的功能已经被应用层所覆盖，很少单独存在。</p>
-<h4 id="第4层-传输层"><a href="#第4层-传输层" class="headerlink" title="第4层 传输层"></a>第4层 传输层</h4><p>传输层是第一个端到端的层次，也是进程到进程的层次。数据的通信表面上看是在两个主机之间进行，但实质上是发生在两个主机的进程之间。OSI参考模型的前三层可组成公共网络，被很多设备共享，并且计算机——交换结点（典型的交换结点是路由器，交换机等）、交换结点——交换结点是按照“接力”方式传送的。为了防止传送途中报文的丢失，两个主机的进程之间需要实现端到端控制。因此，传输层的功能主要包括复用/分解（区分发送和接收主机上的进程）、端到端的可靠传输、连接控制、流量控制和拥塞控制机制等。</p>
-<h4 id="第3层-网络层"><a href="#第3层-网络层" class="headerlink" title="第3层 网络层"></a>第3层 网络层</h4><p>网络层解决的核心问题是如何将分组通过交换网络传送至目的主机，因此，网络层的主要功能是数据转发与路由，在交换网络中，信息从源节点出发，要经过若干个中继节点所谓存储转发后，才能到达目的结点。这样一个包括源结点、中继结点、目的结点的集合称为从源结点到目的结点的路径。一般在两个结点之间会有多条路径选择，这种路由选择是网络层要完成的主要功能之一。当网络设备，比如路由器，从一个接口收到数据分组时，需要根据已掌握的路由信息将其转发到合适的接口并向下一个结点发送，直至送达目的结点。此外网络层还要对进入交换网络的通信量加以控制，以避免通信量过大造成交换网络性能下降。</p>
-<h4 id="第2层-数据链路层"><a href="#第2层-数据链路层" class="headerlink" title="第2层 数据链路层"></a>第2层 数据链路层</h4><p>数据链路层的主要功能是实现在相邻结点之间数据可靠而有效的传输，数据在物理介质内传输过程，不能保证没有任何错误发生。为了能实现有效的差错控制，就采用了一种以“帧”为单位的数据块传输方式。要采用帧格式传输，就必须有相应的帧同步技术，这就是数据链路层的“成帧”（“帧同步”）功能，包括定义帧的格式、类型、成帧的方法等。有了“帧”的存在，就可以将差错控制技术应用在数据帧中，例如，将数据码后面附加一定位数的循环码，从而实现数据链路层的差错控制功能。数据链路层还可以实现相邻结点间通信的流量控制。</p>
-<h4 id="第1层-物理层"><a href="#第1层-物理层" class="headerlink" title="第1层 物理层"></a>第1层 物理层</h4><p>物理层的主要功能是在传输介质上实现无结构比特流传输。所谓无结构比特流是指不关心比特流实际代表的信息内容，只关心如何将0、1这些比特以合适的信号传送至目的地，因此，物理层要实现信号编码功能，物理层的另一项主要任务就是规定数据终端设备（DTE）与数据通信设备（DCE）之间接口的相关特性，主要包括机械，电气，功能和规程4个方面的特性。机械特性也叫物理特性，说明硬件连接接口的机械特点，如接口的形状、尺寸、插脚的数量和排列方式等；电气特性规定了在物理连接上，导线的电气连接及有关电路的特性，如信号电平大小、接收器和发送器电路特性的说明，信号的识别、最大传输速率的说明等；功能特性说明物理接口各条信号线的用途，如接口信号线的功能分类等；规程特性指明利用接口传输比特流的全过程及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输的方式，即在物理连接建立、维持和交换信息时，收发双方在各自电路上的动作序列。</p>
-<h4 id="三、OSI七层参考模型与TCP-IP协议"><a href="#三、OSI七层参考模型与TCP-IP协议" class="headerlink" title="三、OSI七层参考模型与TCP/IP协议"></a>三、OSI七层参考模型与TCP/IP协议</h4><html> <table><tbody><tr><td style="vertical-align:bottom;"> <p>OSI七层网络模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP四层模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP五层模型</p> </td> <td style="vertical-align:bottom;"> <p>对应网络协议</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>应用层（Application）</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">HTTP</span>、TFTP,<span style="color:#ff0000;">&nbsp;FTP</span>, NFS, WAIS、SMTP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>表示层（Presentation）</p> </td> <td style="vertical-align:bottom;"> <p>Telnet, Rlogin, SNMP, Gopher</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>会话层（Session）</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">SMTP, DNS</span></p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>传输层（Transport）</p> </td> <td> <p>传输层</p> </td> <td> <p>传输层</p> </td> <td style="vertical-align:bottom;"> <p>TCP, UDP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>网络层（Network）</p> </td> <td> <p>网络互联层</p> </td> <td> <p>网络层</p> </td> <td style="vertical-align:bottom;"> <p>IP, ICMP, ARP, RARP, AKP, UUCP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>数据链路层（Data Link）</p> </td> <td rowspan="2"> <p>网络接口层</p> </td> <td> <p>数据链路层</p> </td> <td style="vertical-align:bottom;"> <p>FDDI, Ethernet, Arpanet, PDN, SLIP, PPP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>物理层（Physical）</p> </td> <td> <p>物理层</p> </td> <td style="vertical-align:bottom;"> <p>IEEE 802.1A, IEEE 802.2到IEEE 802.11</p> </td> </tr></tbody></table> </html>
+            <h4 id="css3-截取前几行内容并且垂直居中显示"><a href="#css3-截取前几行内容并且垂直居中显示" class="headerlink" title="css3 截取前几行内容并且垂直居中显示"></a>css3 截取前几行内容并且垂直居中显示</h4><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attribute">position</span>: absolute;</span><br><span class="line"><span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%,-50%);</span><br><span class="line"><span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">display</span>: -webkit-box;</span><br><span class="line"><span class="attribute">-webkit-line-clamp</span>: <span class="number">2</span>;</span><br><span class="line"><span class="attribute">-webkit-box-orient</span>: vertical;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* vue打包会丢失box-orient属性，需要特殊处理 */</span></span><br><span class="line"><span class="comment">/*! autoprefixer: off */</span></span><br><span class="line"><span class="selector-tag">-webkit-box-orient</span>: <span class="selector-tag">vertical</span>;</span><br><span class="line"><span class="comment">/* autoprefixer: on */</span></span><br></pre></td></tr></table></figure>
+</code></pre><h4 id="input-placeholder修改颜色"><a href="#input-placeholder修改颜色" class="headerlink" title="input placeholder修改颜色"></a>input placeholder修改颜色</h4><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::-webkit-input-placeholder</span> &#123; <span class="comment">/* WebKit browsers */</span> </span><br><span class="line"><span class="attribute">color</span>: <span class="number">#999</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="selector-pseudo">:-moz-placeholder</span> &#123; <span class="comment">/* Mozilla Firefox 4 to 18 */</span> </span><br><span class="line"><span class="attribute">color</span>: <span class="number">#999</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="selector-pseudo">::-moz-placeholder</span> &#123; <span class="comment">/* Mozilla Firefox 19+ */</span> </span><br><span class="line"><span class="attribute">color</span>: <span class="number">#999</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="selector-pseudo">:-ms-input-placeholder</span> &#123; <span class="comment">/* Internet Explorer 10+ */</span> </span><br><span class="line"><span class="attribute">color</span>: <span class="number">#999</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h4 id="手动写三角"><a href="#手动写三角" class="headerlink" title="手动写三角"></a>手动写三角</h4><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">0px</span>;</span><br><span class="line">   <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">   <span class="attribute">border</span>: .<span class="number">11rem</span> solid transparent;</span><br><span class="line">   <span class="attribute">border-top</span>: .<span class="number">15rem</span> solid <span class="number">#8D3A3A</span>;</span><br><span class="line">   <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
-<h4 id="四、流程图"><a href="#四、流程图" class="headerlink" title="四、流程图"></a>四、流程图</h4><p><img src="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/img.png" alt="image"></p>
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/16/Node-js小试牛刀/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/16/Node-js小试牛刀/" itemprop="url">Node.js小试牛刀</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-16T01:35:36+08:00">
+                2018-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/16/学习日记es6-polyfill/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/16/学习日记es6-polyfill/" itemprop="url">学习日记es6-polyfill</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-16T01:35:36+08:00">
+                2018-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/es6/" itemprop="url" rel="index">
+                    <span itemprop="name">es6</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/es6/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="浮点数误差"><a href="#浮点数误差" class="headerlink" title="浮点数误差"></a>浮点数误差</h3><p>对于javascript的数字来说，“机器精度”的值通常为2^-52<br>ES6开始，该值定义在Number.EPSILON中，我们可以拿来直接用，也可以为ES6之前的版本写polyfill<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(  !Number.EPSILON  )&#123;</span><br><span class="line">Number.EPSILON  =  Math.pow(2,-52);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以用Number.EPSILON来比较两个数字是否相等（在制定误差范围内）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function numbersCloseEnoughToEqual(  n1,  n2 )&#123;</span><br><span class="line">return Math.abs(  n1  - n2 )  &lt;  Number.EPSILON ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1853,7 +977,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/0.1+0.2!==0.3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/扒一扒deepLink：应用深度链接/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="赵小金">
@@ -1872,7 +996,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/18/0.1+0.2!==0.3/" itemprop="url">0.1+0.2!==0.3</a></h1>
+                <a class="post-title-link" href="/2017/02/27/扒一扒deepLink：应用深度链接/" itemprop="url">扒一扒deepLink：应用深度链接</a></h1>
         
 
         <div class="post-meta">
@@ -1884,8 +1008,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T11:11:28+08:00">
-                2019-07-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T17:39:31+08:00">
+                2017-02-27
               </time>
             
 
@@ -1894,6 +1018,39 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1924,8 +1081,42 @@
       
         
           
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span> == <span class="number">0.3</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>) <span class="comment">// 0.30000000000000004</span></span><br></pre></td></tr></table></figure>
-<p>浮点数值的最高精度是17位小数，但是在进行算数计算式其精度远远不如整数。浮点数值计算会产生舍入误差，有一点需要明确，这是基于IEEE754数值的浮点计算的通病。<br>所以实际上，这里错的不是结论，而是比较的方法，正确的比较方法是使用Javascript提供的最小精度值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.abs(<span class="number">0.1</span> + <span class="number">0.2</span> <span class="number">-0.3</span>) &lt; <span class="built_in">Number</span>.EPSILON) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+            <html><br><div style="text-indent:1rem"> 总想着要做一个自己的博客，可是总是又因为各种各样的事情一直没有做，工作中的记录都在有道云笔记中，因为我觉得有道云笔记真的是个神器，但是作为博客来说是有点不太上台面，终于下定决心要在这过年的假期完成这件事，因为我发现我最近真的越来越忙了，再不做真的没有时间了呀~</div><br></html>
+
+<h2 id="什么是deepLink"><a href="#什么是deepLink" class="headerlink" title="什么是deepLink"></a>什么是deepLink</h2><h5 id="scheme-原始唤起码-Universal-Links-通用链接-下载后通过设备指纹识别唤起客户端指定页"><a href="#scheme-原始唤起码-Universal-Links-通用链接-下载后通过设备指纹识别唤起客户端指定页" class="headerlink" title="scheme(原始唤起码)+Universal Links(通用链接)+下载后通过设备指纹识别唤起客户端指定页"></a>scheme(原始唤起码)+Universal Links(通用链接)+下载后通过设备指纹识别唤起客户端指定页</h5><h3 id="deepLink起源"><a href="#deepLink起源" class="headerlink" title="deepLink起源"></a>deepLink起源</h3><p>起源就是领导说要做一套可以无缝唤起客户端的系统，如果完不成就要用第三方的系统，但是我们已经完成了scheme(原始唤起码)+Universal Links(通用链接)，只剩下载后通过设备指纹识别唤起客户端指定页，我们能妥协吗，当然不行！</p>
+<hr>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><h5 id="ios9-，H5与客户端通信方式为scheme"><a href="#ios9-，H5与客户端通信方式为scheme" class="headerlink" title="ios9-，H5与客户端通信方式为scheme"></a>ios9-，H5与客户端通信方式为scheme</h5><ul>
+<li>协议形式为miaopai:// ，这样的唤起码浏览器不会识别，只有客户端可以识别，浏览器不会报错</li>
+<li>所以为了达到唤起不成功可以下载的功能，页面做了在唤起码执行完成2s后定时执行下载或者一些别的操作（跳转到指定H5……）<h5 id="ios9-H5与客户端通信方式为scheme或者通用链接"><a href="#ios9-H5与客户端通信方式为scheme或者通用链接" class="headerlink" title="ios9+,H5与客户端通信方式为scheme或者通用链接"></a>ios9+,H5与客户端通信方式为scheme或者通用链接</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">什么是通用链接(Universal Links)？</span><br><span class="line">Apple 为了大力推动 APP 开发者在深层链接上有更好的体验。 推出通用链接：一种能够方便的通过传统 HTTP 链接来启动 APP, 使用相同的网址打开网站和APP。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>协议形式为<a href="https://app.yixia.com,这样的唤起码浏览器和APP都会识别，跳转方式为：" target="_blank" rel="noopener">https://app.yixia.com,这样的唤起码浏览器和APP都会识别，跳转方式为：</a></p>
+<ul>
+<li>已安装客户端会直接识别唤起码</li>
+<li>未安装客户端会跳转至通用链接指定页（中转页）</li>
+</ul>
+</li>
+<li>客户端与Safari之间的通信方式<ul>
+<li>客户端点击右上角yixia.com在Safari中打开</li>
+<li>Safari下拉页面在客户端中打开</li>
+<li>手机会默认记住这种选择作为偏好操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="下载后通过设备指纹识别唤起客户端指定页"><a href="#下载后通过设备指纹识别唤起客户端指定页" class="headerlink" title="下载后通过设备指纹识别唤起客户端指定页"></a>下载后通过设备指纹识别唤起客户端指定页</h3><h4 id="IOS-Android下载后唤起指定页"><a href="#IOS-Android下载后唤起指定页" class="headerlink" title="IOS Android下载后唤起指定页"></a>IOS Android下载后唤起指定页</h4><p>没安装的情况下，点击任意唤起链接，即种植当前链接到服务端，8分钟内下载完成并唤起之后即可自动跳转到已种植的站内页面（仅限于下载后第一次启动）</p>
+<hr>
+<h4 id="IOS-Android下载后唤起指定页用到的参数和流程"><a href="#IOS-Android下载后唤起指定页用到的参数和流程" class="headerlink" title="IOS Android下载后唤起指定页用到的参数和流程"></a>IOS Android下载后唤起指定页用到的参数和流程</h4><ul>
+<li>h5页下载之前将以下参数种植到接口中(类似于一个.json文件)，IOS如下</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line">  <span class="string">"width"</span> : 手机屏幕宽度 [ <span class="number">320</span> || <span class="number">375</span> || <span class="number">414</span> ],</span><br><span class="line">  <span class="string">"height"</span> : 手机屏幕高度 [ <span class="number">568</span> || <span class="number">667</span> || <span class="number">736</span> ],</span><br><span class="line">  <span class="string">"os"</span> : 手机系统 [ iphone os <span class="number">9</span>_1 ], <span class="comment">//统一小写</span></span><br><span class="line">  <span class="string">"time"</span> : 当前时间戳,</span><br><span class="line">  <span class="string">"ip"</span>:<span class="number">111.202</span><span class="number">.106</span><span class="number">.229</span>,</span><br><span class="line">  <span class="string">"code"</span> : h5页面传给客户端的参数（唤起码）</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** h5页面的os来自当前浏览器的navigator.userAgent值，</span></span><br><span class="line"><span class="comment">  "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"</span></span><br><span class="line"><span class="comment">  */</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Android统一在下载之前种植</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">android:</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"width"</span>:  <span class="number">1</span>,</span><br><span class="line">    <span class="string">"height"</span>:  <span class="number">1</span>,</span><br><span class="line">    <span class="string">"os"</span>: 安卓的设备号 [ m1-note ],<span class="comment">//统一小写，空格变-</span></span><br><span class="line">    <span class="string">"time"</span> : 当前时间戳,</span><br><span class="line">    <span class="string">"ip"</span>:<span class="number">111.202</span><span class="number">.106</span><span class="number">.229</span>,</span><br><span class="line">    <span class="string">"code"</span>: h5页面传给客户端的参数（唤起码）</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** h5页面的os来自当前浏览器的navigator.userAgent值，</span></span><br><span class="line"><span class="comment">    "Mozilla/5.0 (Linux; Android 5.1; MZ-m1 note Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/45.0.2454.94 Mobile Safari/537.36"</span></span><br><span class="line"><span class="comment">    三星和魅族手机去前缀，统一小写，空格变-：</span></span><br><span class="line"><span class="comment">    MZ-m1 note =&gt; m1-note</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>种植成功之后，首次唤起客户端发送相同参数到服务端进行比对，如完全一致则发送code至客户端进行跳转操作（测试包新唤起会进行如上操作）</li>
+</ul>
 
           
         
@@ -1965,7 +1156,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 
@@ -2011,7 +1202,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2022,7 +1213,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>

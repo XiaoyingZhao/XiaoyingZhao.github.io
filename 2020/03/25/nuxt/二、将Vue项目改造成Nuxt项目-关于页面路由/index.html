@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="vue,javascript,nuxt,">
+  <meta name="keywords" content="javascript,vue,nuxt,">
 
 
 
@@ -80,17 +80,19 @@
 
 
 <meta name="description" content="路由nuxt的路由没有router文件，nuxt的路由就是page文件夹下的文件目录 以下目录结构1234567pages/--| _slug/-----| comments.vue-----| index.vue--| users/-----| _id.vue--| index.vue Nuxt.js 生成对应的路由配置表为：12345678910111213141516171819202122">
-<meta name="keywords" content="vue,javascript,nuxt">
+<meta name="keywords" content="javascript,vue,nuxt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二、将Vue项目改造成Nuxt项目-关于页面路由">
 <meta property="og:url" content="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/index.html">
 <meta property="og:site_name" content="赵小金">
 <meta property="og:description" content="路由nuxt的路由没有router文件，nuxt的路由就是page文件夹下的文件目录 以下目录结构1234567pages/--| _slug/-----| comments.vue-----| index.vue--| users/-----| _id.vue--| index.vue Nuxt.js 生成对应的路由配置表为：12345678910111213141516171819202122">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-25T12:23:48.024Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/img1.jpg">
+<meta property="og:updated_time" content="2020-03-27T09:01:55.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二、将Vue项目改造成Nuxt项目-关于页面路由">
 <meta name="twitter:description" content="路由nuxt的路由没有router文件，nuxt的路由就是page文件夹下的文件目录 以下目录结构1234567pages/--| _slug/-----| comments.vue-----| index.vue--| users/-----| _id.vue--| index.vue Nuxt.js 生成对应的路由配置表为：12345678910111213141516171819202122">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/img1.jpg">
 
 
 
@@ -338,6 +340,12 @@
 <p>这里注意：<code>_category.vue</code>与<code>_category/</code>同级</p>
 <h3 id="路由参数校验"><a href="#路由参数校验" class="headerlink" title="路由参数校验"></a>路由参数校验</h3><p>在动态路由中可以设置参数校验，例如文章详情页的路由是<code>http://localhost:3000/article/123456</code>，<code>123456</code>是文章id，文章id永远都是数字，不可能是汉字，所以可以在<code>pages/article/_id.vue</code>页面校验一下参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  validate (&#123; params &#125;) &#123;</span><br><span class="line">    <span class="comment">// 必须是number类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^\d+$/</span>.test(params.id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果校验方法返回的值不为 true或Promise中resolve 解析为false或抛出Error ， Nuxt.js 将自动加载显示 404 错误页面或 500 错误页面。</p>
+<p>新建<code>error.vue</code>页面在<code>layouts</code>文件夹中，在<code>error.vue</code>页面中可以捕获到：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;not-found v-<span class="keyword">if</span>=<span class="string">"error.statusCode==404"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">not-found</span>&gt;</span></span></span><br><span class="line">    &lt;error-page v-else&gt;&lt;/error-page&gt;</span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> notFound <span class="keyword">from</span> <span class="string">'~/components/404.vue'</span></span><br><span class="line"><span class="keyword">import</span> errorPage <span class="keyword">from</span> <span class="string">'~/components/500.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">'error'</span>],</span><br><span class="line">  components: &#123; notFound, errorPage &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="路由中间件"><a href="#路由中间件" class="headerlink" title="路由中间件"></a>路由中间件</h3><h5 id="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"><a href="#中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。" class="headerlink" title="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"></a>中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。</h5><p>它可以做到在打开页面或者切换路由之前，加一些判断，例如重定向之类的操作。<br>中间件放在<code>middleware</code>文件夹中，文件名就是中间件的名字(middleware/auth.js将成为 auth 中间件)<br>中间件的配置方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nuxt.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  router: &#123;</span><br><span class="line">    middleware: <span class="string">'stats'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以再中间件中加重定向：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还可以加一些其他操作，例如将userAgent赋值给context：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, app, req, store, route, params, error, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line">  context.userAgent = process.server ? context.req.headers[<span class="string">'user-agent'</span>] : navigator.userAgent</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的话，在红框，黄框周期内就可以愉快的使用userAgent了:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">validate (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>, context.userAgent)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;,</span><br><span class="line">asyncData (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>, context.userAgent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/img1.jpg" alt="img"></p>
 
       
     </div>
@@ -355,9 +363,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
             <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
             <a href="/tags/nuxt/" rel="tag"># nuxt</a>
           
@@ -381,6 +389,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/" rel="prev" title="三、将Vue项目改造成Nuxt项目-使用第三方插件">
+                三、将Vue项目改造成Nuxt项目-使用第三方插件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +469,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -468,7 +480,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -512,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态嵌套路由"><span class="nav-number">2.</span> <span class="nav-text">动态嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由参数校验"><span class="nav-number">3.</span> <span class="nav-text">路由参数校验</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态嵌套路由"><span class="nav-number">2.</span> <span class="nav-text">动态嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由参数校验"><span class="nav-number">3.</span> <span class="nav-text">路由参数校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由中间件"><span class="nav-number">4.</span> <span class="nav-text">路由中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"><span class="nav-number">4.0.1.</span> <span class="nav-text">中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。</span></a></li></ol></li></ol></div>
             
 
           </div>
