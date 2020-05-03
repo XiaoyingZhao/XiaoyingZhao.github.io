@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、前言闭包是基于词法作用域（  和动态作用域对应，词法作用域是由你写代码时，将变量写在哪里来决定的，因此当词法分析器处理代码时，会保持作用）书写代码时所产生的自然结果，甚至不需要为了利用闭包而有意地创建闭包。闭包的创建和使用在动态语言的代码中随处可见。你缺少的只是识别，拥抱和使用闭包的思维。 当函数可以记住并访问所在的词法作用域，即使函数在当前词法作用域之外执行。就产生了闭包。 一般情况下，当函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包与模块">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/闭包与模块/index.html">
+<meta property="og:site_name" content="赵小金">
+<meta property="og:description" content="一、前言闭包是基于词法作用域（  和动态作用域对应，词法作用域是由你写代码时，将变量写在哪里来决定的，因此当词法分析器处理代码时，会保持作用）书写代码时所产生的自然结果，甚至不需要为了利用闭包而有意地创建闭包。闭包的创建和使用在动态语言的代码中随处可见。你缺少的只是识别，拥抱和使用闭包的思维。 当函数可以记住并访问所在的词法作用域，即使函数在当前词法作用域之外执行。就产生了闭包。 一般情况下，当函">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T12:09:53.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闭包与模块">
+<meta name="twitter:description" content="一、前言闭包是基于词法作用域（  和动态作用域对应，词法作用域是由你写代码时，将变量写在哪里来决定的，因此当词法分析器处理代码时，会保持作用）书写代码时所产生的自然结果，甚至不需要为了利用闭包而有意地创建闭包。闭包的创建和使用在动态语言的代码中随处可见。你缺少的只是识别，拥抱和使用闭包的思维。 当函数可以记住并访问所在的词法作用域，即使函数在当前词法作用域之外执行。就产生了闭包。 一般情况下，当函">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/闭包与模块/">
+
+
+
+
+
+  <title>闭包与模块 | 赵小金</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵小金</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">嗨~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/闭包与模块/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">闭包与模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-03T18:20:15+08:00">
+                2020-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>闭包是基于词法作用域（  和动态作用域对应，词法作用域是由你写代码时，将变量写在哪里来决定的，因此当词法分析器处理代码时，会保持作用）书写代码时所产生的自然结果，甚至不需要为了利用闭包而有意地创建闭包。闭包的创建和使用在动态语言的代码中随处可见。你缺少的只是识别，拥抱和使用闭包的思维。</p>
+<p>当函数可以记住并访问所在的词法作用域，即使函数在当前词法作用域之外执行。就产生了闭包。</p>
+<p>一般情况下，当函数执行完毕，垃圾回收机制会期待函数的整个内部作用域被销毁，但当闭包存在时，会阻止这件事情的发生，事实上内部作用域依旧存在，此时内部函数依旧持有对外部函数作用域的引用，这个引用就叫做闭包。无论通过何种方式将内部函数传递到所在的词法作用域之外，他都会持有对 原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。</p>
+<p>所以说，在javascript,python这种动态语言中，因为函数是一级对象，无论何时何地，只要将函数当做第一级的值类型并到处传递，都会看到闭包的运用，可以说，闭包无处不在。</p>
+<h3 id="二、循环与闭包"><a href="#二、循环与闭包" class="headerlink" title="二、循环与闭包"></a>二、循环与闭包</h3><p>要说明闭包，for循环是最常见的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">	<span class="keyword">let</span> j = i</span><br><span class="line">	setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(j)</span><br><span class="line">	&#125;, j * <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正常情况下，我们对这段代码行为的预期分别是输出数字1~5，每秒一次，每次一个。<br>但实际上，这段代码在运行时会以每秒一次的频率输出五次5。<br>这里引申出一个更深入的问题，代码中到底有什么缺陷导致他的行为同语义所暗示的不一致呢？<br>缺陷是我们试图假设循环中的每个迭代在运行时，都会给自己“捕获一个i的副本”。但是根据作用域的工作原理，实际情况是尽管循环中的5个函数是在各个迭代中分别定义的，但是它们都<code>被封闭在一个共享的全局作用域中</code>，因此实际上只有一个i。<br>下面回到正题，缺陷是什么？我们需要更多的闭包作用于，特别是在循环的过程中每个迭代都需要一个闭包作用域。</p>
+<p>IIFE会通过声明并立即执行一个函数来创建作用域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(i)</span><br><span class="line">		&#125;, i * <span class="number">1000</span>)</span><br><span class="line">	&#125;)()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样可以吗？</p>
+<p>不行。<br>如果作用域是空的，那么仅仅将他们封闭起来是不够的。仔细看一下，我们的IIFE只是一个什么都没有的空作用域，他需要包含一点实质内容才能为我们所用。</p>
+<p>他需要有自己的变量，用来在每个迭代中存储i的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">		setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(i)</span><br><span class="line">		&#125;, i * <span class="number">1000</span>)</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ES6的let声明"><a href="#ES6的let声明" class="headerlink" title="ES6的let声明"></a>ES6的let声明</h4><p>let可以用来劫持块作用域，并且在这个块作用域中声明一个变量。<br>本质上这是一个将一个块转换成一个可以被关闭的作用域。然后下面这些看起来很酷的代码就可以正常运行了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">	<span class="keyword">let</span> j = i</span><br><span class="line">	setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(j)</span><br><span class="line">	&#125;, j * <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;, i * <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、模块"><a href="#三、模块" class="headerlink" title="三、模块"></a>三、模块</h3><p>模块是一个利用闭包的典型案例：</p>
+<p>模块模式至少具备两个条件：</p>
+<p>1）必须有外部的封闭包装函数来创建内部作用域，该函数至少被调用一次（每次调用都会创建一个新的模块作用域），如果是ITFE调用就只产生一个实例（单例模式）；</p>
+<p>2）封闭函数返回至少一个内部函数的引用（可以直接返回该内部函数，如jQuery；也可以返回一个对象，该对象至少包含一个属性，指向内部函数的引用），这样内部函数才能在私有作用域形成闭包，而且可以访问或者修改私有的状态；</p>
+<p>比如模块的一个很常见的应用就是返回作为公共API返回的对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">change</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'change'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">identify</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'identify'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        change: change,</span><br><span class="line">        identify: identify,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>模块模式另一个简单但强大的用法是命名将要作为公共API返回的对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">change</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 修改公共API</span></span><br><span class="line">        publicAPI.identify = identify2</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">identify1</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'identify1'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">identify2</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'identify2'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> publicAPI = &#123;</span><br><span class="line">        change:change,</span><br><span class="line">        identify:identify,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> publicAPI</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.identify() <span class="comment">// identify1</span></span><br><span class="line">foo.change()</span><br><span class="line">foo.identify() <span class="comment">// identify2</span></span><br></pre></td></tr></table></figure>
+<p>通过在模块实例的内部保留对公共API对象的内部引用，可以从内部对模块实例进行修改，包括添加删除方法和属性，以及修改他们的值。</p>
+<h3 id="四、模块加载器-管理器"><a href="#四、模块加载器-管理器" class="headerlink" title="四、模块加载器/管理器"></a>四、模块加载器/管理器</h3><p>模块管理器本质上并没有任何的“魔力”，本质上就是讲模块定义封装进一个友好的API。下面是一个简单的模块加载器的实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyModules = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> modules = []</span><br><span class="line">    <span class="comment">//参数name:模块名称</span></span><br><span class="line">    <span class="comment">//参数deps:依赖的模块名称</span></span><br><span class="line">    <span class="comment">//impl:名为name的模块实现</span></span><br><span class="line">    <span class="keyword">var</span> define = <span class="function"><span class="keyword">function</span> <span class="title">define</span> (<span class="params">name, deps, impl</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i; i&lt;deps.length; i++)&#123;</span><br><span class="line">            deps[i]=modules[deps[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        modules[name] = impl.apply(impl,deps);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> get = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> modules[name];</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        define:define,</span><br><span class="line">        get:get</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">MyModules.define(<span class="string">'bar'</span>,[],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        hello:hello,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br><span class="line">MyModules.define(<span class="string">'foo'</span>,[<span class="string">'bar'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">bar</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">awesome</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'foo '</span> + bar.hello()); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>&#123;</span><br><span class="line">        awesome:awesome,</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> bar=MyModules.get(<span class="string">'bar'</span>);</span><br><span class="line"><span class="keyword">var</span> foo=MyModules.get(<span class="string">'foo'</span>);</span><br><span class="line">foo.awesome();</span><br></pre></td></tr></table></figure></p>
+<p><code>foo</code>和<code>bar</code>模块东营市通过一个返回公共API的函数来定义的，<code>foo</code>甚至接受<code>bar</code>的实例作为以来参数，并能相应的使用它。</p>
+<h4 id="ES6的模块机制"><a href="#ES6的模块机制" class="headerlink" title="ES6的模块机制"></a>ES6的模块机制</h4><p>ES6中为模块增加了一级语法支持。在通过模块系统进行加载时，ES6会将文件当做独立的模块来处理。每个模块都可以导入其他模块或特定的API成员，同样也可以导出自己的API成员。</p>
+<p>ES6的模块没有“行内”格式，必须被定义在独立的文件中（一个文件一个模块）。浏览器或引擎有一个默认的“模块加载器”可以在导入模块是同步的加载模块文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bar.js</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">hello</span> (<span class="params">who</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">'let me introduce:'</span> + who</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">export</span> hello</span><br><span class="line"></span><br><span class="line">foo.js</span><br><span class="line"></span><br><span class="line">	<span class="keyword">import</span> hello <span class="keyword">from</span> <span class="string">'bar'</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> hungry = <span class="string">'hippo'</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">awesome</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log( hello( hungry ) )</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">export</span> awesome</span><br></pre></td></tr></table></figure>
+<p>import可以将一个模块中的一个或多个API导入到当前作用域中，并分别绑定在一个变量上。expor会将模块的一个标识符（变量，函数）导出为公共API。</p>
+<p>模块文件中的内容会被当做好像包含在作用域闭包中一样来处理，就和前面介绍的函数闭包模块一样。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/" rel="next" title="三、将Vue项目改造成Nuxt项目-使用第三方插件">
+                <i class="fa fa-chevron-left"></i> 三、将Vue项目改造成Nuxt项目-使用第三方插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">赵小金</p>
+              <p class="site-description motion-element" itemprop="description">赵小金的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、循环与闭包"><span class="nav-number">2.</span> <span class="nav-text">二、循环与闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6的let声明"><span class="nav-number">2.1.</span> <span class="nav-text">ES6的let声明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、模块"><span class="nav-number">3.</span> <span class="nav-text">三、模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、模块加载器-管理器"><span class="nav-number">4.</span> <span class="nav-text">四、模块加载器/管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6的模块机制"><span class="nav-number">4.1.</span> <span class="nav-text">ES6的模块机制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵小金</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
