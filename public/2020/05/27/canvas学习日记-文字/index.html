@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="fontfont 属性设置或返回画布上文本内容的当前字体属性，语法与 CSS font 属性相同。 font  默认值：”20px sans-serif” ctx.font = font-style font-variant font-weight font-zise font-family      属性    值    font-style        normal (Default)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas学习日记-文字">
+<meta property="og:url" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/index.html">
+<meta property="og:site_name" content="赵小金">
+<meta property="og:description" content="fontfont 属性设置或返回画布上文本内容的当前字体属性，语法与 CSS font 属性相同。 font  默认值：”20px sans-serif” ctx.font = font-style font-variant font-weight font-zise font-family      属性    值    font-style        normal (Default)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img3.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img4.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img5.jpg">
+<meta property="og:updated_time" content="2020-06-09T10:14:27.254Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas学习日记-文字">
+<meta name="twitter:description" content="fontfont 属性设置或返回画布上文本内容的当前字体属性，语法与 CSS font 属性相同。 font  默认值：”20px sans-serif” ctx.font = font-style font-variant font-weight font-zise font-family      属性    值    font-style        normal (Default)">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/27/canvas学习日记-文字/img1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/27/canvas学习日记-文字/">
+
+
+
+
+
+  <title>canvas学习日记-文字 | 赵小金</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵小金</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">嗨~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/canvas学习日记-文字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">canvas学习日记-文字</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-27T15:18:09+08:00">
+                2020-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="font"><a href="#font" class="headerlink" title="font"></a>font</h3><p>font 属性设置或返回画布上文本内容的当前字体属性，语法与 CSS font 属性相同。</p>
+<p><strong>font</strong></p>
+<ul>
+<li>默认值：”20px sans-serif”</li>
+<li>ctx.font = font-style font-variant font-weight font-zise font-family</li>
+</ul>
+<table><br><tr><br>    <td>属性</td><br>    <td>值</td><br></tr><br><tr><br>    <td>font-style</td><br>    <td><br>    normal (Default) <br><br>    italic (斜体字：通常字体会设计一个专门的斜体字) <br><br>    oblique (倾斜字体：简单的将字体倾斜)<br>    </td><br></tr><br><tr><br>    <td>font-variant</td><br>    <td><br>    normal (Default) <br><br>    small-caps (将英文中的小写字母变成小型的大写字母) <br><br>    </td><br></tr><br><tr><br>    <td>font-weight</td><br>    <td><br>    lighter <br><br>    normal (Default) <br><br>    bold<br><br>    bolder<br><br>    W3C将font-weight分为不同的等级：<br><br>    100,200,300,400(normal),<br><br>    500,600,700(bold),<br><br>    800,900<br>    </td><br></tr><br><tr><br>    <td>font-size</td><br>    <td><br>    20px (Default) <br><br>    2em<br><br>    150%<br><br>    font-size可以分为以下几种几号：<br><br>    xx-small<br><br>    x-small<br><br>    medium<br><br>    large<br><br>    x-large<br><br>    xx-large<br><br>    </td><br></tr><br><tr><br>    <td>font-family</td><br>    <td><br>    web安全字体<br>    </td><br></tr><br></table>
+
+<p><strong>fillText</strong><br>| 参数 | 描述 |<br>|–|–|–|<br>| text | 规定在画布上输出的文本。 |<br>| x | 开始绘制文本的 x 坐标位置（相对于画布）。 |<br>| y | 开始绘制文本的 y 坐标位置（相对于画布）。 |<br>| maxWidth | 可选。允许的最大文本宽度，以像素计。 |</p>
+<p><strong>基本使用</strong>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ctx.font = <span class="string">'bold 40px Arial'</span></span><br><span class="line">ctx.fillText(<span class="string">'Canvas'</span>, <span class="number">0</span>, <span class="number">200</span>)</span><br><span class="line">ctx.strokeText(<span class="string">'Canvas'</span>, <span class="number">0</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/05/27/canvas学习日记-文字/img1.jpg" alt="image"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渐变</span></span><br><span class="line"><span class="keyword">const</span> linearGrad = ctx.createLinearGradient(<span class="number">0</span>,<span class="number">0</span>,<span class="number">800</span>,<span class="number">0</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.0</span>,<span class="string">'red'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.25</span>,<span class="string">'orange'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.5</span>,<span class="string">'yellow'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.75</span>,<span class="string">'green'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">1.0</span>,<span class="string">'purple'</span>)</span><br><span class="line">ctx.fillStyle = linearGrad</span><br><span class="line">ctx.fillText(<span class="string">'canvascanvascanvascanvascanvascanvascanvascanvascanvas'</span>, <span class="number">0</span>, <span class="number">400</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img2.jpg" alt="image"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 纹理</span></span><br><span class="line"><span class="keyword">const</span> backgroundImg = <span class="keyword">new</span> Image()</span><br><span class="line">backgroundImg.src = <span class="string">'https://www.cnblogs.com/skins/coffee/images/bg_body.gif'</span></span><br><span class="line">backgroundImg.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> pattern = ctx.createPattern(backgroundImg, <span class="string">'repeat'</span>)</span><br><span class="line">  ctx.fillStyle = pattern</span><br><span class="line">  ctx.font = <span class="string">'bold 100px Arial'</span></span><br><span class="line">  ctx.fillText(<span class="string">'canvas'</span>, <span class="number">0</span>, <span class="number">500</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img3.jpg" alt="image"></p>
+<h3 id="textAlign属性：调整文本的水平对齐方式"><a href="#textAlign属性：调整文本的水平对齐方式" class="headerlink" title="textAlign属性：调整文本的水平对齐方式"></a>textAlign属性：调整文本的水平对齐方式</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>起始点为左边界</td>
+</tr>
+<tr>
+<td>center</td>
+<td>起始点为中间位置</td>
+</tr>
+<tr>
+<td>center</td>
+<td>起始点为右边界</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// textAlign</span></span><br><span class="line">ctx.font = <span class="string">'40px quick'</span></span><br><span class="line">ctx.textAlign = <span class="string">'left'</span></span><br><span class="line">ctx.fillText(<span class="string">'left'</span>, <span class="number">400</span>, <span class="number">1000</span>)</span><br><span class="line">ctx.textAlign = <span class="string">'center'</span></span><br><span class="line">ctx.fillText(<span class="string">'center'</span>, <span class="number">400</span>, <span class="number">1100</span>)</span><br><span class="line">ctx.textAlign = <span class="string">'right'</span></span><br><span class="line">ctx.fillText(<span class="string">'right'</span>, <span class="number">400</span>, <span class="number">1200</span>)</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = <span class="string">'rgba(0,0,0,.4)'</span></span><br><span class="line">ctx.moveTo(<span class="number">400</span>,<span class="number">900</span>)</span><br><span class="line">ctx.lineTo(<span class="number">400</span>,<span class="number">1200</span>)</span><br><span class="line">ctx.stroke()</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img4.jpg" alt="image"></p>
+<h3 id="textBaseline属性：调整文本的垂直对齐方式"><a href="#textBaseline属性：调整文本的垂直对齐方式" class="headerlink" title="textBaseline属性：调整文本的垂直对齐方式"></a>textBaseline属性：调整文本的垂直对齐方式</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>起始点为上边界</td>
+</tr>
+<tr>
+<td>middle</td>
+<td>起始点为中间位置</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>起始点为下边界</td>
+</tr>
+<tr>
+<td>alphabetic(Default)</td>
+<td>(拉丁文)</td>
+</tr>
+<tr>
+<td>ideographic</td>
+<td>(汉字，日文等方块文字)</td>
+</tr>
+<tr>
+<td>hanging</td>
+<td>(印度语)</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// textBaseline</span></span><br><span class="line">ctx.textAlign = <span class="string">'center'</span></span><br><span class="line">ctx.font = <span class="string">'40px quick'</span></span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'top'</span></span><br><span class="line">ctx.fillText(<span class="string">'top-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1300</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'middle'</span></span><br><span class="line">ctx.fillText(<span class="string">'middle-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1400</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'bottom'</span></span><br><span class="line">ctx.fillText(<span class="string">'bottom-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1500</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'alphabetic'</span></span><br><span class="line">ctx.fillText(<span class="string">'alphabetic-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1600</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'ideographic'</span></span><br><span class="line">ctx.fillText(<span class="string">'ideographic-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1700</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'hanging'</span></span><br><span class="line">ctx.fillText(<span class="string">'hanging-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1800</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img5.jpg" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/17/canvas学习日记/" rel="next" title="canvas学习日记">
+                <i class="fa fa-chevron-left"></i> canvas学习日记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/03/canvas学习日记-弧线/" rel="prev" title="canvas-学习日记之弧线">
+                canvas-学习日记之弧线 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">赵小金</p>
+              <p class="site-description motion-element" itemprop="description">赵小金的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#font"><span class="nav-number">1.</span> <span class="nav-text">font</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#textAlign属性：调整文本的水平对齐方式"><span class="nav-number">2.</span> <span class="nav-text">textAlign属性：调整文本的水平对齐方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#textBaseline属性：调整文本的垂直对齐方式"><span class="nav-number">3.</span> <span class="nav-text">textBaseline属性：调整文本的垂直对齐方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵小金</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

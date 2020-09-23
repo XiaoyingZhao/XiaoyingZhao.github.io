@@ -232,6 +232,730 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/10/学习日记vue配置-持续更新/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/10/学习日记vue配置-持续更新/" itemprop="url">学习日记vue配置-持续更新</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-10T10:14:09+08:00">
+                2020-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改字体路径</span></span><br><span class="line">chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> fonts = config.module.rule(<span class="string">'fonts'</span>)</span><br><span class="line">  fonts</span><br><span class="line">    .use(<span class="string">'url-loader'</span>)</span><br><span class="line">    .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">    .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">      options = &#123;</span><br><span class="line">        limit: <span class="number">10000</span>,</span><br><span class="line">        name: <span class="string">'[name].[ext]'</span>,</span><br><span class="line">        publicPath: <span class="string">'https://xxx'</span>,</span><br><span class="line">        outputPath: <span class="string">'font/'</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> options</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/学习Promise/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/学习Promise/" itemprop="url">学习Promise</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T18:09:25+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果要弄懂promise，就必须弄懂什么是异步、什么是同步。</p>
+<h4 id="什么是同步呢"><a href="#什么是同步呢" class="headerlink" title="什么是同步呢"></a>什么是同步呢</h4><p>你可以理解为同一个时间，你只能干一件事<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">second</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'second'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">first</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'first'</span>)</span><br><span class="line">    second()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Last'</span>)</span><br><span class="line">&#125;</span><br><span class="line">first()</span><br><span class="line"><span class="comment">//first、second、last</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="调用栈"><a href="#调用栈" class="headerlink" title="调用栈"></a>调用栈</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">当执行此代码时，将创建一个全局执行上下文并将其推到调用堆栈的顶部；// 这个不太重要，下面是重点</span><br><span class="line">first()函数先上，现在他在顶部；</span><br><span class="line">然后打印‘first’，然后执行完了，这个时候这个console.log会自动弹走，就是这个console.log虽然是后进来的，但是他先走了；</span><br><span class="line">现在first函数仍然在顶部，他下面还有second函数，所以不会弹走；</span><br><span class="line">执行second()函数,这时候second函数在顶部；</span><br><span class="line">打印‘second’，然后执行完了，弹走这个console.log，这时候second在顶部；</span><br><span class="line">这个时候second函数的事儿都干完了，他也弹走了，这时候first函数在顶部；</span><br><span class="line">浏览器会问，first你还有事吗，first说我还有一个，执行打印‘last’</span><br></pre></td></tr></table></figure>
+<h4 id="什么是异步呢"><a href="#什么是异步呢" class="headerlink" title="什么是异步呢"></a>什么是异步呢</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'我执行了！'</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</span><br><span class="line">getList();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'哈哈哈'</span>);</span><br><span class="line"><span class="comment">//Hello World、哈哈哈、我执行了！（两秒以后执行最后一个）</span></span><br></pre></td></tr></table></figure>
+<h5 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h5><p>刚才我们说了，同步的时候，浏览器会维护一个‘执行栈’，除了执行栈，在开启多线程的时候，浏览器还会维护一个消息列表，除了主线程，其余的都是副线程，这些副线程合起来就叫消息列表。 </p>
+<h4 id="增加难度："><a href="#增加难度：" class="headerlink" title="增加难度："></a>增加难度：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是定时器！'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是promise！'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是then！'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'我是主线程！'</span>);</span><br><span class="line"></span><br><span class="line">执行顺序：</span><br><span class="line">我是promise！</span><br><span class="line">我是主线程！</span><br><span class="line">我是then！</span><br><span class="line">我是定时器！</span><br></pre></td></tr></table></figure>
+<h5 id="事件轮询"><a href="#事件轮询" class="headerlink" title="事件轮询"></a>事件轮询</h5><p>上面我们说了，浏览器为了提升效率，为js开启了一个不太一样的多线程，因为js不能同时执行嘛，那副线程（注意是副线程里面哈）里面谁执行，这个选择的过程，就可以理解为事件轮询。我们先用事件轮询的顺序分析一下上面的代码，再来上概念：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">promise函数肯定首先执行，他是主线程嘛，打印‘我是promise’；</span><br><span class="line">然后继续走主线程，打印‘我是主线程’；</span><br><span class="line">然后主线程走完了，开始走消息列表；</span><br><span class="line">（宏任务和微任务一会再讲）</span><br><span class="line">这个时候会先执行promise.then，因为他是微任务，里面的‘我是then！’</span><br><span class="line">消息列表里面在上面的是定时器，但是定时器是宏任务，优先级比较低，所以会往后排；</span><br></pre></td></tr></table></figure></p>
+<h5 id="什么是宏任务？微任务？"><a href="#什么是宏任务？微任务？" class="headerlink" title="什么是宏任务？微任务？"></a>什么是宏任务？微任务？</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 宏任务（Macrotasks）：js同步执行的代码块，setTimeout、setInterval、XMLHttprequest、setImmediate、I/O、UI rendering等。</span><br><span class="line"></span><br><span class="line">微任务（Microtasks）：promise、process.nextTick（node环境）、Object.observe, MutationObserver等。</span><br><span class="line"></span><br><span class="line">微任务比宏任务要牛逼一点</span><br><span class="line"></span><br><span class="line">浏览器执行的顺序：</span><br><span class="line">(1)执行主代码块，这个主代码块也是宏任务</span><br><span class="line">(2)若遇到Promise，把then之后的内容放进微任务队列</span><br><span class="line">(3)遇到setTimeout，把他放到宏任务里面</span><br><span class="line">(4)一次宏任务执行完成，检查微任务队列有无任务 </span><br><span class="line">(5)有的话执行所有微任务 </span><br><span class="line">(6)执行完毕后，开始下一次宏任务。</span><br></pre></td></tr></table></figure>
+<p>下面用代码来深入理解上面的机制：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'4'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'1'</span>) <span class="comment">// 同步任务</span></span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br></pre></td></tr></table></figure>
+<p>这段代码作为宏任务，进入主线程。<br>先遇到setTimeout，那么将其回调函数注册后分发到宏任务Event Queue。<br>接下来遇到了Promise，new Promise立即执行，then函数分发到微任务Event Queue。<br>遇到console.log()，立即执行。<br>整体代码script作为第一个宏任务执行结束。查看当前有没有可执行的微任务，执行then的回调。 （第一轮事件循环结束了，我们开始第二轮循环。）<br>从宏任务Event Queue开始。我们发现了宏任务Event Queue中setTimeout对应的回调函数，立即执行。 执行结果：1 - 2 - 3 - 4</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'3'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'4'</span>)</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'5'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'6'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'7'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'8'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'9'</span>)</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'10'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'11'</span>)</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'12'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>整体script作为第一个宏任务进入主线程，遇到console.log(1)输出1。<br>遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。<br>现在开始执行微任务，我们发现了process1和then1两个微任务，执行process1,输出6。执行then1，输出8。 第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。那么第二轮事件循环从setTimeout1宏任务开始：<br>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，记为process2。<br>new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。<br>现在开始执行微任务，我们发现有process2和then2两个微任务可以执行输出3，5。 第二轮事件循环结束，第二轮输出2，4，3，5。第三轮事件循环从setTimeout2宏任务开始：<br>直接输出9，将process.nextTick()分发到微任务Event Queue中。记为process3。<br>直接执行new Promise，输出11。将then分发到微任务Event Queue中，记为then3。<br>执行两个微任务process3和then3。输出10。输出12。 第三轮事件循环结束，第三轮输出9，11，10，12。 整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。 (请注意，node环境下的事件监听依赖libuv与前端环境不完全相同，输出顺序可能会有误差)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/学习Promise2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/学习Promise2/" itemprop="url">学习Promise</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T18:09:25+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="promise是什么？"><a href="#promise是什么？" class="headerlink" title="promise是什么？"></a>promise是什么？</h3><p>ES6提供Promise构造函数，我们创造一个Promise实例，Promise构造函数接收一个函数作为参数，这个传入的函数有两个参数，分别是两个函数 resolve和reject作用是，resolve将Promise的状态由未成功变为成功，将异步操作的结果作为参数传递过去；相似的是reject则将状态由未失败转变为失败，在异步操作失败时调用，将异步操作报出的错误作为参数传递过去。<br>实例创建完成后，可以使用then方法分别指定成功或失败的回调函数，比起f1(f2(f3))的层层嵌套的回调函数写法，链式调用的写法更为美观易读</p>
+<h4 id="Promise的特点"><a href="#Promise的特点" class="headerlink" title="Promise的特点"></a>Promise的特点</h4><p>Promise对象有以下两个特点。</p>
+<p>（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</p>
+<p>（2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</p>
+<ul>
+<li>对象不受外界影响，初始状态为pending（等待中），结果的状态为resolve和reject，只有异步操作的结果决定这一状态</li>
+<li>状态只能由pending变为另外两种的其中一种，且改变后不可逆也不可再度修改，<br>即pending -&gt; resolved 或 pending -&gt; reject</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>&#123;</span><br><span class="line">    reject(<span class="string">"拒绝了"</span>);</span><br><span class="line">    resolve(<span class="string">"又通过了"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">promise.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'success'</span> + data);</span><br><span class="line">&#125;,(error)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">执行结果： <span class="string">"拒绝了"</span></span><br></pre></td></tr></table></figure>
+<h4 id="then"><a href="#then" class="headerlink" title="then"></a>then</h4><p>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。</p>
+<h4 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h4><p>Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getJSON(<span class="string">'/post/1.json'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">post</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getJSON(post.commentURL);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">comments</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 处理前面三个Promise产生的错误</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，一共有三个 Promise 对象：一个由getJSON()产生，两个由then()产生。它们之中任何一个抛出的错误，都会被最后一个catch()捕获。</p>
+<p>一般来说，不要在then()方法里面定义 Reject 状态的回调函数（即then的第二个参数），总是使用catch方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// success</span></span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// error</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123; <span class="comment">//cb</span></span><br><span class="line">    <span class="comment">// success</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// error</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，第二种写法要好于第一种写法，理由是第二种写法可以捕获前面then方法执行中的错误，也更接近同步的写法（try/catch）。因此，建议总是使用catch()方法，而不使用then()方法的第二个参数。</p>
+<p>跟传统的try/catch代码块不同的是，如果没有使用catch()方法指定错误处理的回调函数，Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="string">'ok'</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'test'</span>) &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;);</span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123; <span class="built_in">console</span>.log(value) &#125;);</span><br><span class="line"><span class="comment">// ok</span></span><br><span class="line"><span class="comment">// Uncaught Error: test</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，Promise 指定在下一轮“事件循环”再抛出错误。到了那个时候，Promise 的运行已经结束了，所以这个错误是在 Promise 函数体外抛出的，会冒泡到最外层，成了未捕获的错误。</p>
+<p>一般总是建议，Promise 对象后面要跟catch()方法，这样可以处理 Promise 内部发生的错误。catch()方法返回的还是一个 Promise 对象，因此后面还可以接着调用then()方法。</p>
+<p>catch()方法之中，还能再抛出错误。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> someAsyncThing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 下面一行会报错，因为x没有声明</span></span><br><span class="line">    resolve(x + <span class="number">2</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">someAsyncThing().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someOtherAsyncThing();</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'oh no'</span>, error);</span><br><span class="line">  <span class="comment">// 下面一行会报错，因为 y 没有声明</span></span><br><span class="line">  y + <span class="number">2</span>;</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'carry on'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// oh no [ReferenceError: x is not defined]</span></span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，catch()方法抛出一个错误，因为后面没有别的catch()方法了，导致这个错误不会被捕获，也不会传递到外层。如果改写一下，结果就不一样了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">someAsyncThing().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someOtherAsyncThing();</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'oh no'</span>, error);</span><br><span class="line">  <span class="comment">// 下面一行会报错，因为y没有声明</span></span><br><span class="line">  y + <span class="number">2</span>;</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'carry on'</span>, error);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// oh no [ReferenceError: x is not defined]</span></span><br><span class="line"><span class="comment">// carry on [ReferenceError: y is not defined]</span></span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，第二个catch()方法用来捕获前一个catch()方法抛出的错误。</p>
+<h4 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h4><p>finally()方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 ES2018 引入标准的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">promise</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;···&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;···&#125;)</span><br><span class="line">.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;···&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，不管promise最后的状态，在执行完then或catch指定的回调函数以后，都会执行finally方法指定的回调函数。</p>
+<p>finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是fulfilled还是rejected。这表明，finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。</p>
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h3><p>Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.all([p1, p2, p3]);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，Promise.all()方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。另外，Promise.all()方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。<br>（1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。</p>
+<p>（2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。</p>
+<h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h3><p>Promise.race()方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.race([p1, p2, p3]);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。</p>
+<p>Promise.race()方法的参数与Promise.all()方法一样，如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve()方法，将参数转为 Promise 实例，再进一步处理。</p>
+<p>下面是一个例子，如果指定时间内没有获得结果，就将 Promise 的状态变为reject。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.race([</span><br><span class="line">  fetch(<span class="string">'/resource-that-may-take-a-while'</span>),</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'request timeout'</span>)), <span class="number">5000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line">p</span><br><span class="line">.then(<span class="built_in">console</span>.log)</span><br><span class="line">.catch(<span class="built_in">console</span>.error);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，如果 5 秒之内fetch方法无法返回结果，变量p的状态就会变为rejected，从而触发catch方法指定的回调函数。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/canvas学习日记-弧线/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/03/canvas学习日记-弧线/" itemprop="url">canvas-学习日记之弧线</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T11:08:09+08:00">
+                2020-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="arcTo"><a href="#arcTo" class="headerlink" title="arcTo"></a>arcTo</h3><h5 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h5><p>ctx.arcTo(x1,y1,x2,y2,radius)</p>
+<h5 id="参数解析："><a href="#参数解析：" class="headerlink" title="参数解析："></a>参数解析：</h5><p>（1）(x1,y1)：必需，规定第一个控制点的坐标。<br>（2）(x2,y2)：必需，规定第二个控制点的坐标。<br>（3）radius：必需，规定圆弧所在圆的半径尺寸。</p>
+<h5 id="详细分析如下："><a href="#详细分析如下：" class="headerlink" title="详细分析如下："></a>详细分析如下：</h5><p>（1）起点与第一个控制点连接成一条直线。<br>（2）第一个控制点与第二个控制点连接成一条直线。<br>（3）那么通过这两条直线与圆的半径可以绘制一个与直线相切的圆弧。<br>（4）起点与圆弧连接起来，就是最终绘制的图案。</p>
+<h5 id="绘制示意图："><a href="#绘制示意图：" class="headerlink" title="绘制示意图："></a>绘制示意图：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x0=<span class="number">100</span>,</span><br><span class="line">y0=<span class="number">400</span>,</span><br><span class="line">x1 = <span class="number">500</span>,</span><br><span class="line">y1 = <span class="number">400</span>,</span><br><span class="line">x2 = <span class="number">450</span>,</span><br><span class="line">y2 = <span class="number">450</span>;</span><br><span class="line">radius = <span class="number">20</span>;</span><br><span class="line">ctx.moveTo(x0,y0);</span><br><span class="line">ctx.arcTo(x1,y1,x2,y2,radius);</span><br></pre></td></tr></table></figure>
+<p>（1）radius=20<br><img src="/2020/06/03/canvas学习日记-弧线/img2.jpg" alt="image"><br>（2）radius=50<br><img src="/2020/06/03/canvas学习日记-弧线/img3.jpg" alt="image"><br>（3）var x0=400;  radius=100<br><img src="/2020/06/03/canvas学习日记-弧线/img4.jpg" alt="image"></p>
+<h5 id="画一个月亮"><a href="#画一个月亮" class="headerlink" title="画一个月亮"></a>画一个月亮</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ctx.save()</span><br><span class="line">ctx.strokeStyle = <span class="string">'078'</span></span><br><span class="line">ctx.beginPath();     </span><br><span class="line">ctx.arc(<span class="number">50</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">0.5</span>*<span class="built_in">Math</span>.PI,<span class="number">1.5</span>*<span class="built_in">Math</span>.PI,<span class="literal">true</span>);</span><br><span class="line">ctx.arcTo(<span class="number">200</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">50</span>*dis(<span class="number">50</span>,<span class="number">0</span>,<span class="number">200</span>,<span class="number">50</span>)/<span class="number">150</span>);</span><br><span class="line">ctx.stroke();</span><br><span class="line">ctx.restore()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dis</span>(<span class="params">x1,y1,x2,y2</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/06/03/canvas学习日记-弧线/img5.jpg" alt="image"></p>
+<h5 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h5><p><img src="/2020/06/03/canvas学习日记-弧线/img1.jpg" alt="image"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/canvas学习日记-文字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/27/canvas学习日记-文字/" itemprop="url">canvas学习日记-文字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-27T15:18:09+08:00">
+                2020-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="font"><a href="#font" class="headerlink" title="font"></a>font</h3><p>font 属性设置或返回画布上文本内容的当前字体属性，语法与 CSS font 属性相同。</p>
+<p><strong>font</strong></p>
+<ul>
+<li>默认值：”20px sans-serif”</li>
+<li>ctx.font = font-style font-variant font-weight font-zise font-family</li>
+</ul>
+<table><br><tr><br>    <td>属性</td><br>    <td>值</td><br></tr><br><tr><br>    <td>font-style</td><br>    <td><br>    normal (Default) <br><br>    italic (斜体字：通常字体会设计一个专门的斜体字) <br><br>    oblique (倾斜字体：简单的将字体倾斜)<br>    </td><br></tr><br><tr><br>    <td>font-variant</td><br>    <td><br>    normal (Default) <br><br>    small-caps (将英文中的小写字母变成小型的大写字母) <br><br>    </td><br></tr><br><tr><br>    <td>font-weight</td><br>    <td><br>    lighter <br><br>    normal (Default) <br><br>    bold<br><br>    bolder<br><br>    W3C将font-weight分为不同的等级：<br><br>    100,200,300,400(normal),<br><br>    500,600,700(bold),<br><br>    800,900<br>    </td><br></tr><br><tr><br>    <td>font-size</td><br>    <td><br>    20px (Default) <br><br>    2em<br><br>    150%<br><br>    font-size可以分为以下几种几号：<br><br>    xx-small<br><br>    x-small<br><br>    medium<br><br>    large<br><br>    x-large<br><br>    xx-large<br><br>    </td><br></tr><br><tr><br>    <td>font-family</td><br>    <td><br>    web安全字体<br>    </td><br></tr><br></table>
+
+<p><strong>fillText</strong><br>| 参数 | 描述 |<br>|–|–|–|<br>| text | 规定在画布上输出的文本。 |<br>| x | 开始绘制文本的 x 坐标位置（相对于画布）。 |<br>| y | 开始绘制文本的 y 坐标位置（相对于画布）。 |<br>| maxWidth | 可选。允许的最大文本宽度，以像素计。 |</p>
+<p><strong>基本使用</strong>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ctx.font = <span class="string">'bold 40px Arial'</span></span><br><span class="line">ctx.fillText(<span class="string">'Canvas'</span>, <span class="number">0</span>, <span class="number">200</span>)</span><br><span class="line">ctx.strokeText(<span class="string">'Canvas'</span>, <span class="number">0</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/05/27/canvas学习日记-文字/img1.jpg" alt="image"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渐变</span></span><br><span class="line"><span class="keyword">const</span> linearGrad = ctx.createLinearGradient(<span class="number">0</span>,<span class="number">0</span>,<span class="number">800</span>,<span class="number">0</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.0</span>,<span class="string">'red'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.25</span>,<span class="string">'orange'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.5</span>,<span class="string">'yellow'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">0.75</span>,<span class="string">'green'</span>)</span><br><span class="line">linearGrad.addColorStop(<span class="number">1.0</span>,<span class="string">'purple'</span>)</span><br><span class="line">ctx.fillStyle = linearGrad</span><br><span class="line">ctx.fillText(<span class="string">'canvascanvascanvascanvascanvascanvascanvascanvascanvas'</span>, <span class="number">0</span>, <span class="number">400</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img2.jpg" alt="image"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 纹理</span></span><br><span class="line"><span class="keyword">const</span> backgroundImg = <span class="keyword">new</span> Image()</span><br><span class="line">backgroundImg.src = <span class="string">'https://www.cnblogs.com/skins/coffee/images/bg_body.gif'</span></span><br><span class="line">backgroundImg.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> pattern = ctx.createPattern(backgroundImg, <span class="string">'repeat'</span>)</span><br><span class="line">  ctx.fillStyle = pattern</span><br><span class="line">  ctx.font = <span class="string">'bold 100px Arial'</span></span><br><span class="line">  ctx.fillText(<span class="string">'canvas'</span>, <span class="number">0</span>, <span class="number">500</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img3.jpg" alt="image"></p>
+<h3 id="textAlign属性：调整文本的水平对齐方式"><a href="#textAlign属性：调整文本的水平对齐方式" class="headerlink" title="textAlign属性：调整文本的水平对齐方式"></a>textAlign属性：调整文本的水平对齐方式</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>起始点为左边界</td>
+</tr>
+<tr>
+<td>center</td>
+<td>起始点为中间位置</td>
+</tr>
+<tr>
+<td>center</td>
+<td>起始点为右边界</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// textAlign</span></span><br><span class="line">ctx.font = <span class="string">'40px quick'</span></span><br><span class="line">ctx.textAlign = <span class="string">'left'</span></span><br><span class="line">ctx.fillText(<span class="string">'left'</span>, <span class="number">400</span>, <span class="number">1000</span>)</span><br><span class="line">ctx.textAlign = <span class="string">'center'</span></span><br><span class="line">ctx.fillText(<span class="string">'center'</span>, <span class="number">400</span>, <span class="number">1100</span>)</span><br><span class="line">ctx.textAlign = <span class="string">'right'</span></span><br><span class="line">ctx.fillText(<span class="string">'right'</span>, <span class="number">400</span>, <span class="number">1200</span>)</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = <span class="string">'rgba(0,0,0,.4)'</span></span><br><span class="line">ctx.moveTo(<span class="number">400</span>,<span class="number">900</span>)</span><br><span class="line">ctx.lineTo(<span class="number">400</span>,<span class="number">1200</span>)</span><br><span class="line">ctx.stroke()</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img4.jpg" alt="image"></p>
+<h3 id="textBaseline属性：调整文本的垂直对齐方式"><a href="#textBaseline属性：调整文本的垂直对齐方式" class="headerlink" title="textBaseline属性：调整文本的垂直对齐方式"></a>textBaseline属性：调整文本的垂直对齐方式</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>起始点为上边界</td>
+</tr>
+<tr>
+<td>middle</td>
+<td>起始点为中间位置</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>起始点为下边界</td>
+</tr>
+<tr>
+<td>alphabetic(Default)</td>
+<td>(拉丁文)</td>
+</tr>
+<tr>
+<td>ideographic</td>
+<td>(汉字，日文等方块文字)</td>
+</tr>
+<tr>
+<td>hanging</td>
+<td>(印度语)</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// textBaseline</span></span><br><span class="line">ctx.textAlign = <span class="string">'center'</span></span><br><span class="line">ctx.font = <span class="string">'40px quick'</span></span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'top'</span></span><br><span class="line">ctx.fillText(<span class="string">'top-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1300</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'middle'</span></span><br><span class="line">ctx.fillText(<span class="string">'middle-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1400</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'bottom'</span></span><br><span class="line">ctx.fillText(<span class="string">'bottom-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1500</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'alphabetic'</span></span><br><span class="line">ctx.fillText(<span class="string">'alphabetic-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1600</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'ideographic'</span></span><br><span class="line">ctx.fillText(<span class="string">'ideographic-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1700</span>)</span><br><span class="line"></span><br><span class="line">ctx.textBaseline = <span class="string">'hanging'</span></span><br><span class="line">ctx.fillText(<span class="string">'hanging-中英文-abcdefg'</span>, <span class="number">400</span>, <span class="number">1800</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/27/canvas学习日记-文字/img5.jpg" alt="image"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/17/canvas学习日记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1044,765 +1768,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/" itemprop="url">一、将Vue项目改造成Nuxt项目-了解SSR</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-25T16:52:00+08:00">
-                2020-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
-                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、SSR概念"><a href="#一、SSR概念" class="headerlink" title="一、SSR概念"></a>一、SSR概念</h3><p><strong>SSR</strong><br>server side render 服务端渲染</p>
-<p><strong>客户端渲染</strong><br>页面初始加载的 HTML 页面中无网页展示内容，需要加载执行Js代码，通过 js 渲染生成页面。比较代表性的为React,Vue,Angular三大前端框架的SPA(Single Page Application)应用。</p>
-<p><strong>服务端渲染</strong><br>用户请求服务器，服务器上直接生成 HTML 内容并返回给浏览器。客户端所需要做的仅仅是html页面的展现和之后的DOM事件处理。代表为传统的JSP,PHP,ASP应用。</p>
-<p><strong>同构</strong><br>同构这个概念存在于 Vue，React 这些新型的前端框架中，同构实际上是客户端渲染和服务器端渲染的一个整合。两端共用一套代码，只是服务端采用nodeJS执行，客户端采用JS执行；在加载首屏的时候，执行服务端代码，页面渲染和请求js同时进行。从首屏进入第二页时就不请求服务端代码了，直接执行Vue的路由跳转。<br>（这里首屏的概念不是首页，而是用户打开的第一页，例如：A打开司机招聘的首页，点击其中一条详情进入详情页，然后将详情页分享给B，B打开的是详情页。这里A的首屏是首页，B的首屏是详情页）</p>
-<h3 id="二、使用SSR的利弊"><a href="#二、使用SSR的利弊" class="headerlink" title="二、使用SSR的利弊"></a>二、使用SSR的利弊</h3><h4 id="SSR的优势"><a href="#SSR的优势" class="headerlink" title="SSR的优势"></a>SSR的优势</h4><ol>
-<li>更利于SEO<br>爬虫只会爬取源码，不会执行网站的任何脚本（Google除外，Google等页面加载完之后再去爬取内容，所以Google的爬虫可以爬取单页面应用）</li>
-<li>更利于首屏渲染<br>首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。尤其是针对大型单页应用，打包后文件体积比较大，普通客户端渲染加载所有所需文件时间较长，首页就会有一个很长的白屏等待时间。</li>
-</ol>
-<h4 id="SSR的局限"><a href="#SSR的局限" class="headerlink" title="SSR的局限"></a>SSR的局限</h4><ol>
-<li>服务端压力较大<br>本来是通过客户端完成渲染，现在统一到服务端node服务去做。尤其是高并发访问的情况，会大量占用服务端CPU资源；</li>
-<li>开发条件受限<br>服务端代与客户端共用一套代码，但是执行周期不一致，写法也有略微不同</li>
-<li>学习成本相对较高<br>还需要掌握node、Koa2等相关技术。相对于客户端渲染，项目构建、部署过程更加复杂。</li>
-</ol>
-<h3 id="三、介绍NUXT"><a href="#三、介绍NUXT" class="headerlink" title="三、介绍NUXT"></a>三、介绍NUXT</h3><p> <a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">nuxt官网</a></p>
-<h4 id="nuxt的优点："><a href="#nuxt的优点：" class="headerlink" title="nuxt的优点："></a>nuxt的优点：</h4><ul>
-<li>基于 Vue.js</li>
-<li>自动代码分层</li>
-<li>服务端渲染</li>
-<li>强大的路由功能，支持异步数据</li>
-<li>静态文件服务</li>
-<li>ES2015+ 语法支持</li>
-<li>打包和压缩 JS 和 CSS</li>
-<li>HTML 头部标签管理</li>
-<li>本地开发支持热加载</li>
-<li>集成 ESLint</li>
-<li>支持各种样式预处理器： SASS、LESS、 Stylus 等等</li>
-<li>支持 HTTP/2 推送</li>
-</ul>
-<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h4><p>下图阐述了 Nuxt.js 应用一个完整的服务器请求到渲染（或用户通过 <code>&lt;nuxt-link&gt;</code>切换路由渲染页面）的流程：<br><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/zhouqi.webp" alt="image"><br>生命周期流程图，红框内的是Nuxt的生命周期(运行在<code>服务端</code>)，黄框内<code>同时运行在服务端&amp;&amp;客户端</code>上，绿框内则运行在<code>客户端</code></p>
-<ol>
-<li>红框、黄框内的周期都不存在Window,document,navigator对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  asyncData() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fetch() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// 服务端报错</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// undefined</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>) <span class="comment">// Window &#123;postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …&#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>但也不是不可以在这些周期使用客户端代码，只需要加一个判断平台的条件即可：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (process.client)&#123;</span><br><span class="line">  <span class="comment">// 这里执行服务端不支持的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="三、开始"><a href="#三、开始" class="headerlink" title="三、开始"></a>三、开始</h3><p>1、运行一个NUXT项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-nuxt-app abc</span><br></pre></td></tr></table></figure></p>
-<p>我的电脑运行这条命令慢的出奇，所以我用了另一种方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g @vue/cli-init</span><br><span class="line"><span class="comment">// 如果已安装过vue-cli可以不用执行上面这条</span></span><br><span class="line">$ vue init nuxt/starter abc</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img1.jpg" alt="image"><br>2、启动项目<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd abc</span><br><span class="line">$ npm install</span><br><span class="line">$ npm run dev</span><br><span class="line"><span class="comment">// 在浏览器里执行：`http://localhost:3000/`</span></span><br></pre></td></tr></table></figure></p>
-<p>这时项目中会多一个.nuxt的文件</p>
-<p><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img2.jpg" alt="image"></p>
-<p>3、打包<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
-<p>这时看到.nuxt中的文件变了，并且多了一个dist文件夹（这里有一个坑，通常我们的.gitignore文件会忽略dist文件，这里要注意）<br><img src="/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/img3.jpg" alt="image"></p>
-<p>4、目录详解<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">|-- .nuxt                            <span class="comment">// Nuxt运行时自动生成，和build之后的代码</span></span><br><span class="line">|-- assets                           <span class="comment">// 资源目录 assets 用于组织未编译的静态资源如 LESS、SASS 或 JavaScript</span></span><br><span class="line">|-- components                       <span class="comment">// 用于自己编写的Vue组件，比如滚动组件，日历组件，分页组件</span></span><br><span class="line">|-- layouts                          <span class="comment">// 布局目录，用于组织应用的布局组件，不可更改。</span></span><br><span class="line">|-- middleware                       <span class="comment">// 用于存放中间件</span></span><br><span class="line">|-- pages                            <span class="comment">// 用于存放写的页面，我们主要的工作区域</span></span><br><span class="line">|-- plugins                          <span class="comment">// 用于存放JavaScript插件的地方</span></span><br><span class="line">|-- <span class="keyword">static</span>                           <span class="comment">// 用于存放静态资源文件，比如图片</span></span><br><span class="line">|-- store                            <span class="comment">// 用于组织应用的Vuex 状态管理。</span></span><br><span class="line">|-- .editorconfig                    <span class="comment">// 开发工具格式配置</span></span><br><span class="line">|-- .eslintrc.js                     <span class="comment">// ESLint的配置文件，用于检查代码格式</span></span><br><span class="line">|-- .gitignore                       <span class="comment">// 配置git不上传的文件</span></span><br><span class="line">|-- nuxt.config.js                   <span class="comment">// 用于组织Nuxt.js应用的个性化配置，已覆盖默认配置</span></span><br><span class="line">|-- package-lock.json                <span class="comment">// npm自动生成，用于帮助package的统一性设置的，yarn也有相同的操作</span></span><br><span class="line">|-- package-lock.json                <span class="comment">// npm自动生成，用于帮助package的统一性设置的，yarn也有相同的操作</span></span><br><span class="line">|-- package.json                     <span class="comment">// npm包管理配置文件</span></span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/DNS解析/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/DNS解析/" itemprop="url">DNS解析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:45:34+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/" itemprop="url" rel="index">
-                    <span itemprop="name">网络原理</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>DNS</strong>（Domain Name System）域名系统</p>
-<h3 id="一、域名系统"><a href="#一、域名系统" class="headerlink" title="一、域名系统"></a>一、域名系统</h3><h4 id="1、域名系统概述"><a href="#1、域名系统概述" class="headerlink" title="1、域名系统概述"></a>1、域名系统概述</h4><p>域名系统DNS(Domain Name System)是因特网使用的命名系统，用来把便于人们使用的机器名字转换成为IP地址。域名系统其实就是名字系统。</p>
-<p>我们都知道，IP地址是由32位的二进制数字组成的。用户与因特网上某台主机通信时，显然不愿意使用很难记忆的长达32位的二进制主机地址。即使是点分十进制IP地址也并不太容易记忆。相反，大家愿意使用比较容易记忆的主机名字。但是，机器在处理IP数据报时，并不是使用域名而是使用IP地址。这是因为IP地址长度固定，而域名的长度不固定，机器处理起来比较困难。</p>
-<p>域名到IP地址的解析是由分布在因特网上的许多域名服务器程序共同完成的。域名服务器程序在专设的结点上运行，而人们也常把运行域名服务器程序的机器称为域名服务器。</p>
-<h4 id="2、因特网的域名结构"><a href="#2、因特网的域名结构" class="headerlink" title="2、因特网的域名结构"></a>2、因特网的域名结构</h4><p>由于因特网的用户数量较多，所以因特网在命名时采用的是层次树状结构的命名方法。任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)。这里，“域”(domain)是名字空间中一个可被管理的划分。</p>
-<p>如下例子所示：<br><img src="/2020/01/06/DNS解析/eg1.png" alt="image"></p>
-<p>这是中央电视台用于收发电子邮件的计算机的域名，它由三个标号组成，其中标号com是顶级域名，标号cctv是二级域名，标号mail是三级域名。</p>
-<p>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理。用这种方法可使每一个域名在整个互联网范围内是唯一的，并且也容易设计出一种查找域名的机制。</p>
-<p>域名只是逻辑概念，并不代表计算机所在的物理地点。据2006年12月统计，现在顶级域名TLD(Top Level Domain)已有265个，分为三大类：<br>(1)国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。<br>(2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。<br>(3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。</p>
-<p><img src="/2020/01/06/DNS解析/eg2.png" alt="image"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/" itemprop="url">OSI7层参考模型和TCP/IP5层参考模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T16:23:51+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/" itemprop="url" rel="index">
-                    <span itemprop="name">网络原理</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络原理/学习日记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="一、相关名词"><a href="#一、相关名词" class="headerlink" title="一、相关名词"></a>一、相关名词</h4><p><strong>OSI</strong>（Open System Interconnection Model开放式系统互联模型）简称为OSI模型,由国际标准化组织提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。定义于ISO/IEC 7498-1</p>
-<p><strong>OSI/RM</strong>（Open Systems Interconnection Reference Model）开放系统互联参考模型</p>
-<p><strong>ISO</strong>（International Organization for Standardization）国际标准化组织</p>
-<p><strong>ARP</strong>（Address Resolution Protocol）地址解析协议，是根据IP地址获取物理地址的一个协议</p>
-<p><strong>TCP/IP</strong>（Transmission Control Protocol/Internet Protocol，传输控制协议/网际协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP 和IP两个协议，而是指一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 只是因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议。</p>
-<h4 id="二、七层模型"><a href="#二、七层模型" class="headerlink" title="二、七层模型"></a>二、七层模型</h4><h4 id="第7层-应用层"><a href="#第7层-应用层" class="headerlink" title="第7层 应用层"></a>第7层 应用层</h4><p>应用层与提供给用户的网络服务相关，这些服务非常丰富，包括文件传送、电子邮件、P2P应用等。应用层为用户提供了一个使用网络应用的“接口”。</p>
-<h4 id="第6层-表示层"><a href="#第6层-表示层" class="headerlink" title="第6层 表示层"></a>第6层 表示层</h4><p>表现层主要用于处理应用实体间的交换数据的语法，其目的是解决格式和数据表示的差别，从而为应用层提供一个一致的数据格式，使字符、格式等有差异的设备之间相互通信。除此之外，表现层还可以实现文本压缩、数据加密/解密、字符编码的转换等功能。这一层的功能在某些实际数据通信网络中是有应用层来实现的，而且表示层不独立存在。</p>
-<h4 id="第5层-会话层"><a href="#第5层-会话层" class="headerlink" title="第5层 会话层"></a>第5层 会话层</h4><p>会话层是指用户与用户的连接，通过在两台计算机间建立、管理和终止通信来完成对话。会话层的主要功能：在建立会话时核实双方身份是否有权参加会话；确定双方支付通信费用；双方在各种选择功能方面（如全双工还是半双工通信）取得一致，在会话建立以后，需要对进程间的对话进行管理与控制，例如，对话过程中某个环节输了故障，会话层在可能条件下必须对这个对话的数据，使数据不丢失，如不能保留，那么终止这个对话，并重新开始。在实际的网络中，会话层的功能已经被应用层所覆盖，很少单独存在。</p>
-<h4 id="第4层-传输层"><a href="#第4层-传输层" class="headerlink" title="第4层 传输层"></a>第4层 传输层</h4><p>传输层是第一个端到端的层次，也是进程到进程的层次。数据的通信表面上看是在两个主机之间进行，但实质上是发生在两个主机的进程之间。OSI参考模型的前三层可组成公共网络，被很多设备共享，并且计算机——交换结点（典型的交换结点是路由器，交换机等）、交换结点——交换结点是按照“接力”方式传送的。为了防止传送途中报文的丢失，两个主机的进程之间需要实现端到端控制。因此，传输层的功能主要包括复用/分解（区分发送和接收主机上的进程）、端到端的可靠传输、连接控制、流量控制和拥塞控制机制等。</p>
-<h4 id="第3层-网络层"><a href="#第3层-网络层" class="headerlink" title="第3层 网络层"></a>第3层 网络层</h4><p>网络层解决的核心问题是如何将分组通过交换网络传送至目的主机，因此，网络层的主要功能是数据转发与路由，在交换网络中，信息从源节点出发，要经过若干个中继节点所谓存储转发后，才能到达目的结点。这样一个包括源结点、中继结点、目的结点的集合称为从源结点到目的结点的路径。一般在两个结点之间会有多条路径选择，这种路由选择是网络层要完成的主要功能之一。当网络设备，比如路由器，从一个接口收到数据分组时，需要根据已掌握的路由信息将其转发到合适的接口并向下一个结点发送，直至送达目的结点。此外网络层还要对进入交换网络的通信量加以控制，以避免通信量过大造成交换网络性能下降。</p>
-<h4 id="第2层-数据链路层"><a href="#第2层-数据链路层" class="headerlink" title="第2层 数据链路层"></a>第2层 数据链路层</h4><p>数据链路层的主要功能是实现在相邻结点之间数据可靠而有效的传输，数据在物理介质内传输过程，不能保证没有任何错误发生。为了能实现有效的差错控制，就采用了一种以“帧”为单位的数据块传输方式。要采用帧格式传输，就必须有相应的帧同步技术，这就是数据链路层的“成帧”（“帧同步”）功能，包括定义帧的格式、类型、成帧的方法等。有了“帧”的存在，就可以将差错控制技术应用在数据帧中，例如，将数据码后面附加一定位数的循环码，从而实现数据链路层的差错控制功能。数据链路层还可以实现相邻结点间通信的流量控制。</p>
-<h4 id="第1层-物理层"><a href="#第1层-物理层" class="headerlink" title="第1层 物理层"></a>第1层 物理层</h4><p>物理层的主要功能是在传输介质上实现无结构比特流传输。所谓无结构比特流是指不关心比特流实际代表的信息内容，只关心如何将0、1这些比特以合适的信号传送至目的地，因此，物理层要实现信号编码功能，物理层的另一项主要任务就是规定数据终端设备（DTE）与数据通信设备（DCE）之间接口的相关特性，主要包括机械，电气，功能和规程4个方面的特性。机械特性也叫物理特性，说明硬件连接接口的机械特点，如接口的形状、尺寸、插脚的数量和排列方式等；电气特性规定了在物理连接上，导线的电气连接及有关电路的特性，如信号电平大小、接收器和发送器电路特性的说明，信号的识别、最大传输速率的说明等；功能特性说明物理接口各条信号线的用途，如接口信号线的功能分类等；规程特性指明利用接口传输比特流的全过程及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输的方式，即在物理连接建立、维持和交换信息时，收发双方在各自电路上的动作序列。</p>
-<h4 id="三、OSI七层参考模型与TCP-IP协议"><a href="#三、OSI七层参考模型与TCP-IP协议" class="headerlink" title="三、OSI七层参考模型与TCP/IP协议"></a>三、OSI七层参考模型与TCP/IP协议</h4><html> <table><tbody><tr><td style="vertical-align:bottom;"> <p>OSI七层网络模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP四层模型</p> </td> <td style="vertical-align:bottom;"> <p>TCP/IP五层模型</p> </td> <td style="vertical-align:bottom;"> <p>对应网络协议</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>应用层（Application）</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td rowspan="3"> <p>应用层</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">HTTP</span>、TFTP,<span style="color:#ff0000;">&nbsp;FTP</span>, NFS, WAIS、SMTP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>表示层（Presentation）</p> </td> <td style="vertical-align:bottom;"> <p>Telnet, Rlogin, SNMP, Gopher</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>会话层（Session）</p> </td> <td style="vertical-align:bottom;"> <p><span style="color:#ff0000;">SMTP, DNS</span></p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>传输层（Transport）</p> </td> <td> <p>传输层</p> </td> <td> <p>传输层</p> </td> <td style="vertical-align:bottom;"> <p>TCP, UDP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>网络层（Network）</p> </td> <td> <p>网络互联层</p> </td> <td> <p>网络层</p> </td> <td style="vertical-align:bottom;"> <p>IP, ICMP, ARP, RARP, AKP, UUCP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>数据链路层（Data Link）</p> </td> <td rowspan="2"> <p>网络接口层</p> </td> <td> <p>数据链路层</p> </td> <td style="vertical-align:bottom;"> <p>FDDI, Ethernet, Arpanet, PDN, SLIP, PPP</p> </td> </tr><tr><td style="vertical-align:bottom;"> <p>物理层（Physical）</p> </td> <td> <p>物理层</p> </td> <td style="vertical-align:bottom;"> <p>IEEE 802.1A, IEEE 802.2到IEEE 802.11</p> </td> </tr></tbody></table> </html>
-
-
-<h4 id="四、流程图"><a href="#四、流程图" class="headerlink" title="四、流程图"></a>四、流程图</h4><p><img src="/2020/01/06/OSI7层参考模型和TCP-IP5层参考模型/img.png" alt="image"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/0.1+0.2!==0.3/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/0.1+0.2!==0.3/" itemprop="url">0.1+0.2!==0.3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T11:11:28+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span> == <span class="number">0.3</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>) <span class="comment">// 0.30000000000000004</span></span><br></pre></td></tr></table></figure>
-<p>浮点数值的最高精度是17位小数，但是在进行算数计算式其精度远远不如整数。浮点数值计算会产生舍入误差，有一点需要明确，这是基于IEEE754数值的浮点计算的通病。<br>所以实际上，这里错的不是结论，而是比较的方法，正确的比较方法是使用Javascript提供的最小精度值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.abs(<span class="number">0.1</span> + <span class="number">0.2</span> <span class="number">-0.3</span>) &lt; <span class="built_in">Number</span>.EPSILON) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/leetCode两数之和/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/leetCode两数之和/" itemprop="url">leetCode两数之和</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T17:33:44+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tmp = target - nums[i];</span><br><span class="line">        <span class="keyword">if</span> (nums.indexOf(tmp) != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> tmp2 = nums.indexOf(tmp)</span><br><span class="line">            <span class="keyword">if</span> (tmp2 === i) <span class="keyword">continue</span> </span><br><span class="line">            result.push(i,tmp2)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">6</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">var</span> j = i+<span class="number">1</span>; j &lt; nums.length; j++)&#123;</span><br><span class="line">             <span class="keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                 result.push(i)</span><br><span class="line">                 result.push(j)</span><br><span class="line">                 <span class="keyword">return</span> result</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">26</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1848,7 +1818,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
