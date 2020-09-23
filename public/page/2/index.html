@@ -395,6 +395,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/" itemprop="url">二、将Vue项目改造成Nuxt项目-关于页面路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-25T19:52:00+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
+                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>nuxt的路由没有router文件，nuxt的路由就是<code>page</code>文件夹下的文件目录</p>
+<p>以下目录结构<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pages/</span><br><span class="line">--| _slug/</span><br><span class="line">-----| comments.vue</span><br><span class="line">-----| index.vue</span><br><span class="line">--| users/</span><br><span class="line">-----| _id.vue</span><br><span class="line">--| index.vue</span><br></pre></td></tr></table></figure></p>
+<p>Nuxt.js 生成对应的路由配置表为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">router: &#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'index'</span>,</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="string">'pages/index.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'users-id'</span>,</span><br><span class="line">      path: <span class="string">'/users/:id?'</span>,</span><br><span class="line">      component: <span class="string">'pages/users/_id.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'slug'</span>,</span><br><span class="line">      path: <span class="string">'/:slug'</span>,</span><br><span class="line">      component: <span class="string">'pages/_slug/index.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'slug-comments'</span>,</span><br><span class="line">      path: <span class="string">'/:slug/comments'</span>,</span><br><span class="line">      component: <span class="string">'pages/_slug/comments.vue'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到上面的<code>_slug</code>和<code>_id</code>了吗，这是nuxt的动态路由，其中<code>_slug</code>是目录，<code>_id</code>是文件，动态目录下的<code>index.vue</code>是默认跳转的路由，这代表：</p>
+<ol>
+<li><code>http://localhost:3000/a</code>，<code>http://localhost:3000/b</code> 打开的文件是 <code>pages/_slug/index.vue</code></li>
+<li><code>http://localhost:3000/a/comments</code>，<code>http://localhost:3000/b/comments</code> 打开的文件是 <code>pages/_slug/comments.vue</code></li>
+<li><code>http://localhost:3000/users/123</code>，<code>http://localhost:3000/users/abc</code> 打开的文件是 <code>pages/users/_id.vue</code></li>
+</ol>
+<h3 id="动态嵌套路由"><a href="#动态嵌套路由" class="headerlink" title="动态嵌套路由"></a>动态嵌套路由</h3><p>nuxt也可以在在动态路由下配置动态子路由。</p>
+<p>假设文件结构如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pages/</span><br><span class="line">--| _category/</span><br><span class="line">-----| _subCategory/</span><br><span class="line">--------| _id.vue</span><br><span class="line">--------| index.vue</span><br><span class="line">-----| _subCategory.vue</span><br><span class="line">-----| index.vue</span><br><span class="line">--| _category.vue</span><br><span class="line">--| index.vue</span><br></pre></td></tr></table></figure>
+<p>Nuxt.js 自动生成的路由配置如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">router: &#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="string">'pages/index.vue'</span>,</span><br><span class="line">      name: <span class="string">'index'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/:category'</span>,</span><br><span class="line">      component: <span class="string">'pages/_category.vue'</span>,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">''</span>,</span><br><span class="line">          component: <span class="string">'pages/_category/index.vue'</span>,</span><br><span class="line">          name: <span class="string">'category'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">':subCategory'</span>,</span><br><span class="line">          component: <span class="string">'pages/_category/_subCategory.vue'</span>,</span><br><span class="line">          children: [</span><br><span class="line">            &#123;</span><br><span class="line">              path: <span class="string">''</span>,</span><br><span class="line">              component: <span class="string">'pages/_category/_subCategory/index.vue'</span>,</span><br><span class="line">              name: <span class="string">'category-subCategory'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">              path: <span class="string">':id'</span>,</span><br><span class="line">              component: <span class="string">'pages/_category/_subCategory/_id.vue'</span>,</span><br><span class="line">              name: <span class="string">'category-subCategory-id'</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里注意：<code>_category.vue</code>与<code>_category/</code>同级</p>
+<h3 id="路由参数校验"><a href="#路由参数校验" class="headerlink" title="路由参数校验"></a>路由参数校验</h3><p>在动态路由中可以设置参数校验，例如文章详情页的路由是<code>http://localhost:3000/article/123456</code>，<code>123456</code>是文章id，文章id永远都是数字，不可能是汉字，所以可以在<code>pages/article/_id.vue</code>页面校验一下参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  validate (&#123; params &#125;) &#123;</span><br><span class="line">    <span class="comment">// 必须是number类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^\d+$/</span>.test(params.id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果校验方法返回的值不为 true或Promise中resolve 解析为false或抛出Error ， Nuxt.js 将自动加载显示 404 错误页面或 500 错误页面。</p>
+<p>新建<code>error.vue</code>页面在<code>layouts</code>文件夹中，在<code>error.vue</code>页面中可以捕获到：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;not-found v-<span class="keyword">if</span>=<span class="string">"error.statusCode==404"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">not-found</span>&gt;</span></span></span><br><span class="line">    &lt;error-page v-else&gt;&lt;/error-page&gt;</span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> notFound <span class="keyword">from</span> <span class="string">'~/components/404.vue'</span></span><br><span class="line"><span class="keyword">import</span> errorPage <span class="keyword">from</span> <span class="string">'~/components/500.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">'error'</span>],</span><br><span class="line">  components: &#123; notFound, errorPage &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="路由中间件"><a href="#路由中间件" class="headerlink" title="路由中间件"></a>路由中间件</h3><h5 id="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"><a href="#中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。" class="headerlink" title="中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。"></a>中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。</h5><p>它可以做到在打开页面或者切换路由之前，加一些判断，例如重定向之类的操作。<br>中间件放在<code>middleware</code>文件夹中，文件名就是中间件的名字(middleware/auth.js将成为 auth 中间件)<br>中间件的配置方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nuxt.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  router: &#123;</span><br><span class="line">    middleware: <span class="string">'stats'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以再中间件中加重定向：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还可以加一些其他操作，例如将userAgent赋值给context：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; isHMR, app, req, store, route, params, error, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isHMR) <span class="keyword">return</span></span><br><span class="line">  context.userAgent = process.server ? context.req.headers[<span class="string">'user-agent'</span>] : navigator.userAgent</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (route.fullPath == <span class="string">'/'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">'/all'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的话，在红框，黄框周期内就可以愉快的使用userAgent了:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">validate (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>, context.userAgent)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;,</span><br><span class="line">asyncData (context) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>, context.userAgent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由/img1.jpg" alt="img"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/nuxt/一、将Vue项目改造成Nuxt项目-了解SSR/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1601,150 +1764,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/神器甘特图/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/24/神器甘特图/" itemprop="url">神器甘特图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T19:41:50+08:00">
-                2018-06-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>什么东西在我们的生活和工作当中可有可无，但是有了它立马会提升一个档次呀~ ———— 那就是甘特图Gantt chart，就是下面这个东西啦啦啦</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">dateFormat  YYYY-MM-DD</span><br><span class="line">title 上报事件时间线</span><br><span class="line"></span><br><span class="line">section load事件</span><br><span class="line">load(加载开始)：load_start_timestamp          :    p1, 2018-01-01, 1d</span><br><span class="line">load(加载结束)：load_end_timestamp            :    p2, after p4, 1d</span><br><span class="line"></span><br><span class="line">section show事件</span><br><span class="line">show(页面曝光)                            :           p3, after p1, 1d</span><br><span class="line"></span><br><span class="line">section stay事件</span><br><span class="line">stay(duration第一次)：1000           :            p4, after p3, 1d</span><br><span class="line">stay(duration持续)：5000           :           p5, after p2, 5d</span><br><span class="line"></span><br><span class="line">section model_show事件</span><br><span class="line">model_show(默认曝光)          :            p6, after p5, 10d</span><br><span class="line">model_show(滚动曝光)          :            p7, after p6, 10d</span><br><span class="line"></span><br><span class="line">section model_click事件</span><br><span class="line"> model_click(点击上报)          :            p8, after p7, 10d</span><br></pre></td></tr></table></figure>
-<p>当当当当~<br><img src="/2018/06/24/神器甘特图/timer.jpg" alt="img"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1814,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1806,7 +1825,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>

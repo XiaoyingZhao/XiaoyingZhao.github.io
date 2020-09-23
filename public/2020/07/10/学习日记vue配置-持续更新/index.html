@@ -81,14 +81,14 @@
 
 <meta name="description" content="12345678910111213141516// 修改字体路径chainWebpack: config =&amp;gt; &amp;#123;  const fonts = config.module.rule(&apos;fonts&apos;)  fonts    .use(&apos;url-loader&apos;)    .loader(&apos;url-loader&apos;)    .tap(options =&amp;gt; &amp;#123;      opt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习日记vue配置-持续更新">
+<meta property="og:title" content="学习日记vuecli-webpack配置-持续更新">
 <meta property="og:url" content="http://yoursite.com/2020/07/10/学习日记vue配置-持续更新/index.html">
 <meta property="og:site_name" content="赵小金">
 <meta property="og:description" content="12345678910111213141516// 修改字体路径chainWebpack: config =&amp;gt; &amp;#123;  const fonts = config.module.rule(&apos;fonts&apos;)  fonts    .use(&apos;url-loader&apos;)    .loader(&apos;url-loader&apos;)    .tap(options =&amp;gt; &amp;#123;      opt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-10T02:17:55.040Z">
+<meta property="og:updated_time" content="2020-09-23T03:10:00.761Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习日记vue配置-持续更新">
+<meta name="twitter:title" content="学习日记vuecli-webpack配置-持续更新">
 <meta name="twitter:description" content="12345678910111213141516// 修改字体路径chainWebpack: config =&amp;gt; &amp;#123;  const fonts = config.module.rule(&apos;fonts&apos;)  fonts    .use(&apos;url-loader&apos;)    .loader(&apos;url-loader&apos;)    .tap(options =&amp;gt; &amp;#123;      opt">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>学习日记vue配置-持续更新 | 赵小金</title>
+  <title>学习日记vuecli-webpack配置-持续更新 | 赵小金</title>
   
 
 
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习日记vue配置-持续更新</h1>
+          <h1 class="post-title" itemprop="name headline">学习日记vuecli-webpack配置-持续更新</h1>
         
 
         <div class="post-meta">
@@ -300,6 +300,7 @@
 
       
         <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改字体路径</span></span><br><span class="line">chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> fonts = config.module.rule(<span class="string">'fonts'</span>)</span><br><span class="line">  fonts</span><br><span class="line">    .use(<span class="string">'url-loader'</span>)</span><br><span class="line">    .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">    .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">      options = &#123;</span><br><span class="line">        limit: <span class="number">10000</span>,</span><br><span class="line">        name: <span class="string">'[name].[ext]'</span>,</span><br><span class="line">        publicPath: <span class="string">'https://xxx'</span>,</span><br><span class="line">        outputPath: <span class="string">'font/'</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> options</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue单页面预渲染</span></span><br><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="number">1.</span> 第一步，publicPath的值必须是<span class="string">''</span>或<span class="string">'/'</span></span><br><span class="line">publicPath: <span class="string">'/'</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 第二步，引用插件</span><br><span class="line"><span class="keyword">const</span> PrerenderSpaPlugin = <span class="built_in">require</span>(<span class="string">'prerender-spa-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> Renderer = PrerenderSpaPlugin.PuppeteerRenderer</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> PrerenderSpaPlugin(&#123;</span><br><span class="line">  staticDir: path.join(__dirname, <span class="string">'/dist'</span>),</span><br><span class="line">  routes: [<span class="string">'/'</span>, <span class="string">'/aboutus'</span>],</span><br><span class="line">  renderer: <span class="keyword">new</span> Renderer(&#123;</span><br><span class="line">    injectProperty: <span class="string">'__PRERENDER_INJECTED__'</span>,</span><br><span class="line">    inject: <span class="string">'prerender'</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="number">3.</span> 第三步，main.js中触发</span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  i18n, <span class="comment">// 多语言i18n</span></span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">  <span class="comment">/* 这句非常重要，否则预渲染将不会启动 */</span></span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">document</span>.dispatchEvent(<span class="keyword">new</span> Event(<span class="string">'render-event'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> 如果publicPath是cdn地址，需要做单独处理，下一篇博客我将专门记录prerender-spa-plugin与静态资源cdn地址的处理</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -332,6 +333,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/23/vue预渲染与静态资源cdn地址的处理/" rel="prev" title="vue多页面预渲染与静态资源cdn地址的处理">
+                vue多页面预渲染与静态资源cdn地址的处理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -399,7 +404,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -410,7 +415,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
