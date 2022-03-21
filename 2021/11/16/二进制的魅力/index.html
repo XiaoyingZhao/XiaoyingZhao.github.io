@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是二进制 世界上有10种人：一种是懂得二进制的，另一种是不懂二进制的  二进制是计算技术中广泛采用的一种数制。二进制数据是用0和1两个数码来表示的数。它的基数为2，进位规则是“逢二进一”，借位规则是“借一当二”，由18世纪德国数理哲学大师莱布尼兹发现。当前的计算机系统使用的基本上是二进制系统。 十进制0至9的二进制表示： 十进制    二进制0    01    12    103    11">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制的魅力">
+<meta property="og:url" content="http://yoursite.com/2021/11/16/二进制的魅力/index.html">
+<meta property="og:site_name" content="赵小金">
+<meta property="og:description" content="什么是二进制 世界上有10种人：一种是懂得二进制的，另一种是不懂二进制的  二进制是计算技术中广泛采用的一种数制。二进制数据是用0和1两个数码来表示的数。它的基数为2，进位规则是“逢二进一”，借位规则是“借一当二”，由18世纪德国数理哲学大师莱布尼兹发现。当前的计算机系统使用的基本上是二进制系统。 十进制0至9的二进制表示： 十进制    二进制0    01    12    103    11">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2021/11/16/二进制的魅力/img2.jpeg">
+<meta property="og:image" content="http://yoursite.com/2021/11/16/二进制的魅力/img.png">
+<meta property="og:updated_time" content="2021-11-18T08:52:52.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二进制的魅力">
+<meta name="twitter:description" content="什么是二进制 世界上有10种人：一种是懂得二进制的，另一种是不懂二进制的  二进制是计算技术中广泛采用的一种数制。二进制数据是用0和1两个数码来表示的数。它的基数为2，进位规则是“逢二进一”，借位规则是“借一当二”，由18世纪德国数理哲学大师莱布尼兹发现。当前的计算机系统使用的基本上是二进制系统。 十进制0至9的二进制表示： 十进制    二进制0    01    12    103    11">
+<meta name="twitter:image" content="http://yoursite.com/2021/11/16/二进制的魅力/img2.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/11/16/二进制的魅力/">
+
+
+
+
+
+  <title>二进制的魅力 | 赵小金</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵小金</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">嗨~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/16/二进制的魅力/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二进制的魅力</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-16T18:28:19+08:00">
+                2021-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="什么是二进制"><a href="#什么是二进制" class="headerlink" title="什么是二进制"></a>什么是二进制</h4><blockquote>
+<p>世界上有10种人：一种是懂得二进制的，另一种是不懂二进制的</p>
+</blockquote>
+<p>二进制是计算技术中广泛采用的一种数制。二进制数据是用0和1两个数码来表示的数。它的基数为2，进位规则是“逢二进一”，借位规则是“借一当二”，由18世纪德国数理哲学大师莱布尼兹发现。当前的计算机系统使用的基本上是二进制系统。</p>
+<p>十进制0至9的二进制表示：</p>
+<p>十进制    二进制<br>0    0<br>1    1<br>2    10<br>3    11<br>4    100<br>5    101<br>6    110<br>7    111<br>8    1000<br>9    1001</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">加法： 0+0=0；0+1=1；1+0=1；1+1=10</span><br><span class="line"></span><br><span class="line">求 1101 + 1011 的和</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/16/二进制的魅力/img2.jpeg" alt="img"></p>
+<h4 id="8位二进制数"><a href="#8位二进制数" class="headerlink" title="8位二进制数"></a>8位二进制数</h4><p><code>256 128 64 32 16 8 4 2 1</code><br><code>___  ___  __  __  __ _  _ _  _</code></p>
+<h4 id="如何得到二进制"><a href="#如何得到二进制" class="headerlink" title="如何得到二进制"></a>如何得到二进制</h4><p>e.g. 将125转化成二进制 1111101<br>可以使用短除法得到125的二进制值<br><img src="/2021/11/16/二进制的魅力/img.png" alt="img"></p>
+<h5 id="1-按位或"><a href="#1-按位或" class="headerlink" title="1. 按位或 |"></a>1. 按位或 |</h5><blockquote>
+<p>|与||操作符的道理也是一样的，只要两个数中有一个数为1，结果就为1，其他则为0</p>
+</blockquote>
+<h5 id="1-按位与-amp"><a href="#1-按位与-amp" class="headerlink" title="1. 按位与 &amp;"></a>1. 按位与 &amp;</h5><blockquote>
+<p>&amp;运算符表示只有两个数的值为1时，才返回1</p>
+</blockquote>
+<p>使用场景：我们管理系统做表单checkbox多选是，加入我们有a、b、c、d四个chebox的选项，1，2，4，8分别代表checkbox的value值，当我们全选a + b + c + d的时候，可以将1 | 2 | 4 | 8 = 15传给java后台，如果只选择a + c的时候，则传递给java后台的值为1 | 4 = 5。<br>那么我们做编辑功能的时候，如何判断checkbox是否被选中？很简单，用&amp;符号就可以，比如用户选择了a+c,后台给我们返回5，c的值为1，那么 4 &amp; 5 = 4， b的选项我们是没有选择的，则 2 &amp; 5 = 0，也就是说，选中的通过&amp;的运算值为&gt;0的值，没有选中的将会为0。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> = <span class="number">15</span></span><br><span class="line"><span class="number">1</span> | <span class="number">4</span> = <span class="number">5</span></span><br><span class="line"><span class="number">4</span> &amp; <span class="number">5</span> = <span class="number">4</span></span><br><span class="line"><span class="number">2</span> &amp; <span class="number">5</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h5 id="按位异或"><a href="#按位异或" class="headerlink" title="按位异或 ^"></a>按位异或 ^</h5><blockquote>
+<p>两个操作数相应的比特位有且只有一个1时，结果为1，否则为0</p>
+</blockquote>
+<p>使用场景：<br>(1)假如我们通过某个条件来切换一个值为0或者1<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通的写法</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">toggle</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> num = toggle ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(num)</span><br><span class="line">  &#125;</span><br><span class="line">  update(<span class="literal">true</span>);</span><br><span class="line">  <span class="comment">// 通过异或我们可以这么写</span></span><br><span class="line">  num = num ^ <span class="number">1</span>;  <span class="comment">//num为true的返回 0， 为 false返回1</span></span><br></pre></td></tr></table></figure></p>
+<p>(2)可以在不使用第三变量的值的情况下交换两个变量的值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">5</span>,</span><br><span class="line">       b = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">   a = a ^ b;</span><br><span class="line">   b = a ^ b;</span><br><span class="line">   a = a ^ b;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/04/vue-多模块打包/" rel="next" title="vue-多模块打包">
+                <i class="fa fa-chevron-left"></i> vue-多模块打包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">赵小金</p>
+              <p class="site-description motion-element" itemprop="description">赵小金的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是二进制"><span class="nav-number">1.</span> <span class="nav-text">什么是二进制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8位二进制数"><span class="nav-number">2.</span> <span class="nav-text">8位二进制数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何得到二进制"><span class="nav-number">3.</span> <span class="nav-text">如何得到二进制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-按位或"><span class="nav-number">3.1.</span> <span class="nav-text">1. 按位或 |</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-按位与-amp"><span class="nav-number">3.2.</span> <span class="nav-text">1. 按位与 &amp;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#按位异或"><span class="nav-number">3.3.</span> <span class="nav-text">按位异或 ^</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵小金</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -232,6 +232,300 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/16/二进制的魅力/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/11/16/二进制的魅力/" itemprop="url">二进制的魅力</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-16T18:28:19+08:00">
+                2021-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/学习日记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="什么是二进制"><a href="#什么是二进制" class="headerlink" title="什么是二进制"></a>什么是二进制</h4><blockquote>
+<p>世界上有10种人：一种是懂得二进制的，另一种是不懂二进制的</p>
+</blockquote>
+<p>二进制是计算技术中广泛采用的一种数制。二进制数据是用0和1两个数码来表示的数。它的基数为2，进位规则是“逢二进一”，借位规则是“借一当二”，由18世纪德国数理哲学大师莱布尼兹发现。当前的计算机系统使用的基本上是二进制系统。</p>
+<p>十进制0至9的二进制表示：</p>
+<p>十进制    二进制<br>0    0<br>1    1<br>2    10<br>3    11<br>4    100<br>5    101<br>6    110<br>7    111<br>8    1000<br>9    1001</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">加法： 0+0=0；0+1=1；1+0=1；1+1=10</span><br><span class="line"></span><br><span class="line">求 1101 + 1011 的和</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/16/二进制的魅力/img2.jpeg" alt="img"></p>
+<h4 id="8位二进制数"><a href="#8位二进制数" class="headerlink" title="8位二进制数"></a>8位二进制数</h4><p><code>256 128 64 32 16 8 4 2 1</code><br><code>___  ___  __  __  __ _  _ _  _</code></p>
+<h4 id="如何得到二进制"><a href="#如何得到二进制" class="headerlink" title="如何得到二进制"></a>如何得到二进制</h4><p>e.g. 将125转化成二进制 1111101<br>可以使用短除法得到125的二进制值<br><img src="/2021/11/16/二进制的魅力/img.png" alt="img"></p>
+<h5 id="1-按位或"><a href="#1-按位或" class="headerlink" title="1. 按位或 |"></a>1. 按位或 |</h5><blockquote>
+<p>|与||操作符的道理也是一样的，只要两个数中有一个数为1，结果就为1，其他则为0</p>
+</blockquote>
+<h5 id="1-按位与-amp"><a href="#1-按位与-amp" class="headerlink" title="1. 按位与 &amp;"></a>1. 按位与 &amp;</h5><blockquote>
+<p>&amp;运算符表示只有两个数的值为1时，才返回1</p>
+</blockquote>
+<p>使用场景：我们管理系统做表单checkbox多选是，加入我们有a、b、c、d四个chebox的选项，1，2，4，8分别代表checkbox的value值，当我们全选a + b + c + d的时候，可以将1 | 2 | 4 | 8 = 15传给java后台，如果只选择a + c的时候，则传递给java后台的值为1 | 4 = 5。<br>那么我们做编辑功能的时候，如何判断checkbox是否被选中？很简单，用&amp;符号就可以，比如用户选择了a+c,后台给我们返回5，c的值为1，那么 4 &amp; 5 = 4， b的选项我们是没有选择的，则 2 &amp; 5 = 0，也就是说，选中的通过&amp;的运算值为&gt;0的值，没有选中的将会为0。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> = <span class="number">15</span></span><br><span class="line"><span class="number">1</span> | <span class="number">4</span> = <span class="number">5</span></span><br><span class="line"><span class="number">4</span> &amp; <span class="number">5</span> = <span class="number">4</span></span><br><span class="line"><span class="number">2</span> &amp; <span class="number">5</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h5 id="按位异或"><a href="#按位异或" class="headerlink" title="按位异或 ^"></a>按位异或 ^</h5><blockquote>
+<p>两个操作数相应的比特位有且只有一个1时，结果为1，否则为0</p>
+</blockquote>
+<p>使用场景：<br>(1)假如我们通过某个条件来切换一个值为0或者1<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通的写法</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">toggle</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> num = toggle ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(num)</span><br><span class="line">  &#125;</span><br><span class="line">  update(<span class="literal">true</span>);</span><br><span class="line">  <span class="comment">// 通过异或我们可以这么写</span></span><br><span class="line">  num = num ^ <span class="number">1</span>;  <span class="comment">//num为true的返回 0， 为 false返回1</span></span><br></pre></td></tr></table></figure></p>
+<p>(2)可以在不使用第三变量的值的情况下交换两个变量的值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">5</span>,</span><br><span class="line">       b = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">   a = a ^ b;</span><br><span class="line">   b = a ^ b;</span><br><span class="line">   a = a ^ b;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/04/vue-多模块打包/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/08/04/vue-多模块打包/" itemprop="url">vue-多模块打包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-04T10:07:41+08:00">
+                2021-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* eslint-disable no-useless-escape */</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">'glob'</span>)</span><br><span class="line"><span class="keyword">const</span> projectname = process.argv[<span class="number">3</span>]</span><br><span class="line"><span class="built_in">console</span>.log(projectname)</span><br><span class="line"><span class="comment">// 导入compression-webpack-plugin</span></span><br><span class="line"><span class="keyword">const</span> CompressionWebpackPlugin = <span class="built_in">require</span>(<span class="string">'compression-webpack-plugin'</span>)</span><br><span class="line"><span class="comment">// 定义压缩文件类型</span></span><br><span class="line"><span class="keyword">const</span> productionGzipExtensions = [<span class="string">'js'</span>, <span class="string">'css'</span>]</span><br><span class="line">process.env.VUE_APP_VERSION = <span class="built_in">require</span>(<span class="string">'./package.json'</span>).version</span><br><span class="line"><span class="comment">// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置pages多页面获取当前文件夹下的html和js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getEntry</span> (<span class="params">globPath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> entries = &#123;&#125;</span><br><span class="line">  <span class="keyword">let</span> basename</span><br><span class="line">  <span class="keyword">let</span> tmp</span><br><span class="line">  <span class="keyword">let</span> pathname</span><br><span class="line">  <span class="comment">// 多项目打包</span></span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">    entries = &#123;</span><br><span class="line">      index: &#123;</span><br><span class="line">        <span class="comment">// page的入口</span></span><br><span class="line">        entry: <span class="string">`src/pages/<span class="subst">$&#123;projectname&#125;</span>/<span class="subst">$&#123;projectname&#125;</span>.js`</span>,</span><br><span class="line">        <span class="comment">// 模板来源</span></span><br><span class="line">        template: <span class="string">`src/pages/<span class="subst">$&#123;projectname&#125;</span>/<span class="subst">$&#123;projectname&#125;</span>.html`</span>,</span><br><span class="line">        <span class="comment">// 在 dist/index.html 的输出</span></span><br><span class="line">        filename: <span class="string">'index.html'</span>,</span><br><span class="line">        title: projectname</span><br><span class="line">        <span class="comment">// chunks: ['chunk-vendors', 'chunk-common', 'index']</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(entries)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    glob.sync(globPath).forEach(<span class="function"><span class="keyword">function</span> (<span class="params">entry</span>) </span>&#123;</span><br><span class="line">      basename = path.basename(entry, path.extname(entry))</span><br><span class="line">      tmp = entry.split(<span class="string">'/'</span>).splice(<span class="number">-3</span>)</span><br><span class="line">      pathname = basename <span class="comment">// 正确输出js和html的路径</span></span><br><span class="line"></span><br><span class="line">      entries[pathname] = &#123;</span><br><span class="line">        entry: <span class="string">'src/'</span> + tmp[<span class="number">0</span>] + <span class="string">'/'</span> + tmp[<span class="number">1</span>] + <span class="string">'/'</span> + tmp[<span class="number">1</span>] + <span class="string">'.js'</span>,</span><br><span class="line">        template: <span class="string">'src/'</span> + tmp[<span class="number">0</span>] + <span class="string">'/'</span> + tmp[<span class="number">1</span>] + <span class="string">'/'</span> + tmp[<span class="number">2</span>],</span><br><span class="line">        filename: tmp[<span class="number">2</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> entries</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> htmls = getEntry(<span class="string">'./src/pages/**/*.html'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置end</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">  publicPath: <span class="string">'/'</span>,</span><br><span class="line">  outputDir: <span class="string">'dist/'</span> + projectname,</span><br><span class="line">  pages: htmls,</span><br><span class="line">  <span class="comment">// 统一配置打包插件</span></span><br><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">      externals: &#123;</span><br><span class="line">        <span class="string">'vue'</span>: <span class="string">'Vue'</span>,</span><br><span class="line">        <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">        <span class="string">'vuex'</span>: <span class="string">'Vuex'</span>,</span><br><span class="line">        <span class="string">'axios'</span>: <span class="string">'axios'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      resolve: &#123;</span><br><span class="line">        alias: &#123;</span><br><span class="line">          <span class="string">'@user'</span>: path.join(__dirname, <span class="string">'./src/pages/user'</span>),</span><br><span class="line">          <span class="string">'@admin'</span>: path.join(__dirname, <span class="string">'./src/pages/admin'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        ...options,</span><br><span class="line">        plugins: [</span><br><span class="line">          <span class="keyword">new</span> CompressionWebpackPlugin(&#123;</span><br><span class="line">            filename: <span class="string">'[path].gz[query]'</span>,</span><br><span class="line">            algorithm: <span class="string">'gzip'</span>,</span><br><span class="line">            test: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\.('</span> + productionGzipExtensions.join(<span class="string">'|'</span>) + <span class="string">')$'</span>), <span class="comment">// 匹配文件名</span></span><br><span class="line">            threshold: <span class="number">10240</span>, <span class="comment">// 对10K以上的数据进行压缩</span></span><br><span class="line">            minRatio: <span class="number">0.8</span>,</span><br><span class="line">            <span class="comment">// 删除源文件, 配合webpack-bundle-analyzer时不能删除源文件，且需要配置静态服务器</span></span><br><span class="line">            deleteOriginalAssets: <span class="literal">true</span> <span class="comment">// 是否删除源文件</span></span><br><span class="line">          &#125;)</span><br><span class="line">          <span class="comment">// new BundleAnalyzerPlugin()</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> options</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config.module</span><br><span class="line">      .rule(<span class="string">'images'</span>)</span><br><span class="line">      .use(<span class="string">'url-loader'</span>)</span><br><span class="line">      .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">      .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 修改它的选项...</span></span><br><span class="line">        options.limit = <span class="number">10000</span></span><br><span class="line">        <span class="keyword">return</span> options</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> fonts = config.module.rule(<span class="string">'fonts'</span>)</span><br><span class="line">      fonts</span><br><span class="line">        .use(<span class="string">'url-loader'</span>)</span><br><span class="line">        .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">        .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">          options = &#123;</span><br><span class="line">            limit: <span class="number">10000</span>,</span><br><span class="line">            name: <span class="string">'[name].[ext]'</span>,</span><br><span class="line">            <span class="comment">//            publicPath: `http:$&#123;cdnPath&#125;/fonts`,</span></span><br><span class="line">            publicPath: <span class="string">'/fonts'</span>,</span><br><span class="line">            outputPath: <span class="string">'font/'</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> options</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  pluginOptions: &#123;</span><br><span class="line">    <span class="string">'style-resources-loader'</span>: &#123;</span><br><span class="line">      preProcessor: <span class="string">'less'</span>,</span><br><span class="line">      patterns: [</span><br><span class="line">        <span class="comment">// 配置全局less变量自动引入，不用每次再手动引入</span></span><br><span class="line">        path.join(__dirname, <span class="string">'src/iview-theme/index.less'</span>)</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    optimization: &#123;</span><br><span class="line">      moduleIds: <span class="string">'deterministic'</span>,</span><br><span class="line">      runtimeChunk: <span class="string">'single'</span>,</span><br><span class="line">      splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">          vendor: &#123;</span><br><span class="line">            test: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">            name: <span class="string">'vendors'</span>,</span><br><span class="line">            chunks: <span class="string">'all'</span>,</span><br><span class="line">            minChunkSize: <span class="number">10000</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/vue预渲染与静态资源cdn地址的处理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1460,334 +1754,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/nuxt/四、将Vue项目改造成Nuxt项目-部署/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/17/nuxt/四、将Vue项目改造成Nuxt项目-部署/" itemprop="url">四、将Vue项目改造成Nuxt项目-部署</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-17T19:52:00+08:00">
-                2020-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
-                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="正常部署流程"><a href="#正常部署流程" class="headerlink" title="正常部署流程"></a>正常部署流程</h3><ol>
-<li>本地项目完成之后，<code>npm run build</code>完成打包工作</li>
-<li>将项目上传至服务器</li>
-<li>在服务器执行<code>npm install</code>安装</li>
-<li>执行<code>npm run start</code>运行项目</li>
-</ol>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
-<li>在本地执行<code>npm run dev</code>运行没有问题，但是上传服务器打包之后运行不成功。<br><strong>解决：</strong><br>大多是因为有部分代码在服务端不被识别，如window等，建议在本地自己先执行<code>npm run start</code>差错</li>
-<li>在服务器安装速度比较慢，并且有可能出现网络差安装错误的情况，所以尽量不在服务端执行安装命令，需要将node_modules文件夹上传至服务器，这样又会延伸出一个问题： node_modules文件夹太大，上传时间慢，资源服务器压力大。<br><strong>解决：</strong><br>a. node_modules只安装生产环境的依赖 <code>npm install --production</code><br>b. 将node_modules压缩</li>
-<li>如果每次上传都要删掉开发环境的依赖文件再去安装生产环境的依赖实现起来特别繁琐，很容易操作失误。<br><strong>解决：</strong><br>使用 <code>shelljs</code>插件编写一个shell脚本，每次需要修改依赖时自动执行脚本进行压缩node_modules文件夹<br><strong>实现：</strong><br>a. 编写<code>shell.js</code>脚本文件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shell = <span class="built_in">require</span>(<span class="string">'shelljs'</span>);</span><br><span class="line"><span class="keyword">if</span> (shell.exec(<span class="string">'rm -rf install &amp;&amp; mkdir install &amp;&amp; cp package.json ./install &amp;&amp; npm install --production --prefix ./install/ &amp;&amp; tar -zvcf node_modules.tar.gz ./install/node_modules'</span>).code !== <span class="number">0</span>) &#123;</span><br><span class="line">  shell.echo(<span class="string">'Error: ...'</span>);</span><br><span class="line">  shell.exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  这个脚本实现的功能是：</span></span><br><span class="line"><span class="comment">  1.如果有install这个文件夹，先删掉它 </span></span><br><span class="line"><span class="comment">  2.创建一个install文件夹 </span></span><br><span class="line"><span class="comment">  3.将package.json文件复制一份到install文件夹中 </span></span><br><span class="line"><span class="comment">  4.安装开发环境依赖到install中 </span></span><br><span class="line"><span class="comment">  5.将install/node_modules文件压缩成名为 node_modules.tar.gz的压缩文件</span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>b. 运维配置软连接指向该文件即可</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/" itemprop="url">三、将Vue项目改造成Nuxt项目-使用第三方插件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T19:52:00+08:00">
-                2020-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
-                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="使用第三方插件"><a href="#使用第三方插件" class="headerlink" title="使用第三方插件"></a>使用第三方插件</h3><p>举例swiper,babel-polyfill和postcss-pxtorem插件</p>
-<h4 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h4><ol>
-<li>安装插件（略过）</li>
-<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>vue-swiper.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> VueAwesomeSwiper <span class="keyword">from</span> <span class="string">'vue-awesome-swiper/dist/ssr'</span></span><br><span class="line"> </span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'~/plugins/vue-swiper.js'</span>, <span class="attr">ssr</span>: <span class="literal">false</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>不支持ssr的系统，插件只在浏览器里使用的话，需要加<code>ssr:false</code>属性</p>
-<h4 id="babel-polyfill"><a href="#babel-polyfill" class="headerlink" title="babel-polyfill"></a>babel-polyfill</h4><ol>
-<li>安装插件（略过）</li>
-<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>babel-polyfill.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'babel-polyfill'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'@/plugins/babel-polyfill'</span>, <span class="attr">ssr</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<h4 id="postcss-pxtorem"><a href="#postcss-pxtorem" class="headerlink" title="postcss-pxtorem"></a>postcss-pxtorem</h4><ol>
-<li>安装插件（略过）</li>
-<li>在nuxt.config.js中配置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  extractCSS: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  ** You can extend webpack config here</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  postcss: &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">      <span class="string">'postcss-pxtorem'</span>: &#123;</span><br><span class="line">        rootValue: <span class="number">37.5</span>, <span class="comment">//默认根目录字体大小(px)</span></span><br><span class="line">        propList: [<span class="string">'*'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="string">'autoprefixer'</span>: &#123;</span><br><span class="line">        overrideBrowserslist: [<span class="string">'Android &gt;= 4.0'</span>, <span class="string">'iOS &gt;= 7'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="自己编写插件"><a href="#自己编写插件" class="headerlink" title="自己编写插件"></a>自己编写插件</h3><h4 id="dialog插件"><a href="#dialog插件" class="headerlink" title="dialog插件"></a>dialog插件</h4><p><img src="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/img1.jpg" alt="img"></p>
-<ol>
-<li><p>我们在<code>components</code>文件夹下新建一个组件<code>showDialog.vue</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dialogWrapper"</span></span><br><span class="line">      v-<span class="keyword">if</span>=<span class="string">"show"</span></span><br><span class="line">      @touchmove.prevent&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">      &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">      &lt;p v-html='content'&gt;&lt;/</span>p&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"btns"</span></span><br><span class="line">          v-<span class="keyword">if</span>=<span class="string">"num==2"</span>&gt;</span><br><span class="line">        &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"cancel"</span></span><br><span class="line">                @click=<span class="string">"cancel();complete();"</span>&gt;&#123;&#123;cancelTxt&#125;&#125;&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="btns single"</span></span><br><span class="line"><span class="regexp">          v-if="num==1"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;  </span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'showDialog'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      show: <span class="literal">false</span>,</span><br><span class="line">      title: <span class="string">'标题'</span>,</span><br><span class="line">      content: <span class="string">''</span>,</span><br><span class="line">      num: <span class="number">1</span>,</span><br><span class="line">      cancelTxt: <span class="string">'取消'</span>,</span><br><span class="line">      sureTxt: <span class="string">'确定'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    sure () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    complete () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style lang="less" scope&gt;</span></span><br><span class="line"><span class="regexp">.dialogWrapper &#123;</span></span><br><span class="line"><span class="regexp">  position: fixed;</span></span><br><span class="line"><span class="regexp">  width: 100%;</span></span><br><span class="line"><span class="regexp">  height: 100%;</span></span><br><span class="line"><span class="regexp">  background: rgba(0, 0, 0, 0.4);</span></span><br><span class="line"><span class="regexp">  top: 0;</span></span><br><span class="line"><span class="regexp">  left: 0;</span></span><br><span class="line"><span class="regexp">  z-index: 10000;</span></span><br><span class="line"><span class="regexp">  .content &#123;</span></span><br><span class="line"><span class="regexp">    width: 299px;</span></span><br><span class="line"><span class="regexp">    border-radius: 6px;</span></span><br><span class="line"><span class="regexp">    background: #fff;</span></span><br><span class="line"><span class="regexp">    position: absolute;</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">    top: 50%;</span></span><br><span class="line"><span class="regexp">    left: 0;</span></span><br><span class="line"><span class="regexp">    right: 0;</span></span><br><span class="line"><span class="regexp">    margin: auto;</span></span><br><span class="line"><span class="regexp">    transform: translateY(-50%);</span></span><br><span class="line"><span class="regexp">    padding-top: 20px;</span></span><br><span class="line"><span class="regexp">    h3 &#123;</span></span><br><span class="line"><span class="regexp">      font-size: 18px;</span></span><br><span class="line"><span class="regexp">      font-weight: bold;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    p &#123;</span></span><br><span class="line"><span class="regexp">      padding: 14px 35px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 0.7);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  .btns &#123;</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    display: flex;</span></span><br><span class="line"><span class="regexp">    background: #fff9fafa;</span></span><br><span class="line"><span class="regexp">    padding-top: 2px;</span></span><br><span class="line"><span class="regexp">    &amp;.single &#123;</span></span><br><span class="line"><span class="regexp">      button &#123;</span></span><br><span class="line"><span class="regexp">        margin: 0;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    button &#123;</span></span><br><span class="line"><span class="regexp">      flex: 1;</span></span><br><span class="line"><span class="regexp">      height: 50px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      line-height: 18px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      justify-content: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      background: #fff;</span></span><br><span class="line"><span class="regexp">      &amp;:first-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-right: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;:last-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-left: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;.sure &#123;</span></span><br><span class="line"><span class="regexp">        font-weight: bold;</span></span><br><span class="line"><span class="regexp">        color: rgba(0, 87, 255, 1);</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在文件夹<code>plugins</code>新建js文件<code>vue-plugins.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> showDialog <span class="keyword">from</span> <span class="string">'~/components/plugins/showDialog.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app &#125;, inject) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (process.client) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> DialogConstructor = Vue.extend(showDialog)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成一个该子类的实例</span></span><br><span class="line">    <span class="keyword">const</span> dialog = <span class="keyword">new</span> DialogConstructor();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并将此div加入全局挂载点内部</span></span><br><span class="line">    dialog.$mount(<span class="built_in">document</span>.createElement(<span class="string">'div'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(dialog.$el)</span><br><span class="line"></span><br><span class="line">    inject(<span class="string">'showDialog'</span>, (&#123; title, content, num, sureTxt, cancelTxt, cancel, sure &#125;) =&gt; &#123;</span><br><span class="line">      dialog.show = <span class="literal">true</span></span><br><span class="line">      title &amp;&amp; (dialog.title = title)</span><br><span class="line">      content &amp;&amp; (dialog.content = content)</span><br><span class="line">      num &amp;&amp; (dialog.num = num)</span><br><span class="line">      sureTxt &amp;&amp; (dialog.sureTxt = sureTxt)</span><br><span class="line">      cancelTxt &amp;&amp; (dialog.cancelTxt = cancelTxt)</span><br><span class="line">      cancel &amp;&amp; (dialog.cancel = cancel)</span><br><span class="line">      sure &amp;&amp; (dialog.sure = sure)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在nuxt.config.js中配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Plugins to load before mounting the App</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">plugins: [</span><br><span class="line">  <span class="string">'~/plugins/vue-plugins.js'</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">created () &#123;</span><br><span class="line">  <span class="comment">// 单按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提交成功'</span>,</span><br><span class="line">    content: <span class="string">'我们将尽快处理，如有其它问题请致电：010-56592180'</span>,</span><br><span class="line">    sureTxt: <span class="string">'我知道了'</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 双按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sureTxt: <span class="string">'好的'</span>,</span><br><span class="line">    cancelTxt: <span class="string">'我再想想'</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;,</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="comment">// 取消</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1838,7 +1804,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1897,7 +1863,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

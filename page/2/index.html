@@ -232,6 +232,334 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/nuxt/四、将Vue项目改造成Nuxt项目-部署/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/17/nuxt/四、将Vue项目改造成Nuxt项目-部署/" itemprop="url">四、将Vue项目改造成Nuxt项目-部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-17T19:52:00+08:00">
+                2020-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
+                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="正常部署流程"><a href="#正常部署流程" class="headerlink" title="正常部署流程"></a>正常部署流程</h3><ol>
+<li>本地项目完成之后，<code>npm run build</code>完成打包工作</li>
+<li>将项目上传至服务器</li>
+<li>在服务器执行<code>npm install</code>安装</li>
+<li>执行<code>npm run start</code>运行项目</li>
+</ol>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li>在本地执行<code>npm run dev</code>运行没有问题，但是上传服务器打包之后运行不成功。<br><strong>解决：</strong><br>大多是因为有部分代码在服务端不被识别，如window等，建议在本地自己先执行<code>npm run start</code>差错</li>
+<li>在服务器安装速度比较慢，并且有可能出现网络差安装错误的情况，所以尽量不在服务端执行安装命令，需要将node_modules文件夹上传至服务器，这样又会延伸出一个问题： node_modules文件夹太大，上传时间慢，资源服务器压力大。<br><strong>解决：</strong><br>a. node_modules只安装生产环境的依赖 <code>npm install --production</code><br>b. 将node_modules压缩</li>
+<li>如果每次上传都要删掉开发环境的依赖文件再去安装生产环境的依赖实现起来特别繁琐，很容易操作失误。<br><strong>解决：</strong><br>使用 <code>shelljs</code>插件编写一个shell脚本，每次需要修改依赖时自动执行脚本进行压缩node_modules文件夹<br><strong>实现：</strong><br>a. 编写<code>shell.js</code>脚本文件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shell = <span class="built_in">require</span>(<span class="string">'shelljs'</span>);</span><br><span class="line"><span class="keyword">if</span> (shell.exec(<span class="string">'rm -rf install &amp;&amp; mkdir install &amp;&amp; cp package.json ./install &amp;&amp; npm install --production --prefix ./install/ &amp;&amp; tar -zvcf node_modules.tar.gz ./install/node_modules'</span>).code !== <span class="number">0</span>) &#123;</span><br><span class="line">  shell.echo(<span class="string">'Error: ...'</span>);</span><br><span class="line">  shell.exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  这个脚本实现的功能是：</span></span><br><span class="line"><span class="comment">  1.如果有install这个文件夹，先删掉它 </span></span><br><span class="line"><span class="comment">  2.创建一个install文件夹 </span></span><br><span class="line"><span class="comment">  3.将package.json文件复制一份到install文件夹中 </span></span><br><span class="line"><span class="comment">  4.安装开发环境依赖到install中 </span></span><br><span class="line"><span class="comment">  5.将install/node_modules文件压缩成名为 node_modules.tar.gz的压缩文件</span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>b. 运维配置软连接指向该文件即可</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵小金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵小金">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/" itemprop="url">三、将Vue项目改造成Nuxt项目-使用第三方插件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T19:52:00+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/将Vue项目改造成Nuxt项目/" itemprop="url" rel="index">
+                    <span itemprop="name">将Vue项目改造成Nuxt项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="使用第三方插件"><a href="#使用第三方插件" class="headerlink" title="使用第三方插件"></a>使用第三方插件</h3><p>举例swiper,babel-polyfill和postcss-pxtorem插件</p>
+<h4 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h4><ol>
+<li>安装插件（略过）</li>
+<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>vue-swiper.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> VueAwesomeSwiper <span class="keyword">from</span> <span class="string">'vue-awesome-swiper/dist/ssr'</span></span><br><span class="line"> </span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'~/plugins/vue-swiper.js'</span>, <span class="attr">ssr</span>: <span class="literal">false</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>不支持ssr的系统，插件只在浏览器里使用的话，需要加<code>ssr:false</code>属性</p>
+<h4 id="babel-polyfill"><a href="#babel-polyfill" class="headerlink" title="babel-polyfill"></a>babel-polyfill</h4><ol>
+<li>安装插件（略过）</li>
+<li>我们需要在程序运行前配置好这个插件<br>在<code>plugins</code>中新建<code>babel-polyfill.js</code>文件：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'babel-polyfill'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在nuxt.config.js中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  &#123; <span class="attr">src</span>: <span class="string">'@/plugins/babel-polyfill'</span>, <span class="attr">ssr</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h4 id="postcss-pxtorem"><a href="#postcss-pxtorem" class="headerlink" title="postcss-pxtorem"></a>postcss-pxtorem</h4><ol>
+<li>安装插件（略过）</li>
+<li>在nuxt.config.js中配置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  extractCSS: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  ** You can extend webpack config here</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  postcss: &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">      <span class="string">'postcss-pxtorem'</span>: &#123;</span><br><span class="line">        rootValue: <span class="number">37.5</span>, <span class="comment">//默认根目录字体大小(px)</span></span><br><span class="line">        propList: [<span class="string">'*'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="string">'autoprefixer'</span>: &#123;</span><br><span class="line">        overrideBrowserslist: [<span class="string">'Android &gt;= 4.0'</span>, <span class="string">'iOS &gt;= 7'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="自己编写插件"><a href="#自己编写插件" class="headerlink" title="自己编写插件"></a>自己编写插件</h3><h4 id="dialog插件"><a href="#dialog插件" class="headerlink" title="dialog插件"></a>dialog插件</h4><p><img src="/2020/04/16/nuxt/三、将Vue项目改造成Nuxt项目-使用第三方插件/img1.jpg" alt="img"></p>
+<ol>
+<li><p>我们在<code>components</code>文件夹下新建一个组件<code>showDialog.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dialogWrapper"</span></span><br><span class="line">      v-<span class="keyword">if</span>=<span class="string">"show"</span></span><br><span class="line">      @touchmove.prevent&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">      &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">      &lt;p v-html='content'&gt;&lt;/</span>p&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"btns"</span></span><br><span class="line">          v-<span class="keyword">if</span>=<span class="string">"num==2"</span>&gt;</span><br><span class="line">        &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"cancel"</span></span><br><span class="line">                @click=<span class="string">"cancel();complete();"</span>&gt;&#123;&#123;cancelTxt&#125;&#125;&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="btns single"</span></span><br><span class="line"><span class="regexp">          v-if="num==1"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button class="sure"</span></span><br><span class="line"><span class="regexp">                @click="sure();complete();"&gt;&#123;&#123;sureTxt&#125;&#125;&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;  </span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'showDialog'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      show: <span class="literal">false</span>,</span><br><span class="line">      title: <span class="string">'标题'</span>,</span><br><span class="line">      content: <span class="string">''</span>,</span><br><span class="line">      num: <span class="number">1</span>,</span><br><span class="line">      cancelTxt: <span class="string">'取消'</span>,</span><br><span class="line">      sureTxt: <span class="string">'确定'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    sure () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    complete () &#123;</span><br><span class="line">      <span class="keyword">this</span>.show = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style lang="less" scope&gt;</span></span><br><span class="line"><span class="regexp">.dialogWrapper &#123;</span></span><br><span class="line"><span class="regexp">  position: fixed;</span></span><br><span class="line"><span class="regexp">  width: 100%;</span></span><br><span class="line"><span class="regexp">  height: 100%;</span></span><br><span class="line"><span class="regexp">  background: rgba(0, 0, 0, 0.4);</span></span><br><span class="line"><span class="regexp">  top: 0;</span></span><br><span class="line"><span class="regexp">  left: 0;</span></span><br><span class="line"><span class="regexp">  z-index: 10000;</span></span><br><span class="line"><span class="regexp">  .content &#123;</span></span><br><span class="line"><span class="regexp">    width: 299px;</span></span><br><span class="line"><span class="regexp">    border-radius: 6px;</span></span><br><span class="line"><span class="regexp">    background: #fff;</span></span><br><span class="line"><span class="regexp">    position: absolute;</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">    top: 50%;</span></span><br><span class="line"><span class="regexp">    left: 0;</span></span><br><span class="line"><span class="regexp">    right: 0;</span></span><br><span class="line"><span class="regexp">    margin: auto;</span></span><br><span class="line"><span class="regexp">    transform: translateY(-50%);</span></span><br><span class="line"><span class="regexp">    padding-top: 20px;</span></span><br><span class="line"><span class="regexp">    h3 &#123;</span></span><br><span class="line"><span class="regexp">      font-size: 18px;</span></span><br><span class="line"><span class="regexp">      font-weight: bold;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    p &#123;</span></span><br><span class="line"><span class="regexp">      padding: 14px 35px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 0.7);</span></span><br><span class="line"><span class="regexp">      line-height: 20px;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  .btns &#123;</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    display: flex;</span></span><br><span class="line"><span class="regexp">    background: #fff9fafa;</span></span><br><span class="line"><span class="regexp">    padding-top: 2px;</span></span><br><span class="line"><span class="regexp">    &amp;.single &#123;</span></span><br><span class="line"><span class="regexp">      button &#123;</span></span><br><span class="line"><span class="regexp">        margin: 0;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    button &#123;</span></span><br><span class="line"><span class="regexp">      flex: 1;</span></span><br><span class="line"><span class="regexp">      height: 50px;</span></span><br><span class="line"><span class="regexp">      font-size: 16px;</span></span><br><span class="line"><span class="regexp">      line-height: 18px;</span></span><br><span class="line"><span class="regexp">      text-align: center;</span></span><br><span class="line"><span class="regexp">      justify-content: center;</span></span><br><span class="line"><span class="regexp">      color: rgba(3, 16, 42, 1);</span></span><br><span class="line"><span class="regexp">      background: #fff;</span></span><br><span class="line"><span class="regexp">      &amp;:first-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-right: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;:last-child &#123;</span></span><br><span class="line"><span class="regexp">        margin-left: 1px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      &amp;.sure &#123;</span></span><br><span class="line"><span class="regexp">        font-weight: bold;</span></span><br><span class="line"><span class="regexp">        color: rgba(0, 87, 255, 1);</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文件夹<code>plugins</code>新建js文件<code>vue-plugins.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> showDialog <span class="keyword">from</span> <span class="string">'~/components/plugins/showDialog.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app &#125;, inject) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (process.client) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> DialogConstructor = Vue.extend(showDialog)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成一个该子类的实例</span></span><br><span class="line">    <span class="keyword">const</span> dialog = <span class="keyword">new</span> DialogConstructor();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并将此div加入全局挂载点内部</span></span><br><span class="line">    dialog.$mount(<span class="built_in">document</span>.createElement(<span class="string">'div'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(dialog.$el)</span><br><span class="line"></span><br><span class="line">    inject(<span class="string">'showDialog'</span>, (&#123; title, content, num, sureTxt, cancelTxt, cancel, sure &#125;) =&gt; &#123;</span><br><span class="line">      dialog.show = <span class="literal">true</span></span><br><span class="line">      title &amp;&amp; (dialog.title = title)</span><br><span class="line">      content &amp;&amp; (dialog.content = content)</span><br><span class="line">      num &amp;&amp; (dialog.num = num)</span><br><span class="line">      sureTxt &amp;&amp; (dialog.sureTxt = sureTxt)</span><br><span class="line">      cancelTxt &amp;&amp; (dialog.cancelTxt = cancelTxt)</span><br><span class="line">      cancel &amp;&amp; (dialog.cancel = cancel)</span><br><span class="line">      sure &amp;&amp; (dialog.sure = sure)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在nuxt.config.js中配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Plugins to load before mounting the App</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">plugins: [</span><br><span class="line">  <span class="string">'~/plugins/vue-plugins.js'</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">created () &#123;</span><br><span class="line">  <span class="comment">// 单按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提交成功'</span>,</span><br><span class="line">    content: <span class="string">'我们将尽快处理，如有其它问题请致电：010-56592180'</span>,</span><br><span class="line">    sureTxt: <span class="string">'我知道了'</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 双按钮</span></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.$showDialog(&#123;</span><br><span class="line">    title: <span class="string">'提醒'</span>,</span><br><span class="line">    content: <span class="string">'是否放弃已填写内容？'</span>,</span><br><span class="line">    num: <span class="number">2</span>,</span><br><span class="line">    sureTxt: <span class="string">'好的'</span>,</span><br><span class="line">    cancelTxt: <span class="string">'我再想想'</span>,</span><br><span class="line">    sure: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 确定</span></span><br><span class="line">    &#125;,</span><br><span class="line">    cancel () &#123;</span><br><span class="line">      <span class="comment">// 取消</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/nuxt/二、将Vue项目改造成Nuxt项目-关于页面路由 copy/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1263,7 +1591,9 @@
       
         
           
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tmp = target - nums[i];</span><br><span class="line">        <span class="keyword">if</span> (nums.indexOf(tmp) != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> tmp2 = nums.indexOf(tmp)</span><br><span class="line">            <span class="keyword">if</span> (tmp2 === i) <span class="keyword">continue</span> </span><br><span class="line">            result.push(i,tmp2)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">6</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
+            <p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tmp = target - nums[i];</span><br><span class="line">        <span class="keyword">if</span> (nums.indexOf(tmp) != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> tmp2 = nums.indexOf(tmp)</span><br><span class="line">            <span class="keyword">if</span> (tmp2 === i) <span class="keyword">continue</span> </span><br><span class="line">            result.push(i,tmp2)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">6</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; target</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">var</span> j = i+<span class="number">1</span>; j &lt; nums.length; j++)&#123;</span><br><span class="line">             <span class="keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                 result.push(i)</span><br><span class="line">                 result.push(j)</span><br><span class="line">                 <span class="keyword">return</span> result</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>]</span><br><span class="line"><span class="keyword">var</span> target = <span class="number">26</span></span><br><span class="line"><span class="built_in">console</span>.log(twoSum(nums, target))</span><br></pre></td></tr></table></figure>
           
         
@@ -1460,310 +1790,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/使用vue指令开发一个实时时间转换指令v-time/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/24/使用vue指令开发一个实时时间转换指令v-time/" itemprop="url">使用vue指令开发一个实时时间转换指令v-time</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T18:04:06+08:00">
-                2018-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="时间对象"><a href="#时间对象" class="headerlink" title="时间对象"></a>时间对象</h4><p> 先定义一个与时间有关的对象，将与时间有关的函数封装进去</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Time = &#123;</span><br><span class="line">  <span class="comment">// 获取当前时间戳</span></span><br><span class="line">  getUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今天0点0分0秒的时间戳</span></span><br><span class="line">  getTodayUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取今年1月1日0点0分0秒的时间戳</span></span><br><span class="line">  getYearUnix: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    date.setMonth(<span class="number">0</span>)</span><br><span class="line">    date.setDate(<span class="number">1</span>)</span><br><span class="line">    date.setHours(<span class="number">0</span>)</span><br><span class="line">    date.setMinutes(<span class="number">0</span>)</span><br><span class="line">    date.setSeconds(<span class="number">0</span>)</span><br><span class="line">    date.setMilliseconds(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> date.getTime()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 获取标准年月日</span></span><br><span class="line">  getLastDate: <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(time)</span><br><span class="line">    <span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span> &lt; <span class="number">10</span> ? <span class="string">'0'</span> + (date.getMonth() + <span class="number">1</span>) : date.getMonth() + <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> day = date.getDate() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + date.getDate() : date.getDate()</span><br><span class="line">    <span class="keyword">return</span> date.getFullYear() + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 转换时间</span></span><br><span class="line">  getFormatTime: <span class="function"><span class="keyword">function</span> (<span class="params">timestamp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="keyword">this</span>.getUnix() <span class="comment">// 获取当前时间戳</span></span><br><span class="line">    <span class="keyword">var</span> today = <span class="keyword">this</span>.getTodayUnix() <span class="comment">// 获取今天0点时间戳</span></span><br><span class="line">    <span class="keyword">var</span> year = <span class="keyword">this</span>.getYearUnix() <span class="comment">// 获取今年0点时间戳</span></span><br><span class="line">    <span class="keyword">var</span> timer = (now - timestamp) / <span class="number">1000</span> <span class="comment">// 转换为秒级</span></span><br><span class="line">    <span class="keyword">var</span> tip = <span class="string">''</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (timer &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      tip = <span class="string">'刚刚'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &lt; <span class="number">3600</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">60</span>) + <span class="string">'分钟前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer &gt;= <span class="number">3600</span> &amp;&amp; (timestamp - today &gt;= <span class="number">0</span>)) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.floor(timer/<span class="number">3600</span>) + <span class="string">'小时前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (timer/<span class="number">86400</span> &lt;= <span class="number">31</span>) &#123;</span><br><span class="line">      tip = <span class="built_in">Math</span>.ceil(timer/<span class="number">86400</span>) + <span class="string">'天前'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      tip = <span class="keyword">this</span>.getLastDate(timestamp)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tip</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="自定义指令v-time"><a href="#自定义指令v-time" class="headerlink" title="自定义指令v-time"></a>自定义指令v-time</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'time'</span>, &#123;</span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">    el.innerHTML = Time.getFormatTime(binding.value)</span><br><span class="line">    el.__timeout__ = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      el.innerHTML = Time.getFormatTime(binding.value)</span><br><span class="line">    &#125;, <span class="number">60000</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  unbind: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearInterval(el.__timeout__)</span><br><span class="line">    <span class="keyword">delete</span> el.__timeout__  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>定时器el.__timeout__每分钟触发一次，在unbind钩子中清除</p>
-<h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a>html代码</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"time"</span> <span class="attr">v-time</span>=<span class="string">"1545719797346"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/JS如何实现在IOS中video全屏播放/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵小金">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵小金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/21/JS如何实现在IOS中video全屏播放/" itemprop="url">JS如何实现在IOS中video全屏播放</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T13:08:37+08:00">
-                2018-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在开发人员不容易呀，产品、运营天天各种需求，哎这个顶导要在页面往上滑的时候缓缓的隐藏，下拉的时候在缓缓的显示~ 哎这个图片要自适应的呀，就是那种不够的话补黑边的呀~ 哎视频的进度条要自定义的呀，原生的那个多丑呀~ 哎。。。</p>
-<p>唉，怎么办呢，没有办法呀，使劲磕呗，那今天的话题我们就来说说IOS中video全屏的问题，有需要的朋友可以参考下</p>
-<h3 id="video的几个重要的属性"><a href="#video的几个重要的属性" class="headerlink" title="video的几个重要的属性"></a>video的几个重要的属性</h3><p><code>controls</code>： 显示播放控件；controls属性规定浏览器应该为视频提供播放控件,换句话说，只有写了这个属性才会有播放控件，不写的话默认是没有的，所有如果要自定义播放控件就不需要写controls属性<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><code>autoplay</code>：自动播放；指定后，视频会马上自动开始播放，不会停下来等着数据载入结束<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><code>playsinline</code>：取消全屏；只需在video上添加该属性，便可使视频播放时局域播放，不脱离文档流，但是这个属性需要APP支持，在APP开发中设置UIwebview 的allowsInlineMediaPlayback = YES   webview.allowsInlineMediaPlayback = YES才能生效<br>写法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">webkit-playsinline</span>=<span class="string">"true"</span> <span class="attr">playsinline</span>=<span class="string">"playsinline"</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="js自定义video全屏"><a href="#js自定义video全屏" class="headerlink" title="js自定义video全屏"></a>js自定义video全屏</h3><p>众所周知，IOS是不支持全屏API的，于是requesrFullScreen事件对于video全屏是不起作用的，但是IOS9+对于video标签有一个很重要的属性，那就是<code>playsinline</code>,这个属性去掉之后视频就可以全屏，但不是直接生效，而是下次播放的时候才可以，于是我们需要先把视频短暂的暂停一下，在播放就可以了，具体实现方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">video.pause()</span><br><span class="line">video.removeAttribute(<span class="string">'playsinline'</span>)</span><br><span class="line">video.removeAttribute(<span class="string">'webkit-playsinline'</span>)</span><br><span class="line">video.play()</span><br></pre></td></tr></table></figure></p>
-<p>这个仅对IOS中的全屏有用，如果兼容Android需要使用<code>requestFullScreen</code>方法，具体实现方法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"fullscreenFn()"</span>&gt;</span>全屏<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">autoplay</span>=<span class="string">""</span> <span class="attr">webkit-playsinline</span>=<span class="string">"true"</span> <span class="attr">playsinline</span>=<span class="string">"playsinline"</span> <span class="attr">src</span>=<span class="string">'1.mp4'</span> <span class="attr">id</span>=<span class="string">"video"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浏览器前缀判断</span></span><br><span class="line">    <span class="keyword">var</span> videoEle = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">browserPrefix</span> (<span class="params">method</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> browserPrefixreturn</span><br><span class="line">      <span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="comment">// W3C</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[method])):</span><br><span class="line">          browserPrefixreturn = method</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// FireFox</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'moz'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'moz'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// Chrome等</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'webkit'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'webkit'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="comment">// IE11</span></span><br><span class="line">        <span class="keyword">case</span> (!!(videoEle[<span class="string">'ms'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)])):</span><br><span class="line">          browserPrefixreturn = <span class="string">'ms'</span> + method[<span class="number">0</span>].toUpperCase() + method.slice(<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> browserPrefixreturn</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fullscreenFn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      video.pause()</span><br><span class="line">      video.removeAttribute(<span class="string">'playsinline'</span>)</span><br><span class="line">      video.removeAttribute(<span class="string">'webkit-playsinline'</span>)</span><br><span class="line">      video.play()</span><br><span class="line">      video[browserPrefix(<span class="string">'requestFullScreen'</span>)]()</span><br><span class="line">      event.stopImmediatePropagation()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1814,7 +1840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1873,7 +1899,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
